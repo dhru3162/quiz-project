@@ -1,9 +1,9 @@
 import Navbar from "@/src/Components/Navbar/Navbar";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import HeroSectionPage from "@/src/Components/HeroSection/HeroSectionPage";
-import style from "@/src/Components/HeroSection/HeroSection.module.css"
-import Footer from "@/src/Components/Footer/FooterPage";
+import HeroSectionPage from "@/src/Components/HeroSection/HeroSection";
+import style from "@/src/Components/HeroSection/HeroSection.module.scss"
+import Footer from "@/src/Components/Footer/Footer";
 
 export default function Home() {
   const { control, handleSubmit } = useForm()
