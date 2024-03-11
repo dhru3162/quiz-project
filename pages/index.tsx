@@ -1,6 +1,9 @@
 import Navbar from "@/src/Components/Navbar/Navbar";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import HeroSectionPage from "@/src/Components/HeroSection/HeroSectionPage";
+import style from "@/src/Components/HeroSection/HeroSection.module.css"
+import Footer from "@/src/Components/Footer/FooterPage";
 
 export default function Home() {
   const { control, handleSubmit } = useForm()
@@ -15,10 +18,11 @@ export default function Home() {
   }
 
   return (
-    <div className="bgColor h-screen w-screen text-white" >
+    <div className= {`${style.image}`}>
 
         <Navbar />
-        sdfjhsdghj
+        <HeroSectionPage/>
+        <Footer/>
 
         {/* <div className="flex justify-center bg-white mt-10 p-5">
 
