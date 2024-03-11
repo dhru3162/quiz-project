@@ -1,7 +1,4 @@
 import Navbar from "@/src/Components/Navbar/Navbar";
-import ButtonTheme from "@/src/Components/Theme/Button/ButtonTheme";
-import LoginButton from "@/src/Components/Theme/Button/LoginButton";
-import Inputfield from "@/src/Components/Theme/Input/Inputfield";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -21,6 +18,7 @@ export default function Home() {
     <div className="bgColor h-screen w-screen text-white" >
 
         <Navbar />
+        sdfjhsdghj
 
         {/* <div className="flex justify-center bg-white mt-10 p-5">
 
