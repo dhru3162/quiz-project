@@ -1,19 +1,14 @@
 import Link from 'next/link'
-// import { useSelector } from 'react-redux'
-// import { BsFillPersonLinesFill } from "react-icons/bs";
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
 import Logo from '../Logo';
-import toast from 'react-hot-toast';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
-
 
 const Navbar = () => {
   const [collapse, setCollapse] = useState(false)
-  // const router = useRouter()
+  const router = useRouter()
   // const { isAuth, isLoading, role } = useSelector((state) => state.auth)
-  // const pathName = usePathname()
+  const pathName = usePathname()
 
   const toggleCollapse = () => {
     setCollapse(!collapse)
@@ -87,7 +82,7 @@ const Navbar = () => {
       {/* ) : ( */}
       <nav className="bg-[#EEEEEE80] rounded-b-md backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none z-20 top-0 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link href="/" className="flex items-center space-x-3 outline-none rtl:space-x-reverse">
             <Logo className='h-10' />
           </Link>
           <div className="flex md:order-2 space-x-3 items-center md:space-x-0 rtl:space-x-reverse">
@@ -97,7 +92,7 @@ const Navbar = () => {
                 <ButtonTheme
                   type="submit"
                   onClick={() => {
-                    toast.success(`Login Button Clicked`)
+                    router.push(`/login`)
                   }}
                 >
                   Login
@@ -109,11 +104,7 @@ const Navbar = () => {
                   </Link> */}
 
             </div>
-            <button onClick={toggleCollapse} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" >
-              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-              </svg>
-            </button>
+
           </div>
         </div>
       </nav>

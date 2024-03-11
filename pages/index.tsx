@@ -23,39 +23,6 @@ export default function Home() {
         <Navbar />
         <HeroSectionPage/>
         <Footer/>
-
-        {/* <div className="flex justify-center bg-white mt-10 p-5">
-
-        <form onSubmit={handleSubmit(submit)} className=" w-1/2 space-y-3">
-
-          <Inputfield
-            control={control}
-            name="password"
-            label='Password'
-            eye
-            rules={{
-              required: "Please Enter Password",
-              pattern: {
-                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                message: 'Must be 8 characters or more and including number, uppercase, lowercase and special characters',
-              },
-            }}
-          />
-
-          <LoginButton
-            type="submit"
-            name='Submit'
-            isLoading={loading}
-            className="w-full"
-          />
-          <ButtonTheme
-            type="submit"
-            isLoading={loading}
-          >Submit</ButtonTheme>
-        </form>
-      </div> 
-        Hello
-      </div> */}
     </div>
   );
 }
