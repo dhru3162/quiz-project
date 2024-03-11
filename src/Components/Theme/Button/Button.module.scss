@@ -1,0 +1,36 @@
+@import '../../../../styles/themeColors.scss';
+
+.loginButton {
+    background-color: $button;
+    color: $white;
+    border: $button 2px solid;
+    transition-duration: 500ms;
+    font-size: 15px;
+    font-weight: 200;
+
+    &:hover {
+        background: none;
+        color: $button;
+    }
+
+    &:disabled {
+        opacity: 75%;
+    }
+}
+
+.buttonTheme {
+    color: $button;
+    border: $button 2px solid;
+    transition-duration: 500ms;
+    font-size: 15px;
+    font-weight: 200;
+
+    &:hover {
+        background-color: $button;
+        color: $white;
+    }
+
+    &:disabled {
+        opacity: 75%;
+    }
+}
