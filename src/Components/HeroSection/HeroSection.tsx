@@ -13,7 +13,7 @@ function HeroSectionPage() {
                     Start your journey to fun and enlightenment today! Welcome to QuizWiz where trivia meets entertainment! Dive into a world of puzzles and challenges, expand your knowledge, and join a vibrant community of learners.
                 </div>
                 <div className="mt-12">
-                    <Link href={"/login"} className="bg-black duration-500 border-2 border-[#EEEEEE] text-[#EEEEEE] rounded-full px-6 py-4 text-lg font-medium shadow-lg hover:bg-[#EEEEEE] hover:text-black hover:shadow-xl transition transform hover:scale-105">
+                    <Link href={"/login"} className="bg-black duration-500 border-2 border-[#EEEEEE] text-[#EEEEEE] rounded-full px-6 py-4 text-lg font-medium hover:bg-[#EEEEEE] hover:text-black">
                         Explore Now
                     </Link>
                 </div>
