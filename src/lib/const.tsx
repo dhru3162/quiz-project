@@ -1,7 +1,8 @@
-export const APP_NAME = `Quiz`
+export const APP_NAME = `QuizWiz`
 
-export const APP_SEO_DATA = {
-    login: {
-        title: "Login"
-    },
+export const APP_TITLE_DATA = {
+    login: "Login",
+    register: 'Register'
 }
+
+export const apiLink = `https://dummyjson.com`

@@ -4,18 +4,20 @@ import { BiSolidErrorCircle } from 'react-icons/bi';
 import Style from './inputField.module.scss'
 
 interface FormInputProps extends UseControllerProps<FieldValues> {
-    control: Control<any>;
-    name: string;
-    label: string;
+    control: Control<any>
+    name: string
+    label: string
     rules?: {
         required?: string,
         pattern?: {
             value: any,
             message: string,
-        }
+        },
+        validate?: any
     }
-    type?: string;
-    eye?: boolean;
+    className?: string
+    type?: string
+    eye?: boolean
     disabled?: boolean
 }
 
@@ -25,6 +27,7 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
         name,
         label,
         rules,
+        className,
         type,
         eye,
         disabled
@@ -39,10 +42,10 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
     const typeCondition = eye ? (showPass ? `text` : `password`) : (type || 'text')
 
     return (
-        <div className='h-fit my-3'>
-            <div className='relative'>
+        <div className={`${className && className} h-fit w-full `}>
+            <div className='relative w-full'>
                 <input
-                    className={`${error ? `border-red-500` : `border-black pr-9 focus:border-indigo-600`} ${(error && eye) ? `p-16` : `pr-12`} block pt-2.5 pl-2 pb-1.5  text-gray-900 w-full bg-transparent placeholder-transparent border-b-[2.5px] appearance-none outline-none focus:ring-0 peer`}
+                    className={`${error ? `border-red-500` : `border-black focus:border-[#0C356A]`} ${(error && eye) ? `pr-16` : `pr-12`} block pt-2.5 pl-2 pb-1.5  text-gray-900 w-full bg-transparent placeholder-transparent border-b-[2.5px] appearance-none outline-none focus:ring-0 peer`}
                     id={name}
                     {...field}
                     disabled={disabled}
@@ -50,13 +53,13 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
                     type={typeCondition}
                 />
                 <label
-                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} pl-2 font-medium absolute duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} pl-2 font-medium absolute duration-300 peer-focus:font-medium transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                 >
                     {label}
                 </label>
                 {eye &&
                     <div
-                        className="absolute inset-y-0 right-0 px-3 flex items-center text-sm cursor-pointer text-black"
+                        className="absolute inset-y-0 right-0 px-3 flex items-center text-sm cursor-pointer duration-300 text-black peer-focus:text-[#0C356A]"
                         onClick={() => setShowPass(!showPass)}
                     >
                         {showPass ? (
@@ -80,10 +83,9 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
                     </div>
                 }
             </div >
-            {error && (
-                <span className='text-red-500 text-xs leading-none'>{(error as FieldError)?.message || `This field is required`}</span>
-            )}
-
+            {rules &&
+                <span className={` ${!error && `invisible`} text-red-500 text-xs leading-none`}>{(error as FieldError)?.message || `This field is required`}</span>
+            }
         </div>
     );
 };

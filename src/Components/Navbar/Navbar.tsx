@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation';
-import Logo from '../Logo';
+import Logo from '../Logo/Logo';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
 
 const Navbar = () => {
@@ -80,7 +80,7 @@ const Navbar = () => {
         </div>
       </nav> */}
       {/* ) : ( */}
-      <nav className="bg-[#EEEEEE80] rounded-b-md backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none z-20 top-0 ">
+      <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none z-20 top-0 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/" className="flex items-center space-x-3 outline-none rtl:space-x-reverse">
             <Logo className='h-10' />
