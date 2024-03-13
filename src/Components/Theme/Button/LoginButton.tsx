@@ -7,7 +7,7 @@ interface ButtonProps {
     disabled?: boolean;
     id?: string;
     type: 'button' | 'submit' | 'reset';
-    name: React.ReactNode;
+    children: React.ReactNode;
     isLoading?: boolean;
     onClick?: () => void;
 }
@@ -18,7 +18,7 @@ const LoginButton: React.FC<ButtonProps> = (props) => {
         disabled,
         id,
         type,
-        name,
+        children,
         isLoading = false,
         onClick,
     } = props
@@ -31,7 +31,7 @@ const LoginButton: React.FC<ButtonProps> = (props) => {
         >
             <Pane display="flex" alignItems="center" justifyContent="center">
                 <RoundLoader className="mr-2 w-5 h-5" loading={isLoading} />
-                {name}
+                {children}
             </Pane>
         </button >
     )

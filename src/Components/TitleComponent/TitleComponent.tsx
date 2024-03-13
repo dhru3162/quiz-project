@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import React from 'react'
-import { APP_NAME } from './../../lib/const';
+import { APP_NAME } from '../../lib/const';
 
-export interface SEOComponentProps {
+export interface TitleComponentProps {
     title?: string;
 }
 
-const SEOComponent = ({ title }: SEOComponentProps) => {
+const TitleComponent = ({ title }: TitleComponentProps) => {
     return (
         <Head>
             <title>
@@ -16,4 +16,4 @@ const SEOComponent = ({ title }: SEOComponentProps) => {
     )
 }
 
-export default SEOComponent
+export default TitleComponent

@@ -1,0 +1,15 @@
+@import '../../../styles/themeColors.scss';
+
+.container {
+    background-color: $white;
+}
+
+.headerColor {
+    color: $text;
+    cursor: default;
+}
+
+.textColor {
+    color: $text;
+    cursor: pointer;
+}
