@@ -5,7 +5,8 @@ const initialState = {
     loggedInData: {},
     isAuth: false,
     isLoading: false,
-    isFirstLoading: true
+    isFirstLoading: true,
+    role: ''
 }
 
 const auth = createSlice({
@@ -23,10 +24,12 @@ const auth = createSlice({
             cookies.remove(`auth`)
             state.loggedInData = {}
             state.isAuth = false
+            state.role = ''
         },
         setInitialData: (state, action) => {
             state.loggedInData = action.payload
             state.isFirstLoading = false
+            state.role = 'user'
             state.isAuth = true
         },
         setFirstLoading: (state, action) => {

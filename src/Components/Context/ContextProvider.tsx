@@ -12,11 +12,27 @@ interface LayoutType {
 
 export const Context = createContext<any>(null)
 
-const LayoutContextProvider: React.FC<LayoutType> = ({ children }) => {
+export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
     const [{ auth }, setCookie] = useCookies(['auth'])
-    const { isAuth, isLoading } = useSelector((state: any) => state.auth)
+    const { isAuth } = useSelector((state: any) => state.auth)
     const dispatch = useDispatch()
     const router = useRouter()
+
+    const LogOut = async () => {
+        try {
+            if (auth) {
+                // const payload = {
+                //     Authorization: `Bearer ${auth?.token}`,
+                // };
+                // await logOutApi({ payload, sessionData })
+                dispatch(logOut())
+                router.push(`/`)
+            }
+        } catch (error) {
+            console.log(error);
+            toast(`Somthing Went Wrong`)
+        }
+    };
 
     // for logged in user data get
     const getUserData = async () => {
@@ -49,12 +65,12 @@ const LayoutContextProvider: React.FC<LayoutType> = ({ children }) => {
             dispatch(setFirstLoading(false))
         }
         // eslint-disable-next-line
-    }, [])
+    }, [auth])
 
     return (
         <Context.Provider
             value={{
-
+                LogOut
             }}
         >
             {children}

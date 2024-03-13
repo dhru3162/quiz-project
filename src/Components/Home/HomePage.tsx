@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar"
 
 const HomePage = () => {
     return (
-        <div className={`bgColor`}>
+        <div className={`bgColor min-h-screen`}>
             <Navbar />
             <HeroSectionPage />
             <Footer />
