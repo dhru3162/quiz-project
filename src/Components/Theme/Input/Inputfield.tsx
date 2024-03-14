@@ -45,7 +45,7 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
         <div className={`${className && className} h-fit w-full `}>
             <div className='relative w-full'>
                 <input
-                    className={`${error ? `border-red-500` : `border-black focus:border-[#0C356A]`} ${(error && eye) ? `pr-16` : `pr-12`} block pt-2.5 pl-2 pb-1.5  text-gray-900 w-full bg-transparent placeholder-transparent border-b-[2.5px] appearance-none outline-none focus:ring-0 peer`}
+                    className={`${error ? `border-red-500` : `border-black focus:border-[#0C356A]`} ${(error && eye) ? `pr-16` : `pr-12`} block pt-2.5 pl-2 text-gray-900 w-full bg-transparent placeholder-transparent border-b-[2.5px] appearance-none outline-none focus:ring-0 peer`}
                     id={name}
                     {...field}
                     disabled={disabled}
@@ -53,7 +53,7 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
                     type={typeCondition}
                 />
                 <label
-                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} pl-2 font-medium absolute duration-300 peer-focus:font-medium transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} text-base peer-focus:text-lg pl-2 font-medium absolute duration-300 peer-focus:font-medium transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
                 >
                     {label}
                 </label>

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Logo from '../Logo/Logo';
 import Styles from './LoginStyle.module.scss';
 import Inputfield from '../Theme/Input/Inputfield';
-import { Control } from 'react-hook-form';
 import LoginButton from '../Theme/Button/LoginButton';
 
 const LoginPage = (props: any) => {
@@ -47,7 +46,7 @@ const LoginPage = (props: any) => {
                                 control={control}
                                 className='mt-2'
                                 rules={{
-                                    required: "Please Enter Email Address",
+                                    required: "Please Enter User Name",
                                     // pattern: {
                                     //     value: /^[a-z0-9._-]+@[a-z0-9-]+\.[a-z]{2,4}$/i,
                                     //     message: "Please Enter Valid Email Address",
