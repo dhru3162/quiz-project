@@ -3,6 +3,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import Navbar from '../Navbar/Navbar';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
 import { MdDelete, MdEditSquare } from 'react-icons/md';
+import QuestionModal from './QuestionModel';
 
 const QuestionPage = (props: any) => {
     const { questionsList } = props;
@@ -18,8 +19,10 @@ const QuestionPage = (props: any) => {
                             <h1 className="md:mr-4 md:mt-0 text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                                 Title: React
                             </h1>
+                            <QuestionModal/>
                             <ButtonTheme type='button'>Add Question</ButtonTheme>
                         </div>
+                        
 
                     </div>
 
