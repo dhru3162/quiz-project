@@ -17,8 +17,8 @@ const LoginPage = (props: any) => {
     } = props
 
     return (
-        <div className="bgColor max-sm:min-h-[93vh] min-h-screen w-screen-lg flex justify-center items-center">
-            <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[45%] h-fit flex justify-center pt-8 pb-8 `}>
+        <div className='bgColor max-sm:min-h-[93vh] max-sm:max-h-[93vh] min-h-screen flex justify-center items-center w-full'>
+            <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] h-fit flex justify-center pt-8 pb-8 `}>
                 <div className={`flex flex-col items-center space-y-8 w-full`}>
 
                     <Link href={'/'}>
@@ -158,7 +158,7 @@ const LoginPage = (props: any) => {
                                 className='w-full mt-5'
                                 isLoading={isLoading}
                             >
-                                Login
+                                Register
                             </LoginButton>
                             <div className='flex justify-center mt-7 font-bold text-sm'>
                                 Already have an account?
