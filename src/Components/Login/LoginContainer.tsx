@@ -27,7 +27,7 @@ const LoginContainer = () => {
         if (!isRegister) {
             try {
                 const payload = {
-                    ...data, expiresInMins: 1440
+                    ...data, expiresInMins: 120
                 }
                 const res = await logInApi(payload)
                 dispatch(loginSuccess(res.data))

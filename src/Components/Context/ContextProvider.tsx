@@ -43,7 +43,17 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
             const res = await getInitialDataApi(payload)
             dispatch(setInitialData(res.data))
         } catch (error: any) {
-            if (error?.response?.status === 406) {
+            // if (error?.response?.status === 406) {
+            //     toast(`Token Expired Login Again`)
+            //     dispatch(logOut())
+            //     router.push(`/`)
+            // } else if (error.request.status === 0) {
+            //     toast('Check Your Internet Connection');
+            // } else {
+            //     toast(error?.response?.data?.error?.message)
+            //     console.log(error);
+            // }
+            if (error?.response?.data?.message === "Token Expired!") {
                 toast(`Token Expired Login Again`)
                 dispatch(logOut())
                 router.push(`/`)

@@ -71,8 +71,8 @@ const Navbar = () => {
   return (
     <>
       {role === '' &&
-        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none z-20 top-0 ">
-          <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none z-20 top-0 ">
+          <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link href="/" className="flex items-center space-x-3 outline-none rtl:space-x-reverse">
               <Logo className='h-10' />
             </Link>
@@ -93,9 +93,8 @@ const Navbar = () => {
       }
 
       {role === 'user' &&
-        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none top-0 ">
-          <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-
+        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none top-0 ">
+          <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link href="/" className="flex items-center space-x-3 outline-none">
               <Logo className='h-10' />
             </Link>
@@ -115,8 +114,8 @@ const Navbar = () => {
       }
 
       {role === 'admin' &&
-        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky w-full select-none top-0 ">
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none top-0 ">
+          <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
 
             <Link href="/" className="flex items-center space-x-3 outline-none">
               <Logo className='h-10' />

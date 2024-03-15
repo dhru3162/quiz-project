@@ -1,0 +1,14 @@
+@import '../../../styles/themeColors.scss';
+
+.container {
+    background-color: $white;
+}
+
+.textColor {
+    color: $text;
+    font-weight: 500;
+}
+
+.btnColor{
+    color: $button; 
+}
