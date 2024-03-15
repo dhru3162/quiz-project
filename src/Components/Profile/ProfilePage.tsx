@@ -7,7 +7,7 @@ import { TiArrowBack } from 'react-icons/ti'
 const ProfilePage = (props: any) => {
     const {
         loggedInData,
-        role
+        router
     } = props
 
     return (
@@ -16,7 +16,10 @@ const ProfilePage = (props: any) => {
                 <Navbar />
                 <div className='flex justify-center items-center w-full h-full mt-28'>
                     <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] h-fit pt-8 pb-8 `}>
-                        <div className={`${Styles.btnColor} ml-12 max-md:ml-10 text-lg max-md:text-sm`}>
+                        <div
+                            className={`${Styles.btnColor} ml-12 max-md:ml-10 text-lg max-md:text-sm cursor-pointer`}
+                            onClick={() => router.push('/dashboard')}
+                        >
                             <Pane display="flex" alignItems="center">
                                 <TiArrowBack className='mr-2' />
                                 Back
@@ -31,7 +34,7 @@ const ProfilePage = (props: any) => {
                             <div className='2xl:text-3xl lg:text-2xl space-y-10 max-md:text-xl md:text-2xl max-md:space-y-8 duration-500'>
                                 <div>
                                     Full Name: <span className={`${Styles.textColor}`}>{loggedInData?.firstName} {loggedInData?.lastName}</span>
-                                </div>  
+                                </div>
                                 <div>
                                     Email I&apos;d: <span className={`${Styles.textColor}`}>{loggedInData?.email}</span>
                                 </div>
