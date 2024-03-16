@@ -1,0 +1,16 @@
+@import '../../../styles/themeColors.scss';
+
+.background{
+    // background-color:$text;
+    border: 2px solid $text;
+    background-color:$text;
+  }
+  
+  .answerOption {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+  
