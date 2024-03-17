@@ -5,10 +5,11 @@ import toast from 'react-hot-toast'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import { APP_TITLE_DATA } from '@/src/lib/const'
 import { useDispatch, useSelector } from 'react-redux'
-import { logInApi } from '@/src/ReduxToolkit/APIs/auth.api'
 import { loginSuccess, setIsLoading } from '@/src/ReduxToolkit/Slices/Auth'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/navigation'
+import { authentication } from "@/src/FireBase/FireBase"
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth'
 
 const LoginContainer = () => {
     const { control, handleSubmit, reset, getValues } = useForm()
@@ -19,48 +20,111 @@ const LoginContainer = () => {
     const router = useRouter()
 
     const handlerLogin = async (inputData: any) => {
-        // Remove the confirmPassword field from the object
-        const { 'confirmPassword': removedField, ...data } = inputData;
-        const isRegister = Object.keys(data).length > 2
+        const isRegister = Object.keys(inputData).length > 2
         dispatch(setIsLoading(true))
 
         if (!isRegister) {
             try {
-                const payload = {
-                    ...data, expiresInMins: 120
-                }
-                const res = await logInApi(payload)
-                dispatch(loginSuccess(res.data))
+                const res: any = await authentication.signInWithEmailAndPassword(inputData?.email, inputData?.password)
+                dispatch(loginSuccess(res))
                 toast.success('Login Successful')
+
+                const payload: any = {
+                    accessToken: res?.accessToken,
+                    email: res?.email,
+                    displayName: res?.displayName,
+                    uid: res?.uid
+                }
+                // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+                await setCookie('auth', payload)
+                router.push(`/dashboard`)
+
             } catch (error: any) {
-                toast.error(error?.response?.data?.error?.message)
-                console.log(error)
+                const errorCode = error.code
+                switch (errorCode) {
+                    case 'auth/invalid-credential':
+                        toast.error('Please Check Your Email And Password');
+                        break;
+                    default:
+                        toast.error('Somthing Went Wrong');
+                        break;
+                }
             } finally {
                 dispatch(setIsLoading(false))
             }
         } else if (isRegister) {
-            setTimeout(() => {
-                setIsLoading(false)
-                toast.success(`Coming soon`)
-                console.log(data)
-            }, 3500);
+            try {
+                const res: any = await authentication.createUserWithEmailAndPassword(inputData?.email, inputData?.password);
+                await res.user.updateProfile({
+                    displayName: `${inputData?.firstName || ''} ${inputData?.lastName || ''}`
+                });
+                dispatch(loginSuccess(res));
+                toast.success('Register Successful');
+
+                const payload: any = {
+                    accessToken: res?.accessToken,
+                    email: res?.email,
+                    displayName: res?.displayName,
+                    uid: res?.uid
+                }
+                // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+                await setCookie('auth', payload)
+                router.push(`/dashboard`)
+
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
-    useEffect(() => {
-        if (loggedInData?.token) {
-            const payload: any = {
-                token: loggedInData?.token,
-                email: loggedInData?.email,
-                username: loggedInData?.user?.username,
-                id: loggedInData?.id
-            }
-            const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
-            setCookie('auth', payload, { expires: expires })
-            router.push(`/dashboard`)
-        }
-    }, [loggedInData])
+    // const signInWithGoogle = async () => {
+    //     const provider = new GoogleAuthProvider();
+    //     try {
+    //         const res: any = await authentication.signInWithPopup(provider);
+    //         console.log(res)
+    //         dispatch(loginSuccess(res))
+    //         toast.success('Login Successful')
 
+    //         const payload: any = {
+    //             accessToken: res?.accessToken,
+    //             email: res?.email,
+    //             displayName: res?.displayName,
+    //             uid: res?.uid
+    //         }
+    //         // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+    //         await setCookie('auth', payload)
+    //         router.push(`/dashboard`)
+    //     } catch (error) {
+    //         console.error('Error signing in with Google:', error);
+    //     }
+    // };
+
+    // const signInWithGithub = async () => {
+    //     const provider = new GithubAuthProvider();
+    //     try {
+    //         const res: any = await authentication.signInWithPopup(provider);
+    //         console.log(res)
+    //         dispatch(loginSuccess(res))
+    //         toast.success('Login Successful')
+
+    //         const payload: any = {
+    //             accessToken: res?.accessToken,
+    //             email: res?.email,
+    //             displayName: res?.displayName,
+    //             uid: res?.uid
+    //         }
+    //         // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+    //         await setCookie('auth', payload)
+    //         router.push(`/dashboard`)
+    //     } catch (error: any) {
+    //         if (error.code === 'auth/account-exists-with-different-credential') {
+    //             toast.error('Please sign in using the original provider associated with your email address.');
+    //         } else {
+    //             toast.error('Error signing in with GitHub:', error);
+    //         }
+
+    //     }
+    // };
 
     return (
         <>
@@ -77,6 +141,8 @@ const LoginContainer = () => {
                     setIsLogin,
                     reset,
                     getValues,
+                    // signInWithGoogle,
+                    // signInWithGithub,
                 }}
             />
         </>

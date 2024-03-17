@@ -3,6 +3,7 @@ import Logo from '../Logo/Logo';
 import Styles from './LoginStyle.module.scss';
 import Inputfield from '../Theme/Input/Inputfield';
 import LoginButton from '../Theme/Button/LoginButton';
+import ButtonTheme from '../Theme/Button/ButtonTheme';
 
 const LoginPage = (props: any) => {
     const {
@@ -14,6 +15,8 @@ const LoginPage = (props: any) => {
         setIsLogin,
         reset,
         getValues,
+        // signInWithGoogle,
+        // signInWithGithub,
     } = props
 
     return (
@@ -41,16 +44,16 @@ const LoginPage = (props: any) => {
                         <form className='max-md:w-[90%] w-[60%]' onSubmit={handleSubmit(handlerLogin)}>
 
                             <Inputfield
-                                label='User Name'
-                                name='username'
+                                label='Email'
+                                name='email'
                                 control={control}
                                 className='mt-2'
                                 rules={{
                                     required: "Please Enter User Name",
-                                    // pattern: {
-                                    //     value: /^[a-z0-9._-]+@[a-z0-9-]+\.[a-z]{2,4}$/i,
-                                    //     message: "Please Enter Valid Email Address",
-                                    // },
+                                    pattern: {
+                                        value: /^[a-z0-9._-]+@[a-z0-9-]+\.[a-z]{2,4}$/i,
+                                        message: "Please Enter Valid Email Address",
+                                    },
                                 }}
                             />
                             <Inputfield
@@ -61,10 +64,10 @@ const LoginPage = (props: any) => {
                                 className='mt-2'
                                 rules={{
                                     required: "Please Enter Password",
-                                    // pattern: {
-                                    //     value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                                    //     message: 'Ex. Abcd@123',
-                                    // },
+                                    pattern: {
+                                        value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                                        message: 'Ex. Abcd@123',
+                                    },
                                 }}
                             />
                             <div className='flex justify-end mb-5'>
@@ -79,6 +82,18 @@ const LoginPage = (props: any) => {
                             >
                                 Login
                             </LoginButton>
+                            {/* <ButtonTheme
+                                type='button'
+                                onClick={signInWithGoogle}
+                            >
+                                Login With Google
+                            </ButtonTheme>
+                            <ButtonTheme
+                                type='button'
+                                onClick={signInWithGithub}
+                            >
+                                Login With Github
+                            </ButtonTheme> */}
                             <div className='flex justify-center mt-7 font-bold text-sm'>
                                 Not a member?
                                 <span

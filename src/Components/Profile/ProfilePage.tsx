@@ -28,12 +28,12 @@ const ProfilePage = (props: any) => {
                         <div className={`w-full p-12 max-md:p-10 relative`}>
                             <div className='absolute -top-28 left-0 w-full'>
                                 <div className='flex justify-center'>
-                                    <Avatar name={`${loggedInData.firstName} ${loggedInData.lastName}`} size={90} />
+                                    <Avatar name={loggedInData?.displayName} size={90} src='https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png' />
                                 </div>
                             </div>
                             <div className='2xl:text-3xl lg:text-2xl space-y-10 max-md:text-xl md:text-2xl max-md:space-y-8 duration-500'>
                                 <div>
-                                    Full Name: <span className={`${Styles.textColor}`}>{loggedInData?.firstName} {loggedInData?.lastName}</span>
+                                    Full Name: <span className={`${Styles.textColor}`}>{loggedInData?.displayName}</span>
                                 </div>
                                 <div>
                                     Email I&apos;d: <span className={`${Styles.textColor}`}>{loggedInData?.email}</span>

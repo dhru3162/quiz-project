@@ -9,7 +9,7 @@ const initialState = {
     role: ''
 }
 
-const auth = createSlice({
+const auth: any = createSlice({
     name: 'auth',
     initialState,
     reducers: {
@@ -33,7 +33,7 @@ const auth = createSlice({
             state.isAuth = true
         },
         setFirstLoading: (state, action) => {
-            state.isLoading = action.payload
+            state.isFirstLoading = action.payload
         }
     }
 })
