@@ -16,5 +16,26 @@ body {
 }
 
 .bgColor {
-  background-image: linear-gradient(45deg, transparent 0%, transparent 27%,rgba(214, 214, 214,0.06) 27%, rgba(214, 214, 214,0.06) 38%,transparent 38%, transparent 100%),linear-gradient(45deg, transparent 0%, transparent 39%,rgba(214, 214, 214,0.06) 39%, rgba(214, 214, 214,0.06) 68%,transparent 68%, transparent 100%),linear-gradient(90deg, transparent 0%, transparent 74%,rgba(214, 214, 214,0.06) 74%, rgba(214, 214, 214,0.06) 79%,transparent 79%, transparent 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
+  background-image: linear-gradient(45deg, transparent 0%, transparent 27%, rgba(214, 214, 214, 0.06) 27%, rgba(214, 214, 214, 0.06) 38%, transparent 38%, transparent 100%), linear-gradient(45deg, transparent 0%, transparent 39%, rgba(214, 214, 214, 0.06) 39%, rgba(214, 214, 214, 0.06) 68%, transparent 68%, transparent 100%), linear-gradient(90deg, transparent 0%, transparent 74%, rgba(214, 214, 214, 0.06) 74%, rgba(214, 214, 214, 0.06) 79%, transparent 79%, transparent 100%), linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

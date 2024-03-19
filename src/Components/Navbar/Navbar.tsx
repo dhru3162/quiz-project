@@ -15,7 +15,7 @@ import { Context } from '../Context/ContextProvider';
 
 const Navbar = () => {
   const router = useRouter()
-  const { loggedInData, role } = useSelector((state: any) => state.auth)
+  const { loggedInData, role }: any = useSelector((state: any) => state.auth)
   const { LogOut } = useContext(Context)
 
   const userDropdown = [
@@ -93,7 +93,7 @@ const Navbar = () => {
       }
 
       {role === 'user' &&
-        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none top-0 ">
+        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none z-20 top-0 ">
           <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link href="/" className="flex items-center space-x-3 outline-none">
               <Logo className='h-10' />
@@ -105,7 +105,7 @@ const Navbar = () => {
                 className='!rounded-full !p-0 !bg-transparent'
                 handlerAction={handlerAction}
               >
-                <Avatar name={`${loggedInData.firstName} ${loggedInData.lastName}`} size={45} />
+                <Avatar name={loggedInData?.displayName} size={45} />
               </DropdownTheme>
             </div>
 
@@ -114,7 +114,7 @@ const Navbar = () => {
       }
 
       {role === 'admin' &&
-        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none top-0 ">
+        <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none z-20 top-0 ">
           <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
 
             <Link href="/" className="flex items-center space-x-3 outline-none">
@@ -127,7 +127,7 @@ const Navbar = () => {
                 className='!rounded-full !p-0 !bg-transparent'
                 handlerAction={handlerAction}
               >
-                <Avatar name={`${loggedInData.firstName} ${loggedInData.lastName}`} size={45} />
+                <Avatar name={loggedInData?.displayName} size={45} />
               </DropdownTheme>
             </div>
 

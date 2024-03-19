@@ -14,7 +14,6 @@ export const middleware = (request: NextRequest) => {
     }
 
     if (isPrivatePath && !auth) {
-        toast(`Login First`)
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 }
