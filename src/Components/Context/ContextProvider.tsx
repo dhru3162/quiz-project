@@ -30,7 +30,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
             }
         } catch (error) {
             console.log(error);
-            toast(`Somthing Went Wrong`)
+            toast(`Something Went Wrong`)
         }
     };
 
