@@ -12,19 +12,19 @@ const QuestionContainer = () => {
       const questionsList:Questions[] = [
         {
             question:'what is react?',
-            correctAnswers:"js- libary"
+            correctAnswers:"React"
         },
         {
-            question:'what is react?',
-            correctAnswers:"js- libary"
+            question:'what is java?',
+            correctAnswers:"java"
         },
         {
-            question:'what is react?',
-            correctAnswers:"js- libary"
+            question:'what is next?',
+            correctAnswers:"Next-js"
         },
         {
-            question:'what is react?',
-            correctAnswers:"js- libary"
+            question:'what is node?',
+            correctAnswers:"Node-js"
         },
         {
             question:'what is react?',
