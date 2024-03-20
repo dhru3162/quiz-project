@@ -4,9 +4,12 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import Navbar from '../Navbar/Navbar';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
 import QuestionModal from './QuestionModel';
+import { Router, useRouter } from 'next/router';
+import QuestionAddModal from './QuestionAddModel';
 
 const QuestionPage = (props: any) => {
     const { questionsList } = props;
+    const router = useRouter()
 
     const QuizList = questionsList.map((item: any, index: number) => {
         return (
@@ -40,8 +43,7 @@ const QuestionPage = (props: any) => {
                                 <h1 className="md:mr-4 md:mt-0 text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                                     Title: React
                                 </h1>
-                                <QuestionModal />
-                                <ButtonTheme type='button'>Add Question</ButtonTheme>
+                                <QuestionAddModal/>
                             </div>
                         </div>
 
