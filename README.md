@@ -42,3 +42,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 <!-- npm install --save react-circular-progressbar -->
 <!-- npm i @types/recharts -->
+Some changes 
+
+typing animation
+retry button internet
+bg slider with animation
+loder navigation after login
+navbar common input Field
+logo svg
+refactor code
