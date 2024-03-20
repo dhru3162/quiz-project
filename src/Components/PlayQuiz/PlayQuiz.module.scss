@@ -1,0 +1,31 @@
+@import '../../../styles/themeColors.scss';
+
+.container {
+    background-color: $white;
+}
+
+.timeer {
+    color: $text;
+}
+
+.questionNumber {
+    color: $text;
+}
+
+.progressBar {
+    color: $white;
+}
+
+.totalScore {
+    color: $text;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.correctAnswersColor {
+    color: $text;
+}

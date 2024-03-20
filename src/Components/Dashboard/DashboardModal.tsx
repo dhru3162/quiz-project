@@ -55,7 +55,7 @@ const DashboardModal = ({ item }: any) => {
                                     <ButtonTheme
                                         type="button"
                                         onClick={() => {
-                                            router.push(`/playquiz?q=${item.title}`)
+                                            router.push(`/playquiz?q=${item.id}`)
                                         }}
                                     >
                                         <FaPlay className="mr-2" />

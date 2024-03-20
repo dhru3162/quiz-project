@@ -1,49 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import DashboardPage from './DashboardPage'
-import { Context } from '../Context/ContextProvider'
 import TitleComponent from '../TitleComponent/TitleComponent'
-import { APP_TITLE_DATA } from '@/src/lib/const'
+import { APP_TITLE_DATA, dummyQuizData } from '@/src/lib/const'
 
 const DashboardContainer = () => {
 
-    const data = [
-        {
-            title: 'React',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-        {
-            title: 'Next',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-        {
-            title: 'Node',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-        {
-            title: 'Dot Net',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-        {
-            title: 'Express',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-        {
-            title: 'MongoDB',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-            totalQuestions: '15',
-            time: '60',
-        },
-    ]
 
     return (
         <>
@@ -52,7 +13,7 @@ const DashboardContainer = () => {
             />
             <DashboardPage
                 {...{
-                    data,
+                    dummyQuizData,
                 }}
             />
         </>

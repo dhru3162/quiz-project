@@ -1,6 +1,7 @@
 import { getApp, getApps } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_APPKEY,
@@ -17,5 +18,9 @@ if (!firebase.apps.length) {
 }
 
 const authentication = firebase.auth();
+const database = getFirestore()
 
-export { authentication };
+export {
+  authentication,
+  database
+};
