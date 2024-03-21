@@ -38,6 +38,8 @@ const PlayQuizContainer = () => {
   //   }
   // }, [timer])
 
+  console.log(JSON.stringify(dummyQuizData[0]))
+
   useEffect(() => {
     if (isQuizEnd) {
       checkScore()
@@ -59,13 +61,9 @@ const PlayQuizContainer = () => {
   const checkScore = () => {
     const checkAnswer = quizData?.questions?.map((items: any) => {
       const currectAnswer = `${items.question}_${items.correctAnswers}`
-      console.log(currectAnswer)
-      console.log(answers)
       const check = answers.includes(currectAnswer)
       return check
     })
-    console.log(checkAnswer)
-    console.log(checkAnswer.filter(Boolean).length)
     setTotalScore(checkAnswer.filter(Boolean).length)
   }
 
