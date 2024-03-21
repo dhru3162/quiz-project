@@ -6,10 +6,10 @@ import DashboardModal from "./DashboardModal";
 
 const DashboardPage = (props: any) => {
     const {
-        data,
+        dummyQuizData,
     } = props
 
-    const cards = data?.map((item: any, index: number) => {
+    const cards = dummyQuizData?.map((item: any, index: number) => {
         return (
             <div key={index} className='flex justify-center w-full'>
                 <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl p-5 space-y-2`}>
@@ -42,7 +42,7 @@ const DashboardPage = (props: any) => {
                         </div>
                     </div>
 
-                    <div className='gap-8 m-10 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 '>
+                    <div className='gap-8 m-10 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 duration-500'>
                         {cards}
                     </div>
 
