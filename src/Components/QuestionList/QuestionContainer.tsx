@@ -1,68 +1,29 @@
-import React from 'react'
-import QuestionPage from './QuestionPage'
+import React, { useState, useEffect } from 'react';
+import QuestionPage from './QuestionPage';
+import axios from 'axios';
+import { BASE_API } from '@/src/lib/const';
 
-const QuestionContainer = () => {
-    type Questions = {
-        question: string,
-        correctAnswers: string,
-       
-      
-      }
-      
-      const questionsList:Questions[] = [
-        {
-            question:'what is react?',
-            correctAnswers:"React"
-        },
-        {
-            question:'what is java?',
-            correctAnswers:"java"
-        },
-        {
-            question:'what is next?',
-            correctAnswers:"Next-js"
-        },
-        {
-            question:'what is node?',
-            correctAnswers:"Node-js"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-        {
-            question:'what is react?',
-            correctAnswers:"js- libary"
-        },
-       
-        
-      ]
+const QuestionContainer = (item:any) => {
+    const [questionsList, setQuestionsList] = useState([]);
 
-  return (
-    <>
-    <QuestionPage 
-    {...{
-        questionsList
-    }}
-    /> 
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                const response = await axios.get(`${BASE_API}/4`);
+                setQuestionsList(response.data);
+            } catch (error) {
+                console.error('Error fetching questions:', error);
+            }
+        };
 
-    </>
-  )
-}
-export default QuestionContainer
+        fetchQuestions();
+    }, []);
+
+    return (
+        <>
+            <QuestionPage questionsList={questionsList} />
+        </>
+    );
+};
+
+export default QuestionContainer;

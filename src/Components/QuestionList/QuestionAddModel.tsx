@@ -3,6 +3,8 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useForm, Controller } from "react-hook-form";
 import Style from "./Question.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
+import { BASE_API } from "@/src/lib/const";
+import { nanoid } from "@reduxjs/toolkit";
 
 const QuestionAddModal = ({ item }: any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,8 +21,53 @@ const QuestionAddModal = ({ item }: any) => {
 
     const handleAnswerChange = (index: number) => {
         setCorrectAnswerIndex(index);
-        // Clear radio button error when an option is selected
         setRadioError(false);
+    };
+
+    const addQuestionInner = async (newQuestion:any) => {
+        try {
+            // Fetch the existing data from the API
+            const response = await fetch(`${BASE_API}/4`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch existing data');
+            }
+
+            const existingData = await response.json();
+
+            // Add the new question to the "questions" array
+            existingData.questions.push(newQuestion);
+
+            // Send the updated object back to the API
+            const updateResponse = await fetch(`${BASE_API}/4`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(existingData)
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error('Failed to add question to the array');
+            }
+
+            // Log the updated data
+            console.log('Updated Data:', existingData);
+
+            onClose();
+            reset(); // Reset form fields
+            setOptions(['', '']); // Reset options
+            setCorrectAnswerIndex(-1); // Reset correct answer index
+            setRadioError(false); // Reset radio button error
+        } catch (error) {
+            console.error('Error adding question to the array:', error);
+            // Handle error accordingly
+        }
     };
 
     const onSubmit = (data: any) => {
@@ -30,22 +77,15 @@ const QuestionAddModal = ({ item }: any) => {
             return; // Don't proceed if no correct answer is selected
         }
 
-        const questionObject = {
+        const newQuestion = {
+            id:nanoid(),
             question: data.question,
-            correctAnswer: data.options[correctAnswerIndex],
-            options: data.options
+            correctAnswers: data.options[correctAnswerIndex],
+            options: data.options.filter((option: string) => option.trim() !== '') // Remove empty options
         };
 
-        // Log the question object
-        console.log('Question Object:', questionObject);
-
-        onClose();
-        reset(); // Reset form fields
-        setOptions(['', '']); // Reset options
-        setCorrectAnswerIndex(-1); // Reset correct answer index
-        setRadioError(false); // Reset radio button error
+        addQuestionInner(newQuestion);
     };
-
 
     return (
         <>
@@ -95,7 +135,7 @@ const QuestionAddModal = ({ item }: any) => {
                                             name={`options[${index}]`}
                                             control={control}
                                             defaultValue=""
-                                            rules={{ required: 'Option is required' }}
+                                            rules={{ required: 'options is required' }}
                                             render={({ field }) => (
                                                 <>
                                                     <input
