@@ -6,6 +6,7 @@ import ButtonTheme from '../Theme/Button/ButtonTheme';
 import QuestionModal from './QuestionModel';
 import { Router, useRouter } from 'next/router';
 import QuestionAddModal from './QuestionAddModel';
+import UpdateQuestionModal from './UpdateQuestionModel';
 
 const QuestionPage = (props: any) => {
     const { questionsList } = props;
@@ -24,7 +25,7 @@ const QuestionPage = (props: any) => {
                     {item?.correctAnswers || '-'}
                 </div>
                 <div className="px-2 md:px-4 py-2 md:py-4 w-[10%] truncate flex justify-start">
-                    <div className='text-green-500 text-xl me-2 '><FaEdit /></div>
+                    <UpdateQuestionModal item={item} />
                     <div className='text-red-500 text-xl'><RiDeleteBin6Fill /></div>
                 </div>
             </div>

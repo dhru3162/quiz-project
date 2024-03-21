@@ -3,8 +3,9 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useForm, Controller } from "react-hook-form";
 import Style from "./Question.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
+import { FaEdit } from "react-icons/fa";
 
-const QuestionAddModal = ({ item }: any) => {
+const UpdateQuestionModal = ({ item }: any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { handleSubmit, control, reset, formState: { errors } } = useForm();
     const [options, setOptions] = useState(['', '']);
@@ -50,7 +51,8 @@ const QuestionAddModal = ({ item }: any) => {
     return (
         <>
             <div onClick={() => onOpen()}>
-                <ButtonTheme type='button'>Add Question</ButtonTheme>
+                {/* <ButtonTheme type='button'>Add Question</ButtonTheme> */}
+                <div className='text-green-500 text-xl me-2 '><FaEdit /></div>
             </div>
             <Modal
                 size={'xl'}
@@ -115,7 +117,7 @@ const QuestionAddModal = ({ item }: any) => {
                                     </div>
                                 )}
                                 <div className="mt-4 flex justify-center">
-                                    <ButtonTheme type='submit' className="w-1/2 ">Add</ButtonTheme>
+                                    <ButtonTheme type='submit' className="w-1/2 ">Update</ButtonTheme>
                                 </div>
                             </form>
                         </ModalBody>
@@ -129,4 +131,4 @@ const QuestionAddModal = ({ item }: any) => {
     );
 }
 
-export default QuestionAddModal;
+export default UpdateQuestionModal;
