@@ -3,7 +3,7 @@ import LoginPage from "./LoginPage";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import TitleComponent from "../TitleComponent/TitleComponent";
-import { APP_TITLE_DATA } from "@/src/lib/const";
+import { APP_TITLE_DATA, USER_API } from "@/src/lib/const";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, setIsLoading } from "@/src/ReduxToolkit/Slices/Auth";
 import { useCookies } from "react-cookie";
@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { authentication } from "@/src/FireBase/FireBase";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { Context } from "../Context/ContextProvider";
+import axios from "axios";
 
 const LoginContainer = () => {
   const { control, handleSubmit, reset, getValues } = useForm();
@@ -31,7 +32,6 @@ const LoginContainer = () => {
           inputData?.email,
           inputData?.password
         );
-        console.log(res.roles)
         dispatch(loginSuccess(res));
         toast.success("Login Successful");
 
@@ -59,10 +59,21 @@ const LoginContainer = () => {
       }
     } else if (isRegister) {
       try {
+
         const res: any = await authentication.createUserWithEmailAndPassword(
           inputData?.email,
           inputData?.password
         );
+
+        const userData = {
+          userId: res?.user?._delegate?.uid,
+          fullName: `${inputData?.firstName || ""} ${inputData?.lastName || ""}`,
+          email: inputData?.email,
+          score: '0',
+          history: []
+        }
+        await axios.post(`${USER_API}`, userData)
+
 
         const payload: any = {
           accessToken: res?.accessToken,
@@ -76,9 +87,8 @@ const LoginContainer = () => {
         setCookie("auth", payload);
         router.push(`/dashboard`);
         await res.user.updateProfile({
-          displayName: `${inputData?.firstName || ""} ${
-            inputData?.lastName || ""
-          }`,
+          displayName: `${inputData?.firstName || ""} ${inputData?.lastName || ""
+            }`,
         });
       } catch (error: any) {
         if (error.code) {

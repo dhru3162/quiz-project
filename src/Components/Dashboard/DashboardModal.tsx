@@ -6,7 +6,11 @@ import { BsFillInfoCircleFill } from "react-icons/bs";
 import Style from './Dashboard.module.scss'
 import { useRouter } from 'next/navigation';
 
-const DashboardModal = ({ item }: any) => {
+const DashboardModal = (props: any) => {
+    const {
+        item,
+        setGoToQuizLoader,
+    } = props
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter()
 
@@ -55,7 +59,9 @@ const DashboardModal = ({ item }: any) => {
                                     <ButtonTheme
                                         type="button"
                                         onClick={() => {
+                                            onClose()
                                             router.push(`/playquiz?q=${item.id}`)
+                                            setGoToQuizLoader(true)
                                         }}
                                     >
                                         <FaPlay className="mr-2" />

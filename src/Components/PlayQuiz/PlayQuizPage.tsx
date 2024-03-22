@@ -37,7 +37,7 @@ const PlayQuizPage = (props: any) => {
               <div className='p-8 space-y-8 w-full'>
 
                 <div className="absolute -top-12 left-0 w-full">
-                  <div className="flex justify-center items-center">
+                  <div className="flex justify-center items-center select-none">
                     <div className='relative'>
                       <svg width="75" height="100" className='h-28' viewBox="0 0 130 154" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="65" cy="89" r="64" fill="#EEEEEE" />
@@ -50,7 +50,7 @@ const PlayQuizPage = (props: any) => {
                   </div>
                 </div>
 
-                <div className={`${Style.questionNumber} font-semibold`}>
+                <div className={`${Style.questionNumber} font-semibold select-none`}>
                   <span className={`text-3xl`}>
                     {questionNumber + 1}/
                   </span>
@@ -79,8 +79,8 @@ const PlayQuizPage = (props: any) => {
                     type='button'
                     onClick={handlerNextQuestion}
                   >
-                    {quizData?.totalQuestions === `${questionNumber + 1}` ? `Finish` : `Next`}
-                    {quizData?.totalQuestions !== `${questionNumber + 1}` && <span className='ml-2'><TbPlayerTrackNextFilled /></span>}
+                    {quizData?.totalQuestions === (questionNumber + 1) ? `Finish` : `Next`}
+                    {quizData?.totalQuestions !== (questionNumber + 1) && <span className='ml-2'><TbPlayerTrackNextFilled /></span>}
 
                   </ButtonTheme>
                 </div>
@@ -170,12 +170,16 @@ const PlayQuizPage = (props: any) => {
                             Right Answer:
                             <span className={`${Style.correctAnswersColor}`}> {item?.correctAnswers}</span>
                           </div> */}
-
+                          {(answers[index] === 'emptyData' || answers[index] === undefined) &&
+                            <span className='text-[#ff3333] mt-3'>
+                              * Answer Not selected
+                            </span>
+                          }
                         </div>
                       )}
                     </div>
 
-                    <div className={`${Style.center}`}>
+                    <div className={`${Style.center} mt-16`}>
                       <ButtonTheme
                         type='button'
                         onClick={() => router.push('/dashboard')}

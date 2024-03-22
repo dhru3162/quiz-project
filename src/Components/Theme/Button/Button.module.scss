@@ -34,3 +34,20 @@
         opacity: 75%;
     }
 }
+
+.buttonThemeWhite {
+    color: $white;
+    border: $white 2px solid;
+    transition-duration: 500ms;
+    font-size: 15px;
+    font-weight: 200;
+
+    &:hover {
+        background-color: $white;
+        color: $button;
+    }
+
+    &:disabled {
+        opacity: 75%;
+    }
+}
