@@ -38,7 +38,10 @@ const QuestionAddModal = ({ item }: any) => {
                 throw new Error('Failed to fetch existing data');
             }
 
-            const existingData = await response.json();
+            let existingData = await response.json();
+
+            // Increment the totalQuestions field
+            existingData.totalQuestions = parseInt(existingData.totalQuestions) + 1;
 
             // Add the new question to the "questions" array
             existingData.questions.push(newQuestion);
@@ -78,7 +81,7 @@ const QuestionAddModal = ({ item }: any) => {
         }
 
         const newQuestion = {
-            id:nanoid(),
+            id: nanoid(),
             question: data.question,
             correctAnswers: data.options[correctAnswerIndex],
             options: data.options.filter((option: string) => option.trim() !== '') // Remove empty options
@@ -144,7 +147,7 @@ const QuestionAddModal = ({ item }: any) => {
                                                         placeholder="Enter option"
                                                     />
                                                 </>
-                                            )}
+                                            )}  
                                         />
                                     </div>
                                 ))}
