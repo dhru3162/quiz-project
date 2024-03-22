@@ -1,17 +1,21 @@
 @import '../../../styles/themeColors.scss';
 
-.headText{
+.headText {
     color: $white;
 }
 
-.cardBg{
+.cardBg {
     background-color: $white;
 }
 
-.cardTitle{
+.cardTitle {
     color: $text;
 }
 
-.textColor{
+.textColor {
     color: $text;
+}
+
+.cardHoverAction {
+    color: $button;
 }

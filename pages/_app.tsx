@@ -4,6 +4,7 @@ import TitleComponent from "@/src/Components/TitleComponent/TitleComponent";
 import { store } from "@/src/ReduxToolkit/store";
 import "@/styles/globals.scss";
 import 'react-circular-progressbar/dist/styles.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";

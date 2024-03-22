@@ -22,21 +22,17 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-    const LogOut = async () => {
-        try {
-            if (auth) {
-                // const payload = {
-                //     Authorization: `Bearer ${auth?.token}`,
-                // };
-                // await logOutApi({ payload, sessionData })
-                dispatch(logOut())
-                router.push(`/`)
-            }
-        } catch (error) {
-            console.log(error);
-            toast(`Somthing Went Wrong`)
-        }
-    };
+  const LogOut = async () => {
+    try {
+      await authentication.signOut()
+      dispatch(logOut())
+      router.push(`/`)
+    }
+    catch (error) {
+      console.log(error);
+      toast(`Somthing Went Wrong`)
+    }
+  };
 
   // for logged in user data get
   const getUserData = async () => {

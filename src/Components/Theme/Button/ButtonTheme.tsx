@@ -10,6 +10,7 @@ interface ButtonProps {
     children: React.ReactNode;
     isLoading?: boolean;
     onClick?: () => void;
+    white?: boolean
 }
 
 const ButtonTheme = (props: ButtonProps) => {
@@ -21,13 +22,14 @@ const ButtonTheme = (props: ButtonProps) => {
         children,
         isLoading = false,
         onClick,
+        white,
     } = props
 
     return (
         <button
             {...{ id, type, onClick }}
             disabled={isLoading || disabled}
-            className={`${className && className} ${Style.buttonTheme} px-6 py-2 rounded-lg text-center outline-none`}
+            className={`${className && className} ${white ? Style.buttonThemeWhite : Style.buttonTheme} px-6 py-2 rounded-lg text-center outline-none`}
         >
             <Pane display="flex" alignItems="center" justifyContent="center">
                 <RoundLoader className="mr-2 w-5 h-5" loading={isLoading} />

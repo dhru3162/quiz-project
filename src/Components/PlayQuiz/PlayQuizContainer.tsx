@@ -2,16 +2,12 @@ import { useEffect, useState } from 'react'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import PlayQuizPage from './PlayQuizPage'
 import { useRouter } from 'next/router'
-import { dummyQuizData } from '@/src/lib/const'
-import { log } from 'console'
 
-const PlayQuizContainer = () => {
+const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
-  const { query } = router
-  const [quizData, setQuizData]: any = useState([])
   const [questionNumber, setQuestionNumber] = useState(0)
   const [currentQuestion, setCurrentQuestion]: any = useState()
-  const [timer, setTimer] = useState(60)
+  const [timer, setTimer] = useState(0)
   const [selectedOption, setSelectedOption]: any = useState(``)
   const [answers, setAnswers]: any = useState([])
   const [isQuizEnd, setIsQuizEnd] = useState(false)
@@ -19,12 +15,9 @@ const PlayQuizContainer = () => {
   const percentage = ((totalScore / quizData?.totalQuestions) * 100).toFixed()
 
   useEffect(() => {
-    getQuizData()
-  }, [])
-
-  useEffect(() => {
     if (quizData?.questions) {
       setCurrentQuestion(quizData?.questions[questionNumber])
+      setTimer(quizData?.time)
     }
   }, [questionNumber, quizData])
 
@@ -38,25 +31,11 @@ const PlayQuizContainer = () => {
   //   }
   // }, [timer])
 
-  console.log(JSON.stringify(dummyQuizData[0]))
-
   useEffect(() => {
     if (isQuizEnd) {
       checkScore()
     }
   }, [isQuizEnd])
-
-  const getQuizData = () => {
-    const quiz: any = dummyQuizData.filter((item: any) => item.id === query.q)
-    if (!quiz) {
-      router.push({
-        pathname: '/dashboard'
-      })
-    } else {
-      setQuizData(quiz[0])
-      setQuestionNumber(0)
-    }
-  }
 
   const checkScore = () => {
     const checkAnswer = quizData?.questions?.map((items: any) => {
@@ -74,24 +53,16 @@ const PlayQuizContainer = () => {
       setAnswers([...answers, 'emptyData'])
     }
 
-    if (quizData?.totalQuestions !== `${questionNumber + 1}`) {
+    if (quizData?.totalQuestions !== (questionNumber + 1)) {
       setQuestionNumber(questionNumber + 1)
     } else {
       setQuestionNumber(0)
       setIsQuizEnd(true)
-
-      // console.log(answers)
-      // const calculateAnswer = quizData?.questions.map((items: any) => {
-      //   const check = answers.includes(`${currentQuestion?.question}_${items?.correctAnswers}`)
-      //   return check
-      // })
-      // console.log(calculateAnswer) 
     }
 
     setTimer(60)
     setSelectedOption('')
   }
-  // console.log(answers)
 
   const checkAnswer = (question: any, option: any) => {
     const green = {
@@ -123,7 +94,6 @@ const PlayQuizContainer = () => {
   }
 
   const handlerDisplayScore = (question: any) => {
-
     const findQuestionData = quizData?.questions.filter((item: any) => item.question === question)[0];
     const currectAnswer = `${findQuestionData.question}_${findQuestionData.correctAnswers}`
     const check = answers.includes(currectAnswer)

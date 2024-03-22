@@ -5,7 +5,11 @@ import { Avatar, Pane } from "evergreen-ui";
 import { TiArrowBack } from "react-icons/ti";
 
 const ProfilePage = (props: any) => {
-  const { loggedInData, router } = props;
+  const {
+    loggedInData,
+    router,
+    role,
+  } = props;
 
   return (
     <>
@@ -48,11 +52,13 @@ const ProfilePage = (props: any) => {
                   </span>
                 </div>
                 <div>
-                  Rank: <span className={`${Styles.textColor}`}>1</span>
-                </div>
-                <div>
                   Your Score: <span className={`${Styles.textColor}`}>82</span>
                 </div>
+                {role === 'admin' &&
+                  <div>
+                    Role: <span className={`${Styles.textColor}`}>Admin</span>
+                  </div>
+                }
               </div>
               {/* </div> */}
             </div>

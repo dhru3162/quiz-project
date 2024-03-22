@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 
 const ProfileContainer = () => {
-    const { loggedInData } = useSelector((state: any) => state.auth)
+    const { loggedInData, role } = useSelector((state: any) => state.auth)
     const router = useRouter()
 
     return (
@@ -17,7 +17,8 @@ const ProfileContainer = () => {
             <ProfilePage
                 {...{
                     loggedInData,
-                    router
+                    router,
+                    role,
                 }}
             />
         </>
