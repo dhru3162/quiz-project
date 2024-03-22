@@ -11,8 +11,9 @@ import UpdateQuestionModal from './UpdateQuestionModel';
 const QuestionPage = (props: any) => {
     const { questionsList } = props;
     const router = useRouter()
+    console.log(questionsList?.questions,"Apidata")
 
-    const QuizList = questionsList.map((item: any, index: number) => {
+    const QuizList = questionsList?.questions?.map((item: any, index: number) => {
         return (
             <div key={index} className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-default">
                 <div className="px-2 md:px-4 py-2 md:py-4 font-extrabold text-sm text-gray-900 w-[5%]">
@@ -42,7 +43,7 @@ const QuestionPage = (props: any) => {
                         <div className="flex flex-col mb-4">
                             <div className="flex justify-between">
                                 <h1 className="md:mr-4 md:mt-0 text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-                                    Title: React
+                                    Title: {questionsList?.title}
                                 </h1>
                                 <QuestionAddModal/>
                             </div>
@@ -67,7 +68,7 @@ const QuestionPage = (props: any) => {
                                     </div>
                                 </div>
                                 <div className='max-h-80 overflow-auto'>
-                                    {questionsList.length === 0 ? (
+                                    {questionsList?.questions?.length === 0 ? (
                                         <div className="px-6 py-4 w-full text-sm text-center">
                                             No results found.
                                         </div>
