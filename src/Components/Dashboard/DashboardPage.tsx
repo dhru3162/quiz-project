@@ -136,7 +136,7 @@ const DashboardPage = (props: any) => {
                                 {cardsForAdmin}
                             </div>
 
-                            <DashboardCardsSkeleton />
+                            {/* <DashboardCardsSkeleton /> */}
 
                         </div>
                     </div>
