@@ -100,7 +100,7 @@ const DashboardPage = (props: any) => {
                 <>
                     <Navbar />
                     <div className='bgColor min-h-screen flex justify-center'>
-                        <div className="max-w-screen-2xl">
+                        <div className="max-w-screen-2xl w-full p-10">
 
                             <div className="flex justify-center mt-10 max-md:mt-7">
                                 <h1 className={`${Style.headText} text-5xl md:text-4xl font-bold max-md:text-3xl`}>

@@ -18,7 +18,7 @@ const LoginPage = (props: any) => {
 
     return (
         <div className='bgColor max-sm:min-h-[93vh] max-sm:max-h-[93vh] min-h-screen flex justify-center items-center w-full'>
-            <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] h-fit flex justify-center pt-8 pb-8 `}>
+            <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[40%] h-fit flex justify-center pt-8 pb-8 `}>
                 <div className={`flex flex-col items-center space-y-8 w-full`}>
 
                     <Link href={'/'}>
@@ -95,7 +95,7 @@ const LoginPage = (props: any) => {
                     }
 
                     {!isLogin &&
-                        <form className='max-md:w-[90%] w-[60%]' onSubmit={handleSubmit(handlerLogin)}>
+                        <form className='max-md:w-[90%] w-[60%] space-y-2' onSubmit={handleSubmit(handlerLogin)}>
 
                             <Inputfield
                                 label='First Name'

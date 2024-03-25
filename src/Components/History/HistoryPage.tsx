@@ -3,17 +3,20 @@ import Navbar from '../Navbar/Navbar'
 import Style from './History.module.scss'
 import { TiArrowBack } from 'react-icons/ti'
 import { Pane } from 'evergreen-ui'
+import HistorySkeleton from '../Loaders/Skeletons/HistorySkeleton'
+import HistoryModal from './HistoryModal'
 
 const HistoryPage = (props: any) => {
     const {
         history,
-        router
+        router,
+        loader,
     } = props
 
     const historyList =
-        history.map((item: any, index: number) => {
+        history?.map((item: any, index: number) => {
             return (
-                <div key={index} className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-default">
+                <div key={index} className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-pointer">
                     <div className="px-4 py-4 font-extrabold text-sm text-gray-900 w-[10%]">
                         {index + 1}
                     </div>
@@ -21,7 +24,7 @@ const HistoryPage = (props: any) => {
                         {item?.title || `-`}
                     </div>
                     <div className="px-4 py-4 w-[20%] truncate">
-                        {item?.result || '-'}
+                        {item?.score || `0`}/{item?.totalQuestion || `0`}
                     </div>
                     <div className="px-4 py-4 w-[20%] truncate">
                         {item?.score || `-`}
@@ -69,49 +72,31 @@ const HistoryPage = (props: any) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='max-h-80 overflow-auto'>
-                                    {history?.length === 0 ? (
+                                <div className='h-96 overflow-auto bg-white'>
+                                    {loader &&
+                                        <HistorySkeleton />
+                                    }
+                                    {!loader &&
                                         <>
-                                            <div className="px-6 py-4 w-full text-sm text-center">
-                                                No results found.
-                                            </div>
+                                            {history?.length === 0 ? (
+                                                <>
+                                                    <div className="px-6  py-4 w-full text-sm text-center">
+                                                        No results found.
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <HistoryModal
+                                                        {...{
+                                                            history
+                                                        }}
+                                                    />
+                                                </>
+                                            )}
                                         </>
-                                    ) : (
-                                        <>
-                                            {historyList}
-                                        </>
-                                    )}
+                                    }
                                 </div>
 
-                                {/* {isLoading ? (
-                            <div className='dark:bg-gray-700 min-w-full h-56 overflow-y-auto'>
-                                <OrderListSkeleton rows={15} />
-                            </div>
-                        ) : (
-                            <div className='h-56 overflow-y-scroll'>
-                                <InfiniteScroll
-                                    pageStart={0}
-                                    loadMore={getMoreOrder}
-                                    hasMore={orderList?.hasMany}
-                                    useWindow={false}
-                                    loader={<div key={0}><OrderListSkeleton /></div>}
-                                >
-                                    <div>
-                                        {orderList?.list?.length === 0 ? (
-                                            <>
-                                                <div className="px-6 py-4 w-full text-sm text-center">
-                                                    No results found.
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <>
-                                                {orderListTable()}
-                                            </>
-                                        )}
-                                    </div>
-                                </InfiniteScroll>
-                            </div>
-                        )} */}
                             </div>
                         </div>
                     </div>
