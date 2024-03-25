@@ -6,6 +6,7 @@ export const APP_TITLE_DATA = {
     dashboard: "Dashboard",
     profile: 'Profile',
     history: 'History',
+    forgotPassword:'Forgot Password'
     // playQuiz:"",
 }
 

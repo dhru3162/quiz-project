@@ -145,7 +145,7 @@ const PlayQuizPage = (props: any) => {
                             </div>
                           </div>
 
-                          <div className='gap-3 h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 duration-500'>
+                          <div className='gap-3 h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2'>
                             {item?.options?.map((items: any, index: number) => {
                               const alphabets = [`A.`, `B.`, `C.`, `D.`]
 
@@ -166,10 +166,6 @@ const PlayQuizPage = (props: any) => {
                             })}
                           </div>
 
-                          {/* <div>
-                            Right Answer:
-                            <span className={`${Style.correctAnswersColor}`}> {item?.correctAnswers}</span>
-                          </div> */}
                           {(answers[index] === 'emptyData' || answers[index] === undefined) &&
                             <span className='text-[#ff3333] mt-3'>
                               * Answer Not selected

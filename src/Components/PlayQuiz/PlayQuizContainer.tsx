@@ -2,15 +2,22 @@ import { useEffect, useState } from 'react'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import PlayQuizPage from './PlayQuizPage'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import { USER_API } from '@/src/lib/const'
+import { useSelector } from 'react-redux'
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
+  const { loggedInData } = useSelector((state: any) => state.auth)
+  const [userData, seUserData]: any = useState()
   const [questionNumber, setQuestionNumber] = useState(0)
   const [currentQuestion, setCurrentQuestion]: any = useState()
   const [timer, setTimer] = useState(0)
   const [selectedOption, setSelectedOption]: any = useState(``)
   const [answers, setAnswers]: any = useState([])
   const [isQuizEnd, setIsQuizEnd] = useState(false)
+  const [quizOverLoader, setQuizOverLoader] = useState(false)
   const [totalScore, setTotalScore] = useState(0)
   const percentage = ((totalScore / quizData?.totalQuestions) * 100).toFixed()
 
@@ -37,6 +44,15 @@ const PlayQuizContainer = ({ quizData }: any) => {
     }
   }, [isQuizEnd])
 
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async () => {
+    const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
+    seUserData(res.data[0])
+  }
+
   const checkScore = () => {
     const checkAnswer = quizData?.questions?.map((items: any) => {
       const currectAnswer = `${items.question}_${items.correctAnswers}`
@@ -46,7 +62,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
     setTotalScore(checkAnswer.filter(Boolean).length)
   }
 
-  const handlerNextQuestion = () => {
+  const handlerNextQuestion = async () => {
     if (selectedOption !== '') {
       setAnswers([...answers, `${currentQuestion?.question}_${selectedOption}`])
     } else {
@@ -56,8 +72,17 @@ const PlayQuizContainer = ({ quizData }: any) => {
     if (quizData?.totalQuestions !== (questionNumber + 1)) {
       setQuestionNumber(questionNumber + 1)
     } else {
+      setQuizOverLoader(true)
       setQuestionNumber(0)
       setIsQuizEnd(true)
+
+      // try {
+      //   await axios.post(`${USER_API}/${userData.id}`,)
+      // } catch (error: any) {
+      //   toast(`Somthing Went Wrong`)
+      // } finally {
+      //   setQuizOverLoader(false)
+      // }
     }
 
     setTimer(60)
@@ -103,7 +128,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
 
   return (
     <>
-      <TitleComponent title='' />
+      <TitleComponent title={quizData?.title || ''} />
       <PlayQuizPage
         {...{
           quizData,
@@ -120,6 +145,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
           handlerDisplayScore,
           totalScore,
           percentage,
+          quizOverLoader,
         }}
       />
     </>

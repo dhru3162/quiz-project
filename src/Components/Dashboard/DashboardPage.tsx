@@ -73,7 +73,7 @@ const DashboardPage = (props: any) => {
                     {goToQuizLoader && <Loader bgBlur />}
                     <Navbar />
                     <div className='bgColor min-h-screen flex justify-center'>
-                        <div className="max-w-screen-2xl">
+                        <div className="max-w-screen-2xl w-full p-10">
 
                             <div className="flex justify-center mt-10 max-md:mt-7">
                                 <div className='text-center'>
@@ -86,22 +86,10 @@ const DashboardPage = (props: any) => {
                                 </div>
                             </div>
 
-                            {isLoading ?
-                                <div className="flex justify-center ">
-                                    Loading Quiz...
-                                </div>
-                                :
-                                <div className='gap-8 m-10 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 duration-500'>
-                                    {cardsForUser}
-                                </div>
-                            }
-                            {/* <div className='gap-8 m-10 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 duration-500'> */}
-                            {/* <DashboardCardsSkeleton /> */}
-                            {/* </div> */}
-
-                            {/* <div className="w-full">
-
-                            </div> */}
+                            <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+                                {isLoading && <DashboardCardsSkeleton />}
+                                {!isLoading && cardsForUser}
+                            </div>
 
                         </div>
                     </div>
@@ -131,12 +119,10 @@ const DashboardPage = (props: any) => {
                                 </ButtonTheme>
                             </div>
 
-                            {/* {isLoading && <DashboardCardsSkeleton />} */}
-                            <div className='gap-8 m-10 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 duration-500'>
-                                {cardsForAdmin}
+                            <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+                                {isLoading && <DashboardCardsSkeleton />}
+                                {!isLoading && cardsForAdmin}
                             </div>
-
-                            {/* <DashboardCardsSkeleton /> */}
 
                         </div>
                     </div>
