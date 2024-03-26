@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, Button, useDisclosure } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
@@ -23,25 +22,18 @@ const AddQuizModal = () => {
         }
     };
 
-    const handleAnswerChange = (index: number) => {
+    const handleAnswerChange = (index:any) => {
         setCorrectAnswerIndex(index);
         setRadioError(false);
     };
 
-    const addQuestionInner = async (newQuestion: any) => {
+    const addQuestionInner = async (newQuestion:any) => {
         try {
             // Fetch the existing data from the API
-            const response = await fetch(`${BASE_API}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
+            const response = await fetch(BASE_API);
             if (!response.ok) {
                 throw new Error('Failed to fetch existing data');
             }
-
             let existingData = await response.json();
 
             // Increment the totalQuestions field
@@ -54,7 +46,7 @@ const AddQuizModal = () => {
             existingData.questions.push(newQuestion);
 
             // Send the updated object back to the API
-            const updateResponse = await fetch(`${BASE_API}`, {
+            const updateResponse = await fetch(BASE_API, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -80,25 +72,66 @@ const AddQuizModal = () => {
         }
     };
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data:any) => {
         if (correctAnswerIndex === -1) {
             setRadioError(true);
             return;
         }
+    
+        // const newQuestion = {
+        //     id: nanoid(),
+        //     title: data.title,
+        //     description: data.description,
+        //     question: data.question,
+        //     correctAnswers: data.options[correctAnswerIndex],
+        //     options: data.options.filter((option:any) => option.trim() !== '')
+        // };
+
 
         const newQuestion = {
-            id: nanoid(),
             title: data.title,
             description: data.description,
-            question: data.question,
-            correctAnswers: data.options[correctAnswerIndex],
-            options: data.options.filter((option: string) => option.trim() !== '')
+            totalQuestions: 1,
+            time: 60,
+            questions: [
+                {
+                    id: nanoid(),
+                    question:  data.question,
+                    options: data.options.filter((option:any) => option.trim() !== ''),
+                    correctAnswers:  data.options[correctAnswerIndex]
+                },
+              
+            ],
+            id: nanoid()
         };
-
-        addQuestionInner(newQuestion);
+        
+    
+        try {
+            const response = await fetch(BASE_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newQuestion)
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to add question');
+            }
+    
+            // Reset form and state
+            onClose();
+            reset();
+            setOptions(['', '']);
+            setCorrectAnswerIndex(-1);
+            setRadioError(false);
+    
+            console.log('Question added successfully:', newQuestion);
+        } catch (error) {
+            console.error('Error adding question:', error);
+            // Handle error accordingly
+        }
     };
-
-
     return (
         <>
             <ButtonTheme
