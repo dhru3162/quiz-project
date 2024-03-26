@@ -1,10 +1,11 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import PlayQuizContainer from "@/src/Components/PlayQuiz/PlayQuizContainer";
 import { GetServerSideProps } from 'next';
 import { BASE_API } from '@/src/lib/const';
 
 const playquiz = ({ quizData }: any) => {
+    
     return (
         <PlayQuizContainer
             {...{

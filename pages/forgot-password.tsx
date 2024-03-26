@@ -1,11 +1,3 @@
-import React from 'react'
+import ForgotPasswordContainer from "@/src/Components/ForgotPassword/ForgotPasswordContainer";
 
-const Forgotpassword = () => {
-  return (
-    <div>
-      forgot-password page
-    </div>
-  )
-}
-
-export default Forgotpassword
+export default ForgotPasswordContainer

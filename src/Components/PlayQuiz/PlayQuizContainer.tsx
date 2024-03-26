@@ -2,9 +2,16 @@ import { useEffect, useState } from 'react'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import PlayQuizPage from './PlayQuizPage'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import { USER_API } from '@/src/lib/const'
+import { useSelector } from 'react-redux'
+import { renderToString } from 'react-dom/server'
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
+  const { loggedInData } = useSelector((state: any) => state.auth)
+  const [userData, seUserData]: any = useState()
   const [questionNumber, setQuestionNumber] = useState(0)
   const [currentQuestion, setCurrentQuestion]: any = useState()
   const [timer, setTimer] = useState(0)
@@ -21,21 +28,56 @@ const PlayQuizContainer = ({ quizData }: any) => {
     }
   }, [questionNumber, quizData])
 
-  useEffect(() => {
-    // let time: any = null;
-    if (timer > 0) {
-      const count = setInterval(() => setTimer(timer - 1), 1000);
-      return () => clearInterval(count);
-    } else if (timer === 0){
-      handlerNextQuestion()
-    }
-  }, [timer])
+  // useEffect(() => {
+  //   // let time: any = null;
+  //   if (timer > 0) {
+  //     const count = setInterval(() => setTimer(timer - 1), 1000);
+  //     return () => clearInterval(count);
+  //   } else if (timer === 0){
+  //     handlerNextQuestion()
+  //   }
+  // }, [timer])
 
   useEffect(() => {
     if (isQuizEnd) {
       checkScore()
     }
   }, [isQuizEnd])
+
+  useEffect(() => {
+    if (isQuizEnd) {
+      uploadQuizHistory()
+    }
+  }, [totalScore])
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async () => {
+    const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
+    seUserData(res.data[0])
+  }
+
+  const timerColorChanger = () => {
+    const red = {
+      color: `#ff3333`,
+    }
+    const orange = {
+      color: `#FF9800`,
+    }
+    const blue = {
+      color: `#0C356A`,
+    }
+
+    if (timer > 20) {
+      return blue
+    } else if (timer > 5) {
+      return orange
+    } else if (timer >= 0) {
+      return red
+    }
+  }
 
   const checkScore = () => {
     const checkAnswer = quizData?.questions?.map((items: any) => {
@@ -46,7 +88,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
     setTotalScore(checkAnswer.filter(Boolean).length)
   }
 
-  const handlerNextQuestion = () => {
+  const handlerNextQuestion = async () => {
     if (selectedOption !== '') {
       setAnswers([...answers, `${currentQuestion?.question}_${selectedOption}`])
     } else {
@@ -101,9 +143,81 @@ const PlayQuizContainer = ({ quizData }: any) => {
     return check
   }
 
+  // for upload quiz history
+  const quizResultInString = renderToString(
+    <div className='space-y-16'>
+      {quizData?.questions?.map((item: any, index: number) =>
+        <div key={index} className='space-y-5'>
+
+          <div className='flex justify-between items-end'>
+            <div className='w-[90%] max-md:w-[83%] md:w-[87%] text-3xl max-md:text-2xl'>
+              {`${index + 1}. ${item?.question}`}
+            </div>
+            <div className='w-[10%] max-md:w-[17%] md:w-[13%] max-md:text-sm'>
+              {handlerDisplayScore(item?.question) ?
+                <span className='text-[#4db34d]'>
+                  Score: 1
+                </span>
+                :
+                <span className='text-[#ff3333]'>
+                  Score: 0
+                </span>
+              }
+            </div>
+          </div>
+
+          <div className='gap-3 h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2'>
+            {item?.options?.map((items: any, index: number) => {
+              const alphabets = [`A.`, `B.`, `C.`, `D.`]
+
+              return (
+                <div
+                  key={index}
+                  className={`text-lg font-medium h-full flex w-full p-3 border rounded-lg`}
+                  style={checkAnswer(item?.question, items)}
+                >
+                  <div className="mr-1.5">
+                    {alphabets[index]}
+                  </div>
+                  <div className="">
+                    {items}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {(answers[index] === 'emptyData' || answers[index] === undefined) &&
+            <span className='text-[#ff3333] mt-3'>
+              * Answer Not selected
+            </span>
+          }
+        </div>
+      )}
+    </div>
+  )
+
+  const uploadQuizHistory = async () => {
+    try {
+      const payload = {
+        id: `${userData.history.length}`,
+        title: quizData?.title,
+        totalQuestion: `${quizData?.totalQuestions}`,
+        score: `${totalScore}`,
+        result: quizResultInString,
+        percentage: percentage
+      }
+      const addScore = { ...userData, score: userData.score + totalScore }
+      const updateHistory = { ...addScore, history: [...userData.history, payload] }
+      await axios.put(`${USER_API}/${userData.id}`, updateHistory)
+    } catch (error: any) {
+      toast(`Somthing Went Wrong History Not Saved`)
+    }
+  }
+
   return (
     <>
-      <TitleComponent title='' />
+      <TitleComponent title={quizData?.title || ''} />
       <PlayQuizPage
         {...{
           quizData,
@@ -120,6 +234,8 @@ const PlayQuizContainer = ({ quizData }: any) => {
           handlerDisplayScore,
           totalScore,
           percentage,
+          quizResultInString,
+          timerColorChanger,
         }}
       />
     </>
