@@ -21,15 +21,15 @@ const PlayQuizContainer = ({ quizData }: any) => {
     }
   }, [questionNumber, quizData])
 
-  // useEffect(() => {
-  //   // let time: any = null;
-  //   if (timer > 0) {
-  //     const count = setInterval(() => setTimer(timer - 1), 1000);
-  //     return () => clearInterval(count);
-  //   } else if (timer === 0){
-  //     handlerNextQuestion()
-  //   }
-  // }, [timer])
+  useEffect(() => {
+    // let time: any = null;
+    if (timer > 0) {
+      const count = setInterval(() => setTimer(timer - 1), 1000);
+      return () => clearInterval(count);
+    } else if (timer === 0){
+      handlerNextQuestion()
+    }
+  }, [timer])
 
   useEffect(() => {
     if (isQuizEnd) {

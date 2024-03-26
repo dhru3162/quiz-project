@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
-// import QuestionPage from './QuestionPage';
-import axios from 'axios';
-import { BASE_API } from '@/src/lib/const';
+// import React, { useState, useEffect } from 'react';
 
-const QuestionContainer = (item:any) => {
-    const [questionsList, setQuestionsList] = useState([]);
+// import axios from 'axios';
+// import { BASE_API } from '@/src/lib/const';
+// import DashboardPage from '../Dashboard/DashboardPage';
 
-    useEffect(() => {
-        const fetchQuestions = async () => {
-            try {
-                const response = await axios.get(`${BASE_API}/4`);
-                setQuestionsList(response.data);
-            } catch (error) {
-                console.error('Error fetching questions:', error);
-            }
-        };
+// const QuestionContainer = (item:any) => {
+//     const [questionsList, setQuestionsList] = useState([]);
 
-        fetchQuestions();
-    }, []);
+//     useEffect(() => {
+//         const fetchQuestions = async () => {
+//             try {
+//                 const response = await axios.get(`${BASE_API}/4`);
+//                 setQuestionsList(response.data);
+//             } catch (error) {
+//                 console.error('Error fetching questions:', error);
+//             }
+//         };
 
-    return (
-        <>
-            {/* <QuizPage questionsList={questionsList} /> */}
-        </>
-    );
-};
+//         fetchQuestions();
+//     }, []);
 
-export default QuestionContainer;
+//     return (
+//         <>
+//             <DashboardPage questionsList={questionsList} />
+//         </>
+//     );
+// };
+
+// export default QuestionContainer;
