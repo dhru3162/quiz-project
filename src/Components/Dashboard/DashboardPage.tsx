@@ -1,17 +1,13 @@
 
-import { FaPlus } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar"
-import ButtonTheme from "../Theme/Button/ButtonTheme";
 import Style from './Dashboard.module.scss'
 import DashboardModal from "./DashboardModal";
-import { Pane } from "evergreen-ui";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import DashboardCardsSkeleton from "../Loaders/Skeletons/DashboardCardsSkeleton";
 import Loader from "../Loaders/Loader";
 import AddQuizModal from "./AddQuizModel";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { BASE_API } from "@/src/lib/const";
 import { useState } from "react";
 

@@ -7,6 +7,8 @@ import { BASE_API } from "@/src/lib/const";
 import { nanoid } from "@reduxjs/toolkit"
 import { Pane } from "evergreen-ui";
 import { FaPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { getQuiz } from "@/src/ReduxToolkit/Slices/Quiz";
 
 const AddQuizModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,6 +16,7 @@ const AddQuizModal = () => {
     const [options, setOptions] = useState(['', '']);
     const [correctAnswerIndex, setCorrectAnswerIndex] = useState(-1);
     const [radioError, setRadioError] = useState(false);
+    const dispatch: any = useDispatch()
     const defaultTime = 60;
 
     const handleAddOption = () => {
@@ -22,12 +25,12 @@ const AddQuizModal = () => {
         }
     };
 
-    const handleAnswerChange = (index:any) => {
+    const handleAnswerChange = (index: any) => {
         setCorrectAnswerIndex(index);
         setRadioError(false);
     };
 
-    const addQuestionInner = async (newQuestion:any) => {
+    const addQuestionInner = async (newQuestion: any) => {
         try {
             // Fetch the existing data from the API
             const response = await fetch(BASE_API);
@@ -72,12 +75,12 @@ const AddQuizModal = () => {
         }
     };
 
-    const onSubmit = async (data:any) => {
+    const onSubmit = async (data: any) => {
         if (correctAnswerIndex === -1) {
             setRadioError(true);
             return;
         }
-    
+
         // const newQuestion = {
         //     id: nanoid(),
         //     title: data.title,
@@ -96,16 +99,16 @@ const AddQuizModal = () => {
             questions: [
                 {
                     id: nanoid(),
-                    question:  data.question,
-                    options: data.options.filter((option:any) => option.trim() !== ''),
-                    correctAnswers:  data.options[correctAnswerIndex]
+                    question: data.question,
+                    options: data.options.filter((option: any) => option.trim() !== ''),
+                    correctAnswers: data.options[correctAnswerIndex]
                 },
-              
+
             ],
             id: nanoid()
         };
-        
-    
+
+
         try {
             const response = await fetch(BASE_API, {
                 method: 'POST',
@@ -114,18 +117,19 @@ const AddQuizModal = () => {
                 },
                 body: JSON.stringify(newQuestion)
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to add question');
             }
-    
+
             // Reset form and state
             onClose();
             reset();
             setOptions(['', '']);
             setCorrectAnswerIndex(-1);
             setRadioError(false);
-    
+
+            dispatch(getQuiz())
             console.log('Question added successfully:', newQuestion);
         } catch (error) {
             console.error('Error adding question:', error);
@@ -234,7 +238,7 @@ const AddQuizModal = () => {
                                                         placeholder="Enter option"
                                                     />
                                                 </>
-                                            )}  
+                                            )}
                                         />
                                     </div>
                                 ))}

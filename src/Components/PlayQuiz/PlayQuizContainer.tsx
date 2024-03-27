@@ -13,15 +13,15 @@ const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
   const { userData } = useSelector((state: any) => state.user)
   const dispatch: any = useDispatch()
-  // const [userData, seUserData]: any = useState()
   const [questionNumber, setQuestionNumber] = useState(0)
   const [currentQuestion, setCurrentQuestion]: any = useState()
   const [timer, setTimer]: any = useState()
   const [selectedOption, setSelectedOption]: any = useState(``)
   const [answers, setAnswers]: any = useState([])
   const [isQuizEnd, setIsQuizEnd] = useState(false)
-  const [totalScore, setTotalScore] = useState(0)
-  const percentage = ((totalScore / quizData?.totalQuestions) * 100).toFixed()
+  const [totalScore, setTotalScore]: any = useState()
+  const [percentage, setPercentage]: any = useState()
+  // const percentage = ((totalScore / quizData?.totalQuestions) * 100).toFixed()
 
   useEffect(() => {
     if (quizData?.questions) {
@@ -53,15 +53,6 @@ const PlayQuizContainer = ({ quizData }: any) => {
     }
   }, [totalScore])
 
-  // useEffect(() => {
-  //   getUserData()
-  // }, [])
-
-  // const getUserData = async () => {
-  //   const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
-  //   seUserData(res.data[0])
-  // }
-
   const timerColorChanger = () => {
     const red = {
       color: `#ff3333`,
@@ -88,7 +79,10 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const check = answers.includes(currectAnswer)
       return check
     })
-    setTotalScore(checkAnswer.filter(Boolean).length)
+    const quizScore = checkAnswer.filter(Boolean).length
+    setTotalScore(quizScore)
+    const quizPercentage = ((quizScore / quizData?.totalQuestions) * 100).toFixed()
+    setPercentage(quizPercentage)
   }
 
   const handlerNextQuestion = async () => {
