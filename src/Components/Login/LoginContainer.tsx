@@ -9,18 +9,23 @@ import { loginSuccess, setIsLoading } from "@/src/ReduxToolkit/Slices/Auth";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { authentication } from "@/src/FireBase/FireBase";
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { Context } from "../Context/ContextProvider";
 import axios from "axios";
 
 const LoginContainer = () => {
   const { control, handleSubmit, reset, getValues } = useForm();
   const [isLogin, setIsLogin] = useState(true);
-  const { isLoading, loggedInData } = useSelector((state: any) => state.auth);
+  const { isLoading, role } = useSelector((state: any) => state.auth);
   const [{ auth }, setCookie] = useCookies(["auth"]);
   const dispatch = useDispatch();
   const router = useRouter();
   const { getUserData } = useContext(Context);
+
+  useEffect(() => {
+    if (role && role === 'admin') {
+      router.push('dashboard')
+    }
+  }, [role])
 
   const handlerLogin = async (inputData: any) => {
     const isRegister = Object.keys(inputData).length > 2;
@@ -36,10 +41,10 @@ const LoginContainer = () => {
         toast.success("Login Successful");
 
         const payload: any = {
-          accessToken: res?.accessToken,
-          email: res?.email,
-          displayName: res?.displayName,
-          uid: res?.uid,
+          accessToken: res?.user?._delegate?.accessToken,
+          email: res?.user?._delegate?.email,
+          displayName: res?.user?._delegate?.displayName,
+          uid: res?.user?._delegate?.uid,
         };
         // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
         await setCookie("auth", payload);
@@ -69,7 +74,7 @@ const LoginContainer = () => {
           userId: res?.user?._delegate?.uid,
           fullName: `${inputData?.firstName || ""} ${inputData?.lastName || ""}`,
           email: inputData?.email,
-          score: '0',
+          score: 0,
           history: []
         }
         await axios.post(`${USER_API}`, userData)

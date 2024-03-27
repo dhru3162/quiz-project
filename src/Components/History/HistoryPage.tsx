@@ -35,7 +35,7 @@ const HistoryPage = (props: any) => {
 
     return (
         <div>
-            <div className='bgColor min-h-screen'>
+            <div className='bgColor min-h-[100dvh]'>
                 <Navbar />
                 <div className='max-w-screen-2xl bgColor '>
                     <div className='md:px-10 max-w-full md:max-w-[90%] z-0 lg:max-w-[80%] xl:max-w-[60%] mx-auto right-0 left-0 absolute'>

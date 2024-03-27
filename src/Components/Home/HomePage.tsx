@@ -6,7 +6,7 @@ const HomePage = () => {
     return (
         <>
             <Navbar />
-            <div className={`bgColor min-h-screen`}>
+            <div className={`bgColor min-h-[100dvh]`}>
                 <HeroSectionPage />
                 <Footer />
             </div>

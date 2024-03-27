@@ -5,16 +5,18 @@ import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { USER_API } from '@/src/lib/const'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { renderToString } from 'react-dom/server'
+import { setUserData } from '@/src/ReduxToolkit/Slices/User'
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
-  const { loggedInData } = useSelector((state: any) => state.auth)
-  const [userData, seUserData]: any = useState()
+  const { userData } = useSelector((state: any) => state.user)
+  const dispatch: any = useDispatch()
+  // const [userData, seUserData]: any = useState()
   const [questionNumber, setQuestionNumber] = useState(0)
   const [currentQuestion, setCurrentQuestion]: any = useState()
-  const [timer, setTimer] = useState(0)
+  const [timer, setTimer]: any = useState()
   const [selectedOption, setSelectedOption]: any = useState(``)
   const [answers, setAnswers]: any = useState([])
   const [isQuizEnd, setIsQuizEnd] = useState(false)
@@ -33,9 +35,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const count = setInterval(() => setTimer(timer - 1), 1000);
       return () => clearInterval(count);
     } else if (timer === 0) {
-      if (questionNumber > 0) {
-        handlerNextQuestion()
-      }
+      handlerNextQuestion()
     }
   }, [timer])
 
@@ -51,14 +51,14 @@ const PlayQuizContainer = ({ quizData }: any) => {
     }
   }, [totalScore])
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
 
-  const getUserData = async () => {
-    const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
-    seUserData(res.data[0])
-  }
+  // const getUserData = async () => {
+  //   const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
+  //   seUserData(res.data[0])
+  // }
 
   const timerColorChanger = () => {
     const red = {
@@ -211,6 +211,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const addScore = { ...userData, score: userData.score + totalScore }
       const updateHistory = { ...addScore, history: [...userData.history, payload] }
       await axios.put(`${USER_API}/${userData.id}`, updateHistory)
+      dispatch(setUserData(updateHistory))
     } catch (error: any) {
       toast(`Somthing Went Wrong History Not Saved`)
     }

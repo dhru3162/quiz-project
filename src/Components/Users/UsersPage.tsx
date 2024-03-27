@@ -10,7 +10,7 @@
 //         <div className="bgColor min-h-screen w-screen">
 //             <Navbar />
 //             <div className='p-4 md:p-8 lg:p-12'>
-               
+
 
 //                 <div className='bg-white rounded-lg overflow-x-auto'>
 //                     <Table removeWrapper aria-label="Example static collection table">
@@ -61,7 +61,7 @@ const UsersPage = (props: any) => {
                     {index + 1}
                 </div>
                 <div className="px-2 md:px-4 py-2 md:py-4 w-[30%] truncate">
-                {user?.name || '-'}
+                    {user?.name || '-'}
                 </div>
                 <div className="px-2 md:px-4 py-2 md:py-4 w-[32%] truncate ">
                     {user?.email || '-'}
@@ -78,21 +78,21 @@ const UsersPage = (props: any) => {
 
     return (
         <>
-            <div className="bgColor min-h-screen w-screen ">
+            <div className="bgColor min-h-[100dvh] w-screen ">
                 <Navbar />
                 <div className='max-w-screen-2xl bgColor mt-5 '>
                     <div className='md:px-10 w-full mx-auto'>
 
-                    <div className="flex flex-col items-center mb-4">
-                    <h1 className="text-2xl md:text-3xl font-bold text-slate-50 mx-auto">Users List</h1>
-                    <div className="w-full flex justify-start">
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
-                        />
-                    </div>
-                </div>
+                        <div className="flex flex-col items-center mb-4">
+                            <h1 className="text-2xl md:text-3xl font-bold text-slate-50 mx-auto">Users List</h1>
+                            <div className="w-full flex justify-start">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                                />
+                            </div>
+                        </div>
 
                         <div className="relative overflow-x-auto shadow-lg rounded-lg ">
                             <div className="text-sm text-left text-gray-500">
@@ -111,7 +111,7 @@ const UsersPage = (props: any) => {
                                             Rank
                                         </div>
                                         <div className="px-2 md:px-4 py-2 md:py-3 w-[20%] ">
-                                           Score
+                                            Score
                                         </div>
                                     </div>
                                 </div>

@@ -9,13 +9,15 @@ const ProfilePage = (props: any) => {
     loggedInData,
     router,
     role,
+    userData,
+    isLoading,
   } = props;
 
   return (
     <>
-      <div className="bgColor max-sm:min-h-[93vh] max-sm:max-h-[93vh] min-h-screen">
+      <div className="bgColor min-h-[100dvh]">
         <Navbar />
-        <div className="flex justify-center items-center w-full h-full mt-16">
+        <div className="flex justify-center items-center w-full h-full mt-28">
           <div
             className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] h-fit pt-8 pb-8 duration-500`}
           >
@@ -51,9 +53,21 @@ const ProfilePage = (props: any) => {
                     {loggedInData?.email}
                   </span>
                 </div>
-                <div>
-                  Your Score: <span className={`${Styles.textColor}`}>82</span>
-                </div>
+                {role !== 'admin' &&
+                  <div>
+                    Your Score: <span className={`${Styles.textColor}`}>
+                      {isLoading ?
+                        <>
+                          Loading...
+                        </>
+                        :
+                        <>
+                          {userData?.score || '0'}
+                        </>
+                      }
+                    </span>
+                  </div>
+                }
                 {role === 'admin' &&
                   <div>
                     Role: <span className={`${Styles.textColor}`}>Admin</span>

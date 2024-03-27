@@ -26,10 +26,7 @@ const auth: any = createSlice({
             state.isLoading = action.payload
         },
         loginSuccess: (state, action) => {
-            const { uid } = action.payload
-            console.log(uid)
             state.loggedInData = action.payload
-            // state.role = adminPermission(uid)
         },
         logOut: (state) => {
             const cookies = new Cookies()

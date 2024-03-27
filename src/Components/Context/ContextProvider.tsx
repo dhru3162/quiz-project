@@ -7,9 +7,12 @@ import { useRouter } from "next/router";
 import React, { ReactNode, createContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "firebase/auth";
 import { authentication } from "@/src/FireBase/FireBase";
+import axios from "axios";
+import { USER_API } from "@/src/lib/const";
+import { setLoading, setUserData } from "@/src/ReduxToolkit/Slices/User";
 
 interface LayoutType {
   children: ReactNode;
@@ -19,6 +22,7 @@ export const Context = createContext<any>(null);
 
 export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const [{ auth }, setCookie] = useCookies(["auth"]);
+  const { loggedInData, role } = useSelector((state: any) => state.auth)
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -73,6 +77,26 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       console.log(error);
     }
   };
+
+  const getUserApiData = async () => {
+    dispatch(setLoading(true))
+    try {
+      const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
+      dispatch(setUserData(res.data[0]))
+    } catch (error: any) {
+      console.error(error)
+      toast(`User Data Not Set`)
+    } finally {
+      dispatch(setLoading(false))
+    }
+  }
+
+  useEffect(() => {
+    if (loggedInData?.uid && role !== 'admin') {
+      getUserApiData()
+    }
+    // eslint-disable-next-line
+  }, [loggedInData])
 
   useEffect(() => {
     getUserData();

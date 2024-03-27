@@ -35,7 +35,7 @@ const QuestionPage = (props: any) => {
 
     return (
         <>
-            <div className="bgColor min-h-screen w-screen ">
+            <div className="bgColor min-h-[100dvh] w-screen ">
                 <Navbar />
                 <div className='max-w-screen-2xl bgColor mt-5 '>
                     <div className='md:px-10 w-full mx-auto'>

@@ -1,33 +1,22 @@
 import React, { useState } from 'react'
 import DashboardPage from './DashboardPage'
 import TitleComponent from '../TitleComponent/TitleComponent'
-import { APP_TITLE_DATA, BASE_API } from '@/src/lib/const'
-import { useSelector } from 'react-redux'
+import { APP_TITLE_DATA } from '@/src/lib/const'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react';
-import axios from 'axios'
-import toast from 'react-hot-toast'
+import { getQuiz } from '@/src/ReduxToolkit/Slices/Quiz'
 
 const DashboardContainer = () => {
     const { role } = useSelector((state: any) => state.auth)
-    const [isLoading, setIsLoading] = useState(true)
-    const [quizData, setQuizData] = useState()
+    const { quizData, isLoading } = useSelector((state: any) => state.quiz)
+    const dispatch: any = useDispatch()
     const [goToQuizLoader, setGoToQuizLoader] = useState(false)
 
     useEffect(() => {
-        getQuizData()
-    }, [])
-
-    const getQuizData = async () => {
-        try {
-            const res: any = await axios.get(`${BASE_API}`)
-            setQuizData(res.data)
-        } catch (error: any) {
-            console.error(error.massage)
-            toast(`Somthig Went Wrong`)
-        } finally {
-            setIsLoading(false)
+        if (quizData.length === 0) {
+            dispatch(getQuiz())
         }
-    }
+    }, [])
 
     return (
         <>

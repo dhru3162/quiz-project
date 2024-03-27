@@ -7,7 +7,7 @@ export const middleware = (request: NextRequest) => {
     const isPublicPath = path === '/login' || path === '/' || path === '/forgot-password';
     const isPrivatePath = path === '/dashboard' || path === '/profile' || path === 'history';
 
-    const auth = request.cookies.get('auth')?.value || '';
+    const auth: any = request.cookies.get('auth')?.value || '';
 
     if (isPublicPath && auth) {
         return NextResponse.redirect(new URL('/dashboard', request.nextUrl))

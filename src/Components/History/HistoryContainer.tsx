@@ -9,9 +9,15 @@ import toast from 'react-hot-toast'
 
 const HistoryContainer = () => {
     const router = useRouter()
-    const [history, setHistory] = useState()
+    const [history, setHistory]: any = useState()
     const [loader, setLoader] = useState(true)
-    const { loggedInData } = useSelector((state: any) => state.auth)
+    const { loggedInData, role } = useSelector((state: any) => state.auth)
+
+    useEffect(() => {
+        if (role && role === 'admin') {
+            router.push('dashboard')
+        }
+    }, [role])
 
     useEffect(() => {
         getUserHistory()
@@ -22,6 +28,7 @@ const HistoryContainer = () => {
             const res = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
             setHistory(res.data[0].history)
         } catch (error: any) {
+            setHistory([])
             toast.error(`Somthing Went Wrong`)
         } finally {
             setLoader(false)

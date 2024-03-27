@@ -28,7 +28,7 @@ const PlayQuizPage = (props: any) => {
 
   return (
     <>
-      <div className='bgColor min-h-screen h-fit'>
+      <div className='bgColor min-h-[100dvh] h-fit'>
 
         <div className={`${Style.center} pt-8`}>
           <Logo white />
