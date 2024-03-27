@@ -1,3 +1,4 @@
+
 import { FaPlus } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar"
 import ButtonTheme from "../Theme/Button/ButtonTheme";
@@ -8,6 +9,11 @@ import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import DashboardCardsSkeleton from "../Loaders/Skeletons/DashboardCardsSkeleton";
 import Loader from "../Loaders/Loader";
+import AddQuizModal from "./AddQuizModel";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { BASE_API } from "@/src/lib/const";
+import { useState } from "react";
 
 const DashboardPage = (props: any) => {
     const {
@@ -17,7 +23,31 @@ const DashboardPage = (props: any) => {
         goToQuizLoader,
         setGoToQuizLoader,
     } = props
+    const router = useRouter()
 
+
+
+
+
+    const [editQuizData, setEditQuizData] = useState(null);
+
+    const handleEditClick = ({quizId}:{quizId:any}) => {
+        fetchQuizDataById(quizId);
+
+        // Redirect to edit page using Next.js router or navigate to a specific route
+        // Example:
+        router.push(`/question`);
+    };
+console.log(handleEditClick,"useee")
+    const fetchQuizDataById = async ({quizId}:{quizId:string}) => {
+        try {
+            const response = await fetch(`${BASE_API}/${quizId}`);
+            const data = await response.json();
+            setEditQuizData(data);
+        } catch (error) {
+            console.error('Error fetching quiz data:', error);
+        }
+    };
     const cardsForUser = quizData?.map((item: any, index: number) => {
         return (
             <div key={index} className='flex justify-center w-full'>
@@ -38,34 +68,34 @@ const DashboardPage = (props: any) => {
             </div>
         )
     })
-
     const cardsForAdmin = quizData?.map((item: any, index: number) => {
         return (
-            <>
-                <div key={index} className='flex justify-center w-full h-full'>
-                    <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl relative group`}>
-
-                        <div className={`${Style.cardHoverAction} rounded-lg justify-center h-full opacity-0 group-hover:opacity-100 duration-500 absolute inset-x-0 flex items-center group-hover:translate-y-0 translate-y-4 transform`} >
-                            <div className="inline-flex text-3xl space-x-3">
-                                <BiEdit />
-                                <MdDelete />
+            <div key={index} className='flex justify-center w-full h-full'>
+                <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl relative group`}>
+    
+                    <div className={`${Style.cardHoverAction} rounded-lg justify-center h-full opacity-0 group-hover:opacity-100 duration-500 absolute inset-x-0 flex items-center group-hover:translate-y-0 translate-y-4 transform`} >
+                        <div className="inline-flex text-3xl space-x-3">
+                            {/* Use Link component to navigate */}
+                            <div onClick={() => handleEditClick(item.id)}>
+                                <BiEdit/>
                             </div>
+                            <MdDelete />
                         </div>
-
-                        <div className="w-full duration-500 group-hover:blur p-5 space-y-2 cursor-default" >
-                            <div className={`${Style.cardTitle} text-2xl font-bold line-clamp-1`}>
-                                {item.title}
-                            </div>
-                            <div className={`line-clamp-3`}>
-                                {item.description}
-                            </div>
+                    </div>
+    
+                    <div className="w-full duration-500 group-hover:blur p-5 space-y-2 cursor-default" >
+                        <div className={`${Style.cardTitle} text-2xl font-bold line-clamp-1`}>
+                            {item.title}
+                        </div>
+                        <div className={`line-clamp-3`}>
+                            {item.description}
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         )
     })
-
+    
     return (
         <>
             {role === 'user' &&
@@ -108,15 +138,7 @@ const DashboardPage = (props: any) => {
                                 </h1>
                             </div>
                             <div className='flex justify-end mr-20'>
-                                <ButtonTheme
-                                    type='button'
-                                    white
-                                >
-                                    <Pane display="flex" alignItems="center" justifyContent="center">
-                                        <FaPlus className="mr-2" />
-                                        <span>Add Quiz</span>
-                                    </Pane>
-                                </ButtonTheme>
+                                <AddQuizModal />
                             </div>
 
                             <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>

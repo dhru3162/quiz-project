@@ -35,7 +35,9 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const count = setInterval(() => setTimer(timer - 1), 1000);
       return () => clearInterval(count);
     } else if (timer === 0) {
-      handlerNextQuestion()
+      if (questionNumber > 0) {
+        handlerNextQuestion()
+      }
     }
   }, [timer])
 
