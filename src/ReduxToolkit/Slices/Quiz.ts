@@ -41,3 +41,13 @@ export const getQuiz = () => async (dispatch: any) => {
         dispatch(setIsLoading(false))
     }
 }
+
+export const getUpdatedQuizData = () => async (dispatch: any) => {
+    try {
+        const res: any = await axios.get(`${BASE_API}`)
+        dispatch(setQuizData(res.data))
+    } catch (error: any) {
+        console.error(error.massage)
+        toast.error(`Somthig Went Wrong Reload The Page`)
+    }
+}

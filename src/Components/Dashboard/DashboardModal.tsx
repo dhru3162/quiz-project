@@ -4,15 +4,15 @@ import Logo from "../Logo/Logo";
 import { FaPlay } from "react-icons/fa";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import Style from './Dashboard.module.scss'
-import { useRouter } from 'next/navigation';
 
 const DashboardModal = (props: any) => {
     const {
         item,
-        setGoToQuizLoader,
+        setPageChangeLoader,
+        router,
     } = props
+
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const router = useRouter()
 
     return (
         <>
@@ -61,7 +61,7 @@ const DashboardModal = (props: any) => {
                                         onClick={() => {
                                             onClose()
                                             router.push(`/playquiz?q=${item.id}`)
-                                            setGoToQuizLoader(true)
+                                            setPageChangeLoader(true)
                                         }}
                                     >
                                         <FaPlay className="mr-2" />

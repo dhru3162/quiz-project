@@ -16,6 +16,43 @@
     color: $text;
 }
 
-.cardHoverAction {
+// .cardHoverAction {
+//     color: $button;
+// }
+
+.editAction {
     color: $button;
+    cursor: pointer;
+    transition-duration: 500ms;
+
+    &:hover {
+        color: #1B72E7;
+    }
+}
+
+.deleteAction {
+    color: $button;
+    cursor: pointer;
+    transition-duration: 300ms;
+
+    &:hover {
+        color: #ff3333;
+    }
+}
+
+.deleteBtn {
+    color: #ff3333;
+    border: #ff3333 2px solid;
+    transition-duration: 500ms;
+    font-size: 15px;
+    font-weight: 200;
+
+    &:hover {
+        background-color: #ff3333;
+        color: $white;
+    }
+
+    &:disabled {
+        opacity: 75%;
+    }
 }
