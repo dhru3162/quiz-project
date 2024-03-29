@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react'
 import { APP_NAME } from '../../lib/const';
 
 export interface TitleComponentProps {

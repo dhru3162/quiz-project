@@ -1,5 +1,4 @@
-import React from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalContent, ModalBody, useDisclosure } from "@nextui-org/react";
 import { MdDelete } from "react-icons/md";
 import Style from './Dashboard.module.scss'
 import { Pane } from "evergreen-ui";

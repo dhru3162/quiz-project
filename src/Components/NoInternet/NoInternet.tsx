@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import React from 'react'
 import WifiImage from '../../Images/NoInternet.svg'
 import Style from './NoInternet.module.scss'
 import Logo from '../Logo/Logo'

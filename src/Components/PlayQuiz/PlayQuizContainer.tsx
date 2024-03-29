@@ -21,7 +21,6 @@ const PlayQuizContainer = ({ quizData }: any) => {
   const [isQuizEnd, setIsQuizEnd] = useState(false)
   const [totalScore, setTotalScore]: any = useState()
   const [percentage, setPercentage]: any = useState()
-  // const percentage = ((totalScore / quizData?.totalQuestions) * 100).toFixed()
 
   useEffect(() => {
     if (quizData?.questions) {

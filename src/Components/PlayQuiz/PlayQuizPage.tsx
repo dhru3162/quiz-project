@@ -3,7 +3,6 @@ import ButtonTheme from '../Theme/Button/ButtonTheme'
 import Style from './PlayQuiz.module.scss'
 import Logo from '../Logo/Logo'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import { ClipLoader, MoonLoader } from 'react-spinners';
 
 const PlayQuizPage = (props: any) => {
   const {
@@ -15,14 +14,10 @@ const PlayQuizPage = (props: any) => {
     setSelectedOption,
     isQuizEnd,
     selectedOption,
-    // answers,
-    // checkAnswer,
     router,
-    // handlerDisplayScore,
     totalScore,
     percentage,
     quizResultInString,
-    // quizOverLoader,
     timerColorChanger,
   } = props
 

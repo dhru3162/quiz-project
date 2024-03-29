@@ -15,7 +15,6 @@ const ForgotPasswordPage = (props: any) => {
         router,
     } = props
 
-    // max-sm:min-h-[93vh] max-sm:max-h-[93vh]
     return (
         <div className='bgColor  min-h-[100dvh] flex justify-center items-center w-full'>
             <div className={`${Styles.container} rounded-lg w-full md:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] h-fit flex justify-center pt-8 pb-12 `}>
@@ -90,6 +89,3 @@ const ForgotPasswordPage = (props: any) => {
 }
 
 export default ForgotPasswordPage
-
-
-// Instructions To Reset Your Password Will Be Sent To You Shortly. Please Check Your Email.

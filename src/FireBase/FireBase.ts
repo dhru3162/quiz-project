@@ -10,7 +10,6 @@ const firebaseConfig = {
   storageBucket: process.env.FIREBASE_STORAGEBUCKET,
   messagingSenderId: process.env.FIREBASE_MASSAGINGSENDERID,
   appId: process.env.FIREBASE_APPID,
-  // measurementId: process.env.FIREBASE_MEASUREMENTId,
 };
 
 if (!firebase.apps.length) {

@@ -1,4 +1,3 @@
-import React from 'react'
 import TitleComponent from '../TitleComponent/TitleComponent'
 import { APP_TITLE_DATA } from '@/src/lib/const'
 import ProfilePage from './ProfilePage'

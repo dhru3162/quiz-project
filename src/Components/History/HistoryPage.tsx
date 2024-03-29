@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import Style from './History.module.scss'
 import { TiArrowBack } from 'react-icons/ti'
@@ -108,31 +107,3 @@ const HistoryPage = (props: any) => {
 }
 
 export default HistoryPage
-
-
-{/* <div key={item?.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 flex justify-stretch hover:bg-blue-50 cursor-default">
-<div className="px-4 py-4 font-extrabold text-sm text-gray-900 whitespace-nowrap dark:text-white w-[4%]">
-  {index + 1}
-</div>
-<div className="px-4 py-4 font-extrabold text-sm text-gray-900 whitespace-nowrap dark:text-white w-[14%] truncate">
-  {data?.orderNumber || `-`}
-</div>
-<div className="px-4 py-4 w-[15%] truncate">
-  {data?.poNumber || '-'}
-</div>
-<div className="px-4 py-4 w-[15%] truncate">
-  {data?.patient?.firstName || `-`} {data?.patient?.lastName || `-`}
-</div>
-<div className="px-4 py-2 w-[8%] ">
-  <Avatar name={`${data?.createdByUser?.firstName} ${data?.createdByUser?.lastName}`} size={35} />
-</div>
-<div className="px-4 py-4 w-[15%] truncate">
-  {data?.description || `-`}
-</div>
-<div className="px-4 py-4 w-[15%] truncate">
-  {data?.createdAt ? DateTime.fromISO(data?.createdAt).toFormat('dd MMM yyyy') : `-`}
-</div>
-<div className="px-4 py-4 w-[14%] truncate">
-  {data?.status || `-`}
-</div>
-</div> */}

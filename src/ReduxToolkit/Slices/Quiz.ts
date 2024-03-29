@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-
 const initialState = {
     quizData: [],
     isLoading: false,

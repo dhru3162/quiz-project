@@ -1,7 +1,6 @@
 import Logo from "../Logo/Logo"
 import Style from './Footer.module.scss'
 
-
 function Footer() {
   return (
     <footer className={`bg-black ${Style.textColor} space-y-7 py-12`}>

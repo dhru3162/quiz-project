@@ -1,4 +1,4 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import Logo from "../Logo/Logo";
 import { FaPlay } from "react-icons/fa";
