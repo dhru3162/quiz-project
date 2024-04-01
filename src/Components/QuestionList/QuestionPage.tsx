@@ -4,14 +4,19 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 import Navbar from '../Navbar/Navbar';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
 import QuestionModal from './QuestionModel';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import QuestionAddModal from './QuestionAddModel';
 import UpdateQuestionModal from './UpdateQuestionModel';
+import { Pane } from 'evergreen-ui';
+import { TiArrowBack } from 'react-icons/ti';
+import Style from './Question.module.scss'
 
-const QuestionPage = (props: any) => {
-    const { questionsList } = props;
-    const router = useRouter()
-    console.log(questionsList?.questions,"Apidata")
+const QuestionPage = ({ questionsList, updateQuestion, removeQuestion }: any) => {
+    const router = useRouter();
+
+    const handleDeleteQuestion = (id: string) => {
+        // Implement deletion logic here
+    };
 
     const QuizList = questionsList?.questions?.map((item: any, index: number) => {
         return (
@@ -26,8 +31,8 @@ const QuestionPage = (props: any) => {
                     {item?.correctAnswers || '-'}
                 </div>
                 <div className="px-2 md:px-4 py-2 md:py-4 w-[10%] truncate flex justify-start">
-                    <UpdateQuestionModal item={item} />
-                    <div className='text-red-500 text-xl'><RiDeleteBin6Fill /></div>
+                    <UpdateQuestionModal item={item} updateQuestion={updateQuestion} />
+                    <div className='text-red-500 text-xl' onClick={() => handleDeleteQuestion(item.id)}><RiDeleteBin6Fill /></div>
                 </div>
             </div>
         );
@@ -39,13 +44,22 @@ const QuestionPage = (props: any) => {
                 <Navbar />
                 <div className='max-w-screen-2xl bgColor mt-5 '>
                     <div className='md:px-10 w-full mx-auto'>
+                        <div
+                            className={`${Style.title} max-md:ml-3 text-lg max-md:text-sm cursor-pointer mb-5`}
+                            onClick={() => router.push('/dashboard')}
+                        >
+                            <Pane display="flex" alignItems="center">
+                                <TiArrowBack className='mr-2' />
+                                Back
+                            </Pane>
+                        </div>
 
                         <div className="flex flex-col mb-4">
                             <div className="flex justify-between">
                                 <h1 className="md:mr-4 md:mt-0 text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                                     Title: {questionsList?.title}
                                 </h1>
-                                <QuestionAddModal/>
+                                <QuestionAddModal />
                             </div>
                         </div>
 
