@@ -6,7 +6,6 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { USER_API } from '@/src/lib/const'
 import { useDispatch, useSelector } from 'react-redux'
-import { renderToString } from 'react-dom/server'
 import { setUserData } from '@/src/ReduxToolkit/Slices/User'
 
 const PlayQuizContainer = ({ quizData }: any) => {
@@ -18,7 +17,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
   const [timer, setTimer]: any = useState()
   const [selectedOption, setSelectedOption]: any = useState(``)
   const [answers, setAnswers]: any = useState([])
-  const [isQuizEnd, setIsQuizEnd] = useState(false)
+  const [isQuizEnd, setIsQuizEnd] = useState<boolean>(false)
   const [totalScore, setTotalScore]: any = useState()
   const [percentage, setPercentage]: any = useState()
 
@@ -102,105 +101,13 @@ const PlayQuizContainer = ({ quizData }: any) => {
     setSelectedOption('')
   }
 
-  const checkAnswer = (question: any, option: any) => {
-    const green = {
-      backgroundColor: `#4db34d30`,
-      color: `#4db34d`,
-      borderColor: `#4db34d`
-    };
-    const red = {
-      backgroundColor: `#ff333330`,
-      color: `#ff3333`,
-      borderColor: `#ff3333`
-    };
-    const black = {
-      backgroundColor: `none`,
-      color: '#000000',
-      borderColor: '#000000'
-    };
-    const findQuestionData = quizData?.questions.filter((item: any) => item.question === question)[0];
-
-    if (answers.includes(`${question}_${option}`) && option === findQuestionData.correctAnswers) {
-      return green
-    } else if (answers.includes(`${question}_${option}`) && option !== findQuestionData.correctAnswers) {
-      return red
-    } else if (!answers.includes(`${question}_${option}`) && option === findQuestionData.correctAnswers) {
-      return green
-    } else {
-      return black
-    }
-  }
-
-  const handlerDisplayScore = (question: any) => {
-    const findQuestionData = quizData?.questions.filter((item: any) => item.question === question)[0];
-    const currectAnswer = `${findQuestionData.question}_${findQuestionData.correctAnswers}`
-    const check = answers.includes(currectAnswer)
-
-    return check
-  }
-
-  // for upload quiz history
-  const quizResultInString = renderToString(
-    <div className='space-y-16'>
-      {quizData?.questions?.map((item: any, index: number) =>
-        <div key={index} className='space-y-5'>
-
-          <div className='flex justify-between items-end'>
-            <div className='w-[90%] max-md:w-[83%] md:w-[87%] text-3xl max-md:text-2xl'>
-              {`${index + 1}. ${item?.question}`}
-            </div>
-            <div className='w-[10%] max-md:w-[17%] md:w-[13%] max-md:text-sm'>
-              {handlerDisplayScore(item?.question) ?
-                <span className='text-[#4db34d]'>
-                  Score: 1
-                </span>
-                :
-                <span className='text-[#ff3333]'>
-                  Score: 0
-                </span>
-              }
-            </div>
-          </div>
-
-          <div className='gap-3 h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2'>
-            {item?.options?.map((items: any, index: number) => {
-              const alphabets = [`A.`, `B.`, `C.`, `D.`]
-
-              return (
-                <div
-                  key={index}
-                  className={`text-lg font-medium h-full flex w-full p-3 border rounded-lg`}
-                  style={checkAnswer(item?.question, items)}
-                >
-                  <div className="mr-1.5">
-                    {alphabets[index]}
-                  </div>
-                  <div className="">
-                    {items}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {(answers[index] === 'emptyData' || answers[index] === undefined) &&
-            <span className='text-[#ff3333] mt-3'>
-              * Answer Not selected
-            </span>
-          }
-        </div>
-      )}
-    </div>
-  )
-
   const uploadQuizHistory = async () => {
     try {
       const payload = {
         id: `${userData.history.length}`,
-        title: quizData?.title,
-        totalQuestion: `${quizData?.totalQuestions}`,
+        quizData: quizData,
         score: `${totalScore}`,
-        result: quizResultInString,
+        result: answers,
         percentage: percentage
       }
       const addScore = { ...userData, score: userData.score + totalScore }
@@ -208,7 +115,11 @@ const PlayQuizContainer = ({ quizData }: any) => {
       await axios.put(`${USER_API}/${userData.id}`, updateHistory)
       dispatch(setUserData(updateHistory))
     } catch (error: any) {
-      toast(`Somthing Went Wrong History Not Saved`)
+      if (error?.response?.status === 413) {
+        toast(`History Save Limit Reached`)
+      } else {
+        toast(`Somthing Went Wrong History Not Saved`)
+      }
     }
   }
 
@@ -226,12 +137,9 @@ const PlayQuizContainer = ({ quizData }: any) => {
           isQuizEnd,
           answers,
           selectedOption,
-          checkAnswer,
           router,
-          handlerDisplayScore,
           totalScore,
           percentage,
-          quizResultInString,
           timerColorChanger,
         }}
       />

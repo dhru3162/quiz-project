@@ -92,7 +92,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   }
 
   useEffect(() => {
-    if (loggedInData?.uid && role !== 'admin') {
+    if (loggedInData?.uid && role === 'user') {
       getUserApiData()
     }
     // eslint-disable-next-line

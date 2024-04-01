@@ -1,23 +1,15 @@
 @import '../../../styles/themeColors.scss';
 
-.container {
-    background-color: $white;
-}
-
-.questionNumber {
-    color: $text;
-}
-
-.totalScore {
-    color: $text;
-}
-
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.correctAnswersColor {
+.progressBar {
+    color: $white;
+}
+
+.totalScore {
     color: $text;
 }

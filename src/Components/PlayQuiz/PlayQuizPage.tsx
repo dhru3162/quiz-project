@@ -2,7 +2,7 @@ import { TbPlayerTrackNextFilled } from 'react-icons/tb'
 import ButtonTheme from '../Theme/Button/ButtonTheme'
 import Style from './PlayQuiz.module.scss'
 import Logo from '../Logo/Logo'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import ResultComponent from '../ResultComponent/ResultComponent';
 
 const PlayQuizPage = (props: any) => {
   const {
@@ -15,9 +15,9 @@ const PlayQuizPage = (props: any) => {
     isQuizEnd,
     selectedOption,
     router,
+    answers,
     totalScore,
     percentage,
-    quizResultInString,
     timerColorChanger,
   } = props
 
@@ -92,50 +92,22 @@ const PlayQuizPage = (props: any) => {
           <div className={`${Style.center} w-full mt-8 pb-16`}>
             <div className={`${Style.container} relative rounded-lg w-full md:w-[90%] lg:w-[80%] xl:w-[60%] duration-500 h-fit`}>
 
-              <div className='p-8 w-full'>
+              <ResultComponent
+                {...{
+                  quizData,
+                  percentage,
+                  score: totalScore,
+                  answers,
+                }}
+              />
 
-                <div className={`${Style.center}`}>
-                  <div className={`w-24 relative h-24 font-sans`}>
-                    <CircularProgressbar
-                      value={percentage}
-                      background
-                      backgroundPadding={6}
-                      styles={buildStyles({
-                        backgroundColor: '#0C356A',
-                        textColor: "#EEEEEE",
-                        pathColor: "#EEEEEE",
-                        trailColor: "transparent"
-                      })}
-                    />
-                    <div className={`${Style.progressBar} absolute top-[32px] w-full font-medium text-2xl`}>
-                      <div className={`${Style.center}`}>
-                        {`${percentage}%`}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`${Style.center} mt-4 font-medium text-lg`}>
-                  Your Score:<span className={`${Style.totalScore}`}>{` ${totalScore}/${quizData?.totalQuestions}`}</span>
-                </div>
-
-                <div className={`${Style.center} p-7 mt-8 max-md:p-0`}>
-                  <div>
-
-                    <div dangerouslySetInnerHTML={{ __html: quizResultInString }} />
-
-                    <div className={`${Style.center} mt-16`}>
-                      <ButtonTheme
-                        type='button'
-                        onClick={() => router.push('/dashboard')}
-                      >
-                        Go To Dashboard
-                      </ButtonTheme>
-                    </div>
-
-                  </div>
-                </div>
-
+              <div className={`${Style.center} mb-16`}>
+                <ButtonTheme
+                  type='button'
+                  onClick={() => router.push('/dashboard')}
+                >
+                  Go To Dashboard
+                </ButtonTheme>
               </div>
 
             </div>

@@ -12,26 +12,6 @@ const HistoryPage = (props: any) => {
         loader,
     } = props
 
-    const historyList =
-        history?.map((item: any, index: number) => {
-            return (
-                <div key={index} className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-pointer">
-                    <div className="px-4 py-4 font-extrabold text-sm text-gray-900 w-[10%]">
-                        {index + 1}
-                    </div>
-                    <div className="px-4 py-4 w-[50%] truncate">
-                        {item?.title || `-`}
-                    </div>
-                    <div className="px-4 py-4 w-[20%] truncate">
-                        {item?.score || `0`}/{item?.totalQuestion || `0`}
-                    </div>
-                    <div className="px-4 py-4 w-[20%] truncate">
-                        {item?.score || `-`}
-                    </div>
-                </div>
-            )
-        })
-
     return (
         <div>
             <div className='bgColor min-h-[100dvh]'>
@@ -78,19 +58,15 @@ const HistoryPage = (props: any) => {
                                     {!loader &&
                                         <>
                                             {history?.length === 0 ? (
-                                                <>
-                                                    <div className="px-6  py-4 w-full text-sm text-center">
-                                                        No results found.
-                                                    </div>
-                                                </>
+                                                <div className="px-6  py-4 w-full text-sm text-center">
+                                                    No results found.
+                                                </div>
                                             ) : (
-                                                <>
-                                                    <HistoryModal
-                                                        {...{
-                                                            history
-                                                        }}
-                                                    />
-                                                </>
+                                                <HistoryModal
+                                                    {...{
+                                                        history
+                                                    }}
+                                                />
                                             )}
                                         </>
                                     }

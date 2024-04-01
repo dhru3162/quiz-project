@@ -1,14 +1,14 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import Logo from "../Logo/Logo";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
+import ResultComponent from "../ResultComponent/ResultComponent";
 
 const HistoryModal = (props: any) => {
     const {
         history
     } = props
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [data, setData] = useState('')
+    const [data, setData]: any = useState()
 
     return (
         <>
@@ -18,7 +18,7 @@ const HistoryModal = (props: any) => {
                         key={index}
                         className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-pointer"
                         onClick={() => {
-                            setData(item.result || '')
+                            setData(item)
                             onOpen()
                         }}
                     >
@@ -26,10 +26,10 @@ const HistoryModal = (props: any) => {
                             {index + 1}
                         </div>
                         <div className="px-4 py-4 w-[50%] truncate">
-                            {item?.title || `-`}
+                            {item?.quizData?.title || `-`}
                         </div>
                         <div className="px-4 py-4 w-[20%] truncate">
-                            {item?.score || `0`}/{item?.totalQuestion || `0`}
+                            {item?.score || `0`}/{item?.quizData?.totalQuestions || `0`}
                         </div>
                         <div className="px-4 py-4 w-[20%] truncate">
                             {item?.score || `-`}
@@ -49,17 +49,17 @@ const HistoryModal = (props: any) => {
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1"></ModalHeader>
-                            <ModalBody className='pb-10 overflow-auto'>
-                                <div className="">
-                                    <div className="flex justify-center">
-                                        <Logo />
-                                    </div>
-
-                                    <div dangerouslySetInnerHTML={{ __html: data }} className="mt-12 md:mx-5" />
-                                </div>
-
+                            <ModalBody>
+                                <ResultComponent
+                                    {...{
+                                        quizData: data?.quizData,
+                                        score: data?.score,
+                                        percentage: data?.percentage,
+                                        answers: data?.result,
+                                    }}
+                                />
                             </ModalBody>
-                            <ModalFooter>
+                            <ModalFooter className='!pt-0'>
                                 <ButtonTheme
                                     type="button"
                                     onClick={onClose}

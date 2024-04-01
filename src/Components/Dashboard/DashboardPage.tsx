@@ -46,7 +46,7 @@ const DashboardPage = (props: any) => {
             <div key={index} className='flex justify-center w-full h-full'>
                 <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl relative group`}>
 
-                    <div className={`z-[1] rounded-lg justify-center h-full opacity-0 group-hover:opacity-100 duration-500 absolute inset-x-0 flex items-center group-hover:translate-y-0 translate-y-4 transform`} >
+                    <div className={`z-[1] rounded-lg justify-center h-[80%] group-hover:h-full opacity-0 group-hover:opacity-100 duration-500 absolute inset-x-0 flex items-center group-hover:translate-y-0 translate-y-7 transform`} >
                         <div className="inline-flex text-3xl space-x-3">
                             <BiEdit
                                 className={`${Style.editAction} `}
