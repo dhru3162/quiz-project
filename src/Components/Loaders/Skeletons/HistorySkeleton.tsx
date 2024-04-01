@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux"
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
 
 const HistorySkeleton = () => {
@@ -19,7 +18,6 @@ const HistorySkeleton = () => {
             </div>
         </div >
     ))
-
 
     return (
         <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">

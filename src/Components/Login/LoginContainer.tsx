@@ -47,7 +47,7 @@ const LoginContainer = () => {
           uid: res?.user?._delegate?.uid,
         };
         // const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
-        await setCookie("auth", payload);
+        setCookie("auth", payload);
         router.push(`/dashboard`);
       } catch (error: any) {
         const errorCode = error.code;

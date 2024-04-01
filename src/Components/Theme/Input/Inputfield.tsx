@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { UseControllerProps, FieldValues, FieldError, useController, Control } from 'react-hook-form';
 import { BiSolidErrorCircle } from 'react-icons/bi';
-import Style from './inputField.module.scss'
 
 interface FormInputProps extends UseControllerProps<FieldValues> {
     control: Control<any>

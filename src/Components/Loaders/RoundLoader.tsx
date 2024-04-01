@@ -1,5 +1,3 @@
-import React from 'react'
-import { MoonLoader } from 'react-spinners'
 
 interface RoundLoaderPropType {
     className?: string

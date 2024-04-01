@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Styles from "./Profile.module.scss";
 import { Avatar, Pane } from "evergreen-ui";
@@ -30,7 +29,9 @@ const ProfilePage = (props: any) => {
                 <span className='mt-1'>Back</span>
               </Pane>
             </div>
+            
             <div className={`w-full p-12 pb-0 max-md:p-10 relative`}>
+
               <div className="absolute -top-28 left-0 w-full">
                 <div className="flex justify-center">
                   <Avatar
@@ -40,19 +41,23 @@ const ProfilePage = (props: any) => {
                   />
                 </div>
               </div>
+
               <div className="2xl:text-3xl lg:text-2xl space-y-10 max-md:text-xl md:text-2xl max-md:space-y-8 duration-500">
+
                 <div>
                   Full Name:{" "}
                   <span className={`${Styles.textColor}`}>
                     {loggedInData?.displayName}
                   </span>
                 </div>
+
                 <div>
                   Email I&apos;d:{" "}
                   <span className={`${Styles.textColor}`}>
                     {loggedInData?.email}
                   </span>
                 </div>
+
                 {role !== 'admin' &&
                   <div>
                     Your Score: <span className={`${Styles.textColor}`}>
@@ -68,13 +73,14 @@ const ProfilePage = (props: any) => {
                     </span>
                   </div>
                 }
+
                 {role === 'admin' &&
                   <div>
                     Role: <span className={`${Styles.textColor}`}>Admin</span>
                   </div>
                 }
+
               </div>
-              {/* </div> */}
             </div>
           </div>
         </div>
