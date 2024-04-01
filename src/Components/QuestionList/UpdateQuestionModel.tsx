@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
 import Style from "./Question.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import { FaEdit } from "react-icons/fa";
 
-const UpdateQuestionModal = ({ item }: any) => {
+const UpdateQuestionModal = ({ item, updateQuestion }: any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { handleSubmit, control, reset, formState: { errors } } = useForm();
-    const [options, setOptions] = useState(['', '']);
+    const { handleSubmit, control, reset, formState: { errors }, setValue } = useForm();
+    const [options, setOptions] = useState(['', '', '', '']);
     const [correctAnswerIndex, setCorrectAnswerIndex] = useState(-1);
-    const [radioError, setRadioError] = useState(false); // State to manage radio button error
+    const [radioError, setRadioError] = useState(false);
+
+    useEffect(() => {
+        if (isOpen && item) {
+            setValue("question", item.question);
+            setValue("options", item.options);
+            const correctAnswerIndex = item.options.findIndex((opt: string) => opt === item.correctAnswer);
+            setCorrectAnswerIndex(correctAnswerIndex);
+            setOptions(item.options);
+        }
+    }, [isOpen, item, setValue]);
 
     const handleAddOption = () => {
         if (options.length < 4) {
@@ -20,39 +30,35 @@ const UpdateQuestionModal = ({ item }: any) => {
 
     const handleAnswerChange = (index: number) => {
         setCorrectAnswerIndex(index);
-        // Clear radio button error when an option is selected
         setRadioError(false);
     };
 
     const onSubmit = (data: any) => {
-        // Check if correct answer is selected
         if (correctAnswerIndex === -1) {
             setRadioError(true);
-            return; // Don't proceed if no correct answer is selected
+            return;
         }
 
-        const questionObject = {
+        const updatedQuestion = {
+            id: item.id,
             question: data.question,
             correctAnswer: data.options[correctAnswerIndex],
             options: data.options
         };
 
-        // Log the question object
-        console.log('Question Object:', questionObject);
+        updateQuestion(updatedQuestion);
 
         onClose();
-        reset(); // Reset form fields
-        setOptions(['', '']); // Reset options
-        setCorrectAnswerIndex(-1); // Reset correct answer index
-        setRadioError(false); // Reset radio button error
+        reset();
+        setOptions(['', '', '', '']);
+        setCorrectAnswerIndex(-1);
+        setRadioError(false);
     };
-
 
     return (
         <>
-            <div onClick={() => onOpen()}>
-                {/* <ButtonTheme type='button'>Add Question</ButtonTheme> */}
-                <div className='text-green-500 text-xl me-2 '><FaEdit /></div>
+            <div className="flex">
+                <div onClick={() => onOpen()} className='text-green-500 text-xl me-2 '><FaEdit /></div>
             </div>
             <Modal
                 size={'xl'}
