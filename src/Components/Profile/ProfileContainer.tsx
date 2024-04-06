@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 
 const ProfileContainer = () => {
     const { loggedInData, role } = useSelector((state: any) => state.auth)
-    const { userData, isLoading } = useSelector((state: any) => state.user)
     const router = useRouter()
 
     return (
@@ -19,8 +18,6 @@ const ProfileContainer = () => {
                     loggedInData,
                     router,
                     role,
-                    userData,
-                    isLoading,
                 }}
             />
         </>

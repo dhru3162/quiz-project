@@ -1,15 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Cookies } from "react-cookie";
 
-const adminPermission = (uid: string) => {
-    const adminId = uid === 'V0IBGWU2BzT9q7oEdytnHvdY9Cv1' || uid === 'Au0LSF01OMNoYVodkRxKSjsqigz1'
-    if (adminId) {
-        return 'admin'
-    } else {
-        return 'user'
-    }
-}
-
 const initialState = {
     loggedInData: {},
     isAuth: false,
@@ -36,10 +27,10 @@ const auth: any = createSlice({
             state.role = ''
         },
         setInitialData: (state, action) => {
-            const { uid } = action.payload
+            const { user: { role } } = action.payload
             state.loggedInData = action.payload
             state.isFirstLoading = false
-            state.role = adminPermission(uid)
+            state.role = role
             state.isAuth = true
         },
         setFirstLoading: (state, action) => {

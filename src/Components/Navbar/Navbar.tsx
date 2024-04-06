@@ -105,7 +105,7 @@ const Navbar = () => {
                 className='!rounded-full !p-0 !bg-transparent'
                 handlerAction={handlerAction}
               >
-                <Avatar name={loggedInData?.displayName} size={45} />
+                <Avatar name={loggedInData?.user?.fullName} size={45} />
               </DropdownTheme>
             </div>
 
@@ -127,7 +127,7 @@ const Navbar = () => {
                 className='!rounded-full !p-0 !bg-transparent'
                 handlerAction={handlerAction}
               >
-                <Avatar name={loggedInData?.displayName} size={45} />
+                <Avatar name={loggedInData?.user?.fullName} size={45} />
               </DropdownTheme>
             </div>
 

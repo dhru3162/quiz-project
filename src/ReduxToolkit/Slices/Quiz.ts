@@ -2,6 +2,7 @@ import { BASE_API } from "@/src/lib/const";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { GetQuizData } from "../Apis/quiz.api";
 
 const initialState = {
     quizData: [],
@@ -28,18 +29,10 @@ export const {
 
 export default quiz.reducer
 
-export const getQuiz = () => async (dispatch: any) => {
-    dispatch(setIsLoading(true))
-    try {
-        const res: any = await axios.get(`${BASE_API}`)
-        dispatch(setQuizData(res.data))
-    } catch (error: any) {
-        console.error(error.massage)
-        toast.error(`Somthig Went Wrong`)
-    } finally {
-        dispatch(setIsLoading(false))
-    }
-}
+// export const getQuiz = () => async (dispatch: any) => {
+//     dispatch(setIsLoading(true))
+   
+// }
 
 export const getUpdatedQuizData = () => async (dispatch: any) => {
     try {

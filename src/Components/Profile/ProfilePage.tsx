@@ -8,8 +8,6 @@ const ProfilePage = (props: any) => {
     loggedInData,
     router,
     role,
-    userData,
-    isLoading,
   } = props;
 
   return (
@@ -35,9 +33,10 @@ const ProfilePage = (props: any) => {
               <div className="absolute -top-28 left-0 w-full">
                 <div className="flex justify-center">
                   <Avatar
-                    name={loggedInData?.displayName}
+                    name={loggedInData?.user?.fullName}
                     size={90}
                     src={loggedInData?.photoURL}
+                    className={`cursor-default`}
                   />
                 </div>
               </div>
@@ -47,21 +46,21 @@ const ProfilePage = (props: any) => {
                 <div>
                   Full Name:{" "}
                   <span className={`${Styles.textColor}`}>
-                    {loggedInData?.displayName}
+                    {loggedInData?.user?.fullName}
                   </span>
                 </div>
 
                 <div>
                   Email I&apos;d:{" "}
                   <span className={`${Styles.textColor}`}>
-                    {loggedInData?.email}
+                    {loggedInData?.user?.email}
                   </span>
                 </div>
 
                 {role !== 'admin' &&
                   <div>
                     Your Score: <span className={`${Styles.textColor}`}>
-                      {isLoading ?
+                      {/* {isLoading ?
                         <>
                           Loading...
                         </>
@@ -69,7 +68,8 @@ const ProfilePage = (props: any) => {
                         <>
                           {userData?.score || '0'}
                         </>
-                      }
+                      } */}
+                      0
                     </span>
                   </div>
                 }

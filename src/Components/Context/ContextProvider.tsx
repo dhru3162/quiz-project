@@ -9,10 +9,11 @@ import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import "firebase/auth";
-import { authentication } from "@/src/FireBase/FireBase";
+// import { authentication } from "@/src/FireBase/FireBase";
 import axios from "axios";
 import { USER_API } from "@/src/lib/const";
-import { setLoading, setUserData } from "@/src/ReduxToolkit/Slices/User";
+// import { setLoading, setUserData } from "@/src/ReduxToolkit/Slices/User";
+import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
 
 interface LayoutType {
   children: ReactNode;
@@ -22,13 +23,17 @@ export const Context = createContext<any>(null);
 
 export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const [{ auth }, setCookie] = useCookies(["auth"]);
-  const { loggedInData, role } = useSelector((state: any) => state.auth)
+  const { isAuth, loggedInData } = useSelector((state: any) => state.auth)
   const dispatch = useDispatch();
   const router = useRouter();
 
   const LogOut = async () => {
     try {
-      await authentication.signOut()
+      const payload = {
+        Authorization: `Bearer ${auth?.token}`
+      }
+
+      await LogoutApi(payload, { sessionId: loggedInData?.session?._id })
       dispatch(logOut())
       router.push(`/`)
     }
@@ -38,68 +43,40 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
     }
   };
 
-  // for logged in user data get
+  // get logged in user data
   const getUserData = async () => {
     try {
-      authentication.onAuthStateChanged((authUser: any) => {
-        if (authUser) {
-          const user = authUser._delegate;
-          const data = {
-            accessToken: user.accessToken,
-            displayName: user.displayName,
-            email: user.email,
-            emailVerified: user.emailVerified,
-            phoneNumber: user.phoneNumber,
-            photoURL: user.photoURL,
-            providerData: user.providerData[0],
-            uid: user.uid,
-            stsTokenManager: {
-              accessToken: user.stsTokenManager.accessToken,
-              expirationTime: user.stsTokenManager.expirationTime,
-              refreshToken: user.stsTokenManager.refreshToken,
-            },
-            metadata: {
-              createdAt: user.metadata.createdAt,
-              creationTime: user.metadata.creationTime,
-              lastLoginAt: user.metadata.lastLoginAt,
-              lastSignInTime: user.metadata.lastSignInTime,
-            },
-          };
-          dispatch(setInitialData(data));
-          dispatch(setFirstLoading(false));
-        } else {
-          dispatch(logOut());
-          router.push(`/`);
-          dispatch(setFirstLoading(false));
-        }
-      });
+      const payload = {
+        Authorization: `Bearer ${auth?.token}`
+      }
+
+      const res = await WhoAmIApi(payload)
+      dispatch(setInitialData(res.data));
+
     } catch (error: any) {
-      console.log(error);
+      if (error?.response?.status === 401) {
+        toast.error(`Token Expired Login Again`)
+        dispatch(logOut());
+        router.push(`/`);
+      } else if (error?.request?.status === 0) {
+        toast.error('Check Your Internet Connection');
+      } else {
+        toast('Somthing Went Wrong')
+        console.error(error);
+      }
+
+    } finally {
+      dispatch(setFirstLoading(false));
+
     }
   };
 
-  const getUserApiData = async () => {
-    dispatch(setLoading(true))
-    try {
-      const res: any = await axios.get(`${USER_API}?userId=${loggedInData?.uid}`)
-      dispatch(setUserData(res.data[0]))
-    } catch (error: any) {
-      console.error(error)
-      toast(`User Data Not Set`)
-    } finally {
-      dispatch(setLoading(false))
-    }
-  }
-
   useEffect(() => {
-    if (loggedInData?.uid && role === 'user') {
-      getUserApiData()
+    if (auth?.token && !isAuth) {
+      getUserData()
+    } else {
+      dispatch(setFirstLoading(false))
     }
-    // eslint-disable-next-line
-  }, [loggedInData])
-
-  useEffect(() => {
-    getUserData();
     // eslint-disable-next-line
   }, [auth]);
 

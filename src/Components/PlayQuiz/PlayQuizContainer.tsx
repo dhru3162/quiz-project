@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { USER_API } from '@/src/lib/const'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserData } from '@/src/ReduxToolkit/Slices/User'
+// import { setUserData } from '@/src/ReduxToolkit/Slices/User'
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter()
@@ -113,7 +113,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const addScore = { ...userData, score: userData.score + totalScore }
       const updateHistory = { ...addScore, history: [...userData.history, payload] }
       await axios.put(`${USER_API}/${userData.id}`, updateHistory)
-      dispatch(setUserData(updateHistory))
+      // dispatch(setUserData(updateHistory))
     } catch (error: any) {
       if (error?.response?.status === 413) {
         toast(`History Save Limit Reached`)

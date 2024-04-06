@@ -60,7 +60,7 @@ const DashboardModal = (props: any) => {
                                         type="button"
                                         onClick={() => {
                                             onClose()
-                                            router.push(`/playquiz?q=${item.id}`)
+                                            router.push(`/playquiz?q=${item._id}`)
                                             setPageChangeLoader(true)
                                         }}
                                     >
