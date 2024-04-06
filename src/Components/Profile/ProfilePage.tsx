@@ -1,14 +1,11 @@
 import Navbar from "../Navbar/Navbar";
 import Styles from "./Profile.module.scss";
-import { Avatar, Pane } from "evergreen-ui";
+import { Avatar, Pane, Position, Tooltip } from "evergreen-ui";
 import { TiArrowBack } from "react-icons/ti";
+import { TbReload } from "react-icons/tb";
 
 const ProfilePage = (props: any) => {
-  const {
-    loggedInData,
-    router,
-    role,
-  } = props;
+  const { loggedInData, router, role, isLoading, totalScore, getScore } = props;
 
   return (
     <>
@@ -24,12 +21,11 @@ const ProfilePage = (props: any) => {
             >
               <Pane display="flex" alignItems="center">
                 <TiArrowBack className="mr-2" />
-                <span className='mt-1'>Back</span>
+                <span className="mt-1">Back</span>
               </Pane>
             </div>
-            
-            <div className={`w-full p-12 pb-0 max-md:p-10 relative`}>
 
+            <div className={`w-full p-12 pb-0 max-md:p-10 relative`}>
               <div className="absolute -top-28 left-0 w-full">
                 <div className="flex justify-center">
                   <Avatar
@@ -42,7 +38,6 @@ const ProfilePage = (props: any) => {
               </div>
 
               <div className="2xl:text-3xl lg:text-2xl space-y-10 max-md:text-xl md:text-2xl max-md:space-y-8 duration-500">
-
                 <div>
                   Full Name:{" "}
                   <span className={`${Styles.textColor}`}>
@@ -57,29 +52,42 @@ const ProfilePage = (props: any) => {
                   </span>
                 </div>
 
-                {role !== 'admin' &&
+                {role !== "admin" && (
                   <div>
-                    Your Score: <span className={`${Styles.textColor}`}>
-                      {/* {isLoading ?
-                        <>
+                    Your Score:{" "}
+                    <span>
+                      {isLoading ? (
+                        <span className={`${Styles.textColor}`}>
                           Loading...
-                        </>
-                        :
-                        <>
-                          {userData?.score || '0'}
-                        </>
-                      } */}
-                      0
+                        </span>
+                      ) : (
+                        <span className={`inline-flex items-center`}>
+                          <span className={`${Styles.textColor}`}>
+                            {totalScore}
+                          </span>
+
+                          <Tooltip
+                            content="Reload Score"
+                            position={Position.RIGHT}
+                          >
+                            <span
+                              className={`${Styles.btnColor} pb-1 ml-2 cursor-pointer`}
+                              onClick={getScore}
+                            >
+                              <TbReload />
+                            </span>
+                          </Tooltip>
+                        </span>
+                      )}
                     </span>
                   </div>
-                }
+                )}
 
-                {role === 'admin' &&
+                {role === "admin" && (
                   <div>
                     Role: <span className={`${Styles.textColor}`}>Admin</span>
                   </div>
-                }
-
+                )}
               </div>
             </div>
           </div>

@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
                 Authorization: `Bearer ${auth?.token}`
             }
             const res = await GetOneQuiz(query.q, payload)
-            const quizData = res.data
+            const quizData = res.data.data
 
             return {
                 props: {
