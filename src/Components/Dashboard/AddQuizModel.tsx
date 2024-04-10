@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import Style from "../QuestionList/Question.module.scss";
+import Style from "./Dashboard.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import { Pane } from "evergreen-ui";
 import { FaPlus } from "react-icons/fa";

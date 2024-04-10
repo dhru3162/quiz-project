@@ -20,9 +20,7 @@ const DashboardContainer = () => {
     const [pageChangeLoader, setPageChangeLoader] = useState(false)
 
     useEffect(() => {
-        if (quizData.length === 0) {
-            getQuiz()
-        }
+        getQuiz()
     }, [])
 
     const getQuiz = async () => {
