@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, setIsLoading } from "@/src/ReduxToolkit/Slices/Auth";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
-import { Context } from "../Context/ContextProvider";
 import { LoginApi, RegisterApi } from "@/src/ReduxToolkit/Apis/auth.api";
 
 const LoginContainer = () => {

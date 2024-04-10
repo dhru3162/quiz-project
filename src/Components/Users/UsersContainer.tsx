@@ -1,5 +1,7 @@
 import React from 'react'
 import UsersPage from './UsersPage'
+import TitleComponent from '../TitleComponent/TitleComponent'
+import { APP_TITLE_DATA } from '@/src/lib/const'
 
 const UsersContainer = () => {
     type UserList = {
@@ -76,12 +78,14 @@ const UsersContainer = () => {
 
     return (
         <>
+            <TitleComponent
+                title={APP_TITLE_DATA.users}
+            />
             <UsersPage
                 {...{
                     userList
                 }}
             />
-
         </>
     )
 }

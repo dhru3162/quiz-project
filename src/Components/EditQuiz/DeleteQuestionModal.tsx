@@ -15,7 +15,7 @@ interface PropData {
     quizId: any
 }
 
-const DeleteQuestionModal = (props: any) => {
+const DeleteQuestionModal = (props: PropData) => {
     const {
         item,
         quizId,

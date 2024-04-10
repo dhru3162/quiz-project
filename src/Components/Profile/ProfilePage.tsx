@@ -5,7 +5,14 @@ import { TiArrowBack } from "react-icons/ti";
 import { TbReload } from "react-icons/tb";
 
 const ProfilePage = (props: any) => {
-  const { loggedInData, router, role, isLoading, totalScore, getScore } = props;
+  const {
+    loggedInData,
+    router,
+    role,
+    isLoading,
+    totalScore,
+    getScore
+  } = props;
 
   return (
     <>

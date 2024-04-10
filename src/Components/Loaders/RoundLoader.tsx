@@ -1,4 +1,3 @@
-
 interface RoundLoaderPropType {
     className?: string
     speed?: number

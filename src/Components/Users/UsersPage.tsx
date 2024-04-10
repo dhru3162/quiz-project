@@ -1,58 +1,9 @@
-// import React from 'react';
-// import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
-// import Navbar from '../Navbar/Navbar';
-
-// const UsersPage = (props: any) => {
-//     const { userList } = props;
-//     // console.log(userList);
-
-//     return (
-//         <div className="bgColor min-h-screen w-screen">
-//             <Navbar />
-//             <div className='p-4 md:p-8 lg:p-12'>
-
-
-//                 <div className='bg-white rounded-lg overflow-x-auto'>
-//                     <Table removeWrapper aria-label="Example static collection table">
-//                         <TableHeader >
-//                             <TableColumn>#</TableColumn>
-//                             <TableColumn>Name</TableColumn>
-//                             <TableColumn>Email</TableColumn>
-//                             <TableColumn>Rank</TableColumn>
-//                             <TableColumn>Score</TableColumn>
-//                         </TableHeader>
-//                         <TableBody>
-//                             {userList.map((user: any, index: number) => (
-//                                 <TableRow key={index} className='border-b-1'>
-//                                     <TableCell>{index + 1}</TableCell>
-//                                     <TableCell>{user.name}</TableCell>
-//                                     <TableCell>{user.email}</TableCell>
-//                                     <TableCell>{user.rank}</TableCell>
-//                                     <TableCell>{user.score}</TableCell>
-//                                 </TableRow>
-//                             ))}
-//                         </TableBody>
-//                     </Table>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default UsersPage;
-
-
-
-
-
-
-
-import React from 'react';
 import Navbar from '../Navbar/Navbar';
 
-
 const UsersPage = (props: any) => {
-    const { userList } = props;
+    const {
+        userList
+    } = props;
 
     const UserList = userList.map((user: any, index: number) => {
         return (

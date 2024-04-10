@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { GetServerSideProps } from 'next';
 import { GetOneQuiz } from '@/src/ReduxToolkit/Apis/quiz.api';
 import EditQuizContainer from '@/src/Components/EditQuiz/EditQuizContainer';

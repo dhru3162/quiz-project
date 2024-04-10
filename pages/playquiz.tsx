@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import PlayQuizContainer from "@/src/Components/PlayQuiz/PlayQuizContainer";
 import { GetServerSideProps } from 'next';
 import { GetOneQuiz } from '@/src/ReduxToolkit/Apis/quiz.api';

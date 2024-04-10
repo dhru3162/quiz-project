@@ -14,7 +14,7 @@ interface PropData {
     getQuiz: any
 }
 
-const DeleteActionModal = (props: any) => {
+const DeleteActionModal = (props: PropData) => {
     const {
         item,
         getQuiz

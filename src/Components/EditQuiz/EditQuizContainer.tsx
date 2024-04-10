@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import EditQuizPage from './EditQuizPage'
 import { useRouter } from 'next/navigation';
 import { APP_TITLE_DATA } from '@/src/lib/const';
@@ -17,7 +17,7 @@ const EditQuizContainer = ({ data, id }: any) => {
         toast(id)
         onClose()
     }
-  
+
     const updateQuiz = async () => {
         try {
             const payload = {

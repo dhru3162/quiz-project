@@ -3,17 +3,12 @@ import TitleComponent from "../TitleComponent/TitleComponent";
 import PlayQuizPage from "./PlayQuizPage";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import axios from "axios";
-import { USER_API } from "@/src/lib/const";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { AddHistoryApi } from "@/src/ReduxToolkit/Apis/history.api";
-// import { setUserData } from '@/src/ReduxToolkit/Slices/User'
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter();
-  // const { userData } = useSelector((state: any) => state.user)
-  const dispatch: any = useDispatch();
   const [questionNumber, setQuestionNumber] = useState(0);
   const [currentQuestion, setCurrentQuestion]: any = useState();
   const [timer, setTimer]: any = useState();

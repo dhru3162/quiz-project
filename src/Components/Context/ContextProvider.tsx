@@ -9,10 +9,6 @@ import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import "firebase/auth";
-// import { authentication } from "@/src/FireBase/FireBase";
-import axios from "axios";
-import { USER_API } from "@/src/lib/const";
-// import { setLoading, setUserData } from "@/src/ReduxToolkit/Slices/User";
 import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
 
 interface LayoutType {
@@ -32,7 +28,6 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       const payload = {
         Authorization: `Bearer ${auth?.token}`
       }
-
       await LogoutApi(payload, { sessionId: loggedInData?.session?._id })
       dispatch(logOut())
       router.push(`/`)
@@ -54,7 +49,6 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       const payload = {
         Authorization: `Bearer ${auth?.token}`
       }
-
       const res = await WhoAmIApi(payload)
       dispatch(setInitialData(res.data));
 
