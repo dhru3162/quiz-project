@@ -8,13 +8,19 @@ export const AddHistoryApi = async (payload: any, head: any) => {
 };
 
 export const GetHistoryApi = async (payload: any) => {
-    return await axios.get(`${API}/user/history`, {
-        headers: payload
-    })
+  return await axios.get(`${API}/user/history`, {
+    headers: payload
+  })
 };
 
 export const GetScoreApi = async (payload: any) => {
-    return await axios.get(`${API}/user/getscore`, {
-        headers: payload
-    })
+  return await axios.get(`${API}/user/getscore`, {
+    headers: payload
+  })
 };
+
+export const GetUserData = async (payload: any) => {
+  return await axios.get(`${API}/user`, {
+    headers: payload
+  })
+}

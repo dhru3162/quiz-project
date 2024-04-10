@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
-import { AddHistoryApi } from "@/src/ReduxToolkit/Apis/history.api";
+import { AddHistoryApi } from "@/src/ReduxToolkit/Apis/users.api";
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter();

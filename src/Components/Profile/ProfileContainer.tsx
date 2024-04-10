@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { GetScoreApi } from "@/src/ReduxToolkit/Apis/history.api";
+import { GetScoreApi } from "@/src/ReduxToolkit/Apis/users.api";
 import toast from "react-hot-toast";
 
 const ProfileContainer = () => {
@@ -16,7 +16,7 @@ const ProfileContainer = () => {
   const [{ auth }, setCookie] = useCookies(["auth"]);
 
   useEffect(() => {
-    if (auth) {
+    if (auth && role !== "admin") {
       getScore();
     }
   }, []);

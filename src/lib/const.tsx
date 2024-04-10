@@ -11,6 +11,6 @@ export const APP_TITLE_DATA = {
   users: "Users"
 };
 
-export const API = `https://quizwiz-backend.vercel.app`;
-// export const API = `http://localhost:8000`;
+// export const API = `https://quizwiz-backend.vercel.app`;
+export const API = `http://localhost:8000`;
 // export const API = `http://192.168.163.182:8000`;

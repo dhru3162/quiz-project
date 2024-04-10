@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useCookies } from "react-cookie";
-import { GetHistoryApi } from "@/src/ReduxToolkit/Apis/history.api";
+import { GetHistoryApi } from "@/src/ReduxToolkit/Apis/users.api";
 
 const HistoryContainer = () => {
   const router = useRouter();
