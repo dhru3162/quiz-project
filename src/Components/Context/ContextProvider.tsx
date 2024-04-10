@@ -37,9 +37,14 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       dispatch(logOut())
       router.push(`/`)
     }
-    catch (error) {
-      console.log(error);
-      toast(`Somthing Went Wrong`)
+    catch (error: any) {
+      if (error.response.status === 401) {
+        dispatch(logOut())
+        router.push(`/`)
+      } else {
+        console.log(error);
+        toast(`Somthing Went Wrong`)
+      }
     }
   };
 

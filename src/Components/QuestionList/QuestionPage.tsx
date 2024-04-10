@@ -6,7 +6,7 @@ import ButtonTheme from '../Theme/Button/ButtonTheme';
 import QuestionModal from './QuestionModel';
 import { useRouter } from 'next/router';
 import QuestionAddModal from './QuestionAddModel';
-import UpdateQuestionModal from './UpdateQuestionModel';
+import UpdateQuestionModal from '../EditQuiz/AddEditQuestionModel';
 import { Pane } from 'evergreen-ui';
 import { TiArrowBack } from 'react-icons/ti';
 import Style from './Question.module.scss'

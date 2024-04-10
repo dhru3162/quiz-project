@@ -1,23 +1,26 @@
-import { Modal, ModalContent, ModalBody, useDisclosure } from "@nextui-org/react";
-import { MdDelete } from "react-icons/md";
-import Style from './Dashboard.module.scss'
-import { Pane } from "evergreen-ui";
-import RoundLoader from "../Loaders/RoundLoader";
-import ButtonTheme from "../Theme/Button/ButtonTheme";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useCookies } from "react-cookie";
-import { DeleteQuizApi } from "@/src/ReduxToolkit/Apis/quiz.api";
+import { Modal, ModalContent, ModalBody, useDisclosure } from '@nextui-org/react';
+import { useState } from 'react'
+import Style from './EditQuiz.module.scss'
+import { Pane } from 'evergreen-ui';
+import RoundLoader from '../Loaders/RoundLoader';
+import ButtonTheme from '../Theme/Button/ButtonTheme';
+import { useCookies } from 'react-cookie';
+import { DeleteQuestionApi } from '@/src/ReduxToolkit/Apis/quiz.api';
+import toast from 'react-hot-toast';
 
 interface PropData {
-    item: any
-    getQuiz: any
+    item: any,
+    updateQuiz: any,
+    children: any,
+    quizId: any
 }
 
-const DeleteActionModal = (props: any) => {
+const DeleteQuestionModal = (props: any) => {
     const {
         item,
-        getQuiz
+        quizId,
+        updateQuiz,
+        children,
     } = props
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,9 +34,9 @@ const DeleteActionModal = (props: any) => {
                 Authorization: `Bearer ${auth?.token}`
             }
 
-            await DeleteQuizApi(item?._id, head)
+            await DeleteQuestionApi(quizId, item?._id, head)
             toast.success(`Question Added Successfully.`)
-            getQuiz()
+            updateQuiz()
             onClose()
         } catch (error: any) {
             console.error(error)
@@ -45,10 +48,14 @@ const DeleteActionModal = (props: any) => {
 
     return (
         <>
-            <MdDelete
-                className={`${Style.deleteAction}`}
-                onClick={onOpen}
-            />
+
+            <div
+                onClick={() => onOpen()}
+                className={`cursor-pointer`}
+            >
+                {children}
+            </div>
+
             <Modal
                 isOpen={isOpen}
                 onClose={onClose}
@@ -59,7 +66,7 @@ const DeleteActionModal = (props: any) => {
                 <ModalContent>
                     <ModalBody className='pt-7 pb-4'>
                         <div className='text-lg'>
-                            Are you sure you want to delete {item?.title} quiz?
+                            Are you sure you want to delete this question?
                         </div>
                         <div className='flex justify-end mt-2'>
                             <div className='inline-flex space-x-2'>
@@ -80,14 +87,14 @@ const DeleteActionModal = (props: any) => {
                                         <RoundLoader className="mr-2 w-5 h-5" loading={loader} />
                                         Delete
                                     </Pane>
-                                </button>
+                                </button >
                             </div>
                         </div>
                     </ModalBody>
                 </ModalContent>
             </Modal >
         </>
-    );
+    )
 }
 
-export default DeleteActionModal
+export default DeleteQuestionModal

@@ -12,3 +12,33 @@ export const GetOneQuiz = async (id: any, payload: any,) => {
         headers: payload
     })
 }
+
+export const AddQuizApi = async (payload: any, head: any) => {
+    return await axios.post(`${API}/quiz/add`, payload, {
+        headers: head
+    })
+}
+
+export const DeleteQuizApi = async (id: any, head: any) => {
+    return await axios.delete(`${API}/quiz/${id}`, {
+        headers: head
+    })
+}
+
+export const AddQuestionApi = async (id: any, payload: any, head: any) => {
+    return await axios.post(`${API}/quiz/addquestion/${id}`, payload, {
+        headers: head
+    })
+}
+
+export const EditQuestionApi = async (id: any, payload: any, head: any) => {
+    return await axios.put(`${API}/quiz/editquestion/${id}`, payload, {
+        headers: head
+    })
+}
+
+export const DeleteQuestionApi = async (quizId: any, questionId: any, head: any) => {
+    return await axios.delete(`${API}/quiz/${quizId}/deletequestion/${questionId}`, {
+        headers: head,
+    })
+}

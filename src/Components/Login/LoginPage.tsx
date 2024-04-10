@@ -3,6 +3,7 @@ import Logo from '../Logo/Logo';
 import Styles from './LoginStyle.module.scss';
 import Inputfield from '../Theme/Input/Inputfield';
 import LoginButton from '../Theme/Button/LoginButton';
+import toast from 'react-hot-toast';
 
 const LoginPage = (props: any) => {
     const {
@@ -68,9 +69,9 @@ const LoginPage = (props: any) => {
                                 }}
                             />
                             <div className='flex justify-end mb-5'>
-                                <Link href={`/forgot-password`} className={`${Styles.textColor} font-bold`}>
+                                <div className={`${Styles.textColor} font-bold`} onClick={() => toast('Coming soon')}>
                                     Forgot password?
-                                </Link>
+                                </div>
                             </div>
                             <LoginButton
                                 type='submit'

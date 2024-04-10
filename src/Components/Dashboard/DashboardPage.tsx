@@ -15,8 +15,7 @@ const DashboardPage = (props: any) => {
         pageChangeLoader,
         setPageChangeLoader,
         router,
-        handleDelete,
-        deleteQuizLoader,
+        getQuiz,
     } = props
 
     const cardsForUser = quizData?.map((item: any, index: number) => {
@@ -51,15 +50,14 @@ const DashboardPage = (props: any) => {
                             <BiEdit
                                 className={`${Style.editAction} `}
                                 onClick={() => {
-                                    router.push(`/question?q=${item?.id}`)
+                                    router.push(`/editquiz?q=${item?._id}`)
                                     setPageChangeLoader(true)
                                 }}
                             />
                             <DeleteActionModal
                                 {...{
                                     item,
-                                    handleDelete,
-                                    deleteQuizLoader
+                                    getQuiz,
                                 }}
                             />
                         </div>
@@ -77,7 +75,7 @@ const DashboardPage = (props: any) => {
             </div>
         )
     })
-    
+
 
     return (
         <>
@@ -125,7 +123,11 @@ const DashboardPage = (props: any) => {
                                     </h1>
                                 </div>
                                 <div className='flex justify-end mr-20 max-md:mr-1 max-md:mt-5'>
-                                    <AddQuizModal />
+                                    <AddQuizModal
+                                        {...{
+                                            getQuiz
+                                        }}
+                                    />
                                 </div>
 
                                 <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>

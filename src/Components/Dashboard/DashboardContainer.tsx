@@ -74,6 +74,7 @@ const DashboardContainer = () => {
                     router,
                     handleDelete,
                     deleteQuizLoader,
+                    getQuiz,
                 }}
             />
         </>

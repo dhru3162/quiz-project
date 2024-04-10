@@ -2,11 +2,10 @@ import { BASE_API } from "@/src/lib/const";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { GetQuizData } from "../Apis/quiz.api";
 
 const initialState = {
     quizData: [],
-    isLoading: false,
+    isLoading: true,
 }
 
 const quiz: any = createSlice({
@@ -29,10 +28,6 @@ export const {
 
 export default quiz.reducer
 
-// export const getQuiz = () => async (dispatch: any) => {
-//     dispatch(setIsLoading(true))
-   
-// }
 
 export const getUpdatedQuizData = () => async (dispatch: any) => {
     try {
