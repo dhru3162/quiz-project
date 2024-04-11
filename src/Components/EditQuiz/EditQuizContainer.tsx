@@ -10,13 +10,7 @@ import { GetOneQuiz } from '@/src/ReduxToolkit/Apis/quiz.api';
 const EditQuizContainer = ({ data, id }: any) => {
     const router = useRouter()
     const [quizData, setQuizData] = useState(data)
-    const [deleteQuestionLoader, setDeleteQuestionLoader] = useState<Boolean>(false)
     const [{ auth }, setCookie] = useCookies(["auth"]);
-
-    const handleDeleteQuestion = async (id: any, onClose: any) => {
-        toast(id)
-        onClose()
-    }
 
     const updateQuiz = async () => {
         try {
@@ -40,8 +34,6 @@ const EditQuizContainer = ({ data, id }: any) => {
                 {...{
                     quizData,
                     router,
-                    handleDeleteQuestion,
-                    deleteQuestionLoader,
                     updateQuiz,
                 }}
             />

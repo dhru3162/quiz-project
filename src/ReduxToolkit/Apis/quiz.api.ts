@@ -19,6 +19,12 @@ export const AddQuizApi = async (payload: any, head: any) => {
     })
 }
 
+export const EditQuizDetailsApi = async (id: any, payload: any, head: any) => {
+    return await axios.put(`${API}/quiz/${id}`, payload, {
+        headers: head
+    })
+}
+
 export const DeleteQuizApi = async (id: any, head: any) => {
     return await axios.delete(`${API}/quiz/${id}`, {
         headers: head

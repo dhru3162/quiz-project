@@ -29,6 +29,7 @@ const ViewQuestionModal = (props: any) => {
     return (
         <>
             <div
+                className={`truncate`}
                 onClick={() => onOpen()}
             >
                 {children}
