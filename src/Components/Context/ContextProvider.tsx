@@ -49,8 +49,15 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       const payload = {
         Authorization: `Bearer ${auth?.token}`
       }
-      const res = await WhoAmIApi(payload)
+      const res: any = await WhoAmIApi(payload)
+
       dispatch(setInitialData(res.data));
+
+      if (res.data.user.role !== auth.user.role) {
+        const updateRole = { ...auth }
+        updateRole.user.role = res.data.user.role
+        setCookie("auth", updateRole)
+      }
 
     } catch (error: any) {
       if (error?.response?.status === 401) {
