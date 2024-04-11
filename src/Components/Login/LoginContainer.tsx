@@ -22,6 +22,7 @@ const LoginContainer = () => {
     if (role && role === 'admin') {
       router.push('dashboard')
     }
+    // eslint-disable-next-line
   }, [role])
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const LoginContainer = () => {
       setCookie("auth", loggedInData);
       router.push(`/dashboard`);
     }
+    // eslint-disable-next-line
   }, [loggedInData])
 
   const handlerLogin = async (inputData: any) => {

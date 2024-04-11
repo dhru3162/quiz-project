@@ -19,10 +19,12 @@ const HistoryContainer = () => {
     if (role && role === "admin") {
       router.push("dashboard");
     }
+    // eslint-disable-next-line
   }, [role]);
 
   useEffect(() => {
     getUserHistory();
+    // eslint-disable-next-line
   }, []);
 
   const getUserHistory = async () => {

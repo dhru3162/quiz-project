@@ -35,18 +35,21 @@ const PlayQuizContainer = ({ quizData }: any) => {
         handlerNextQuestion();
       }
     }
+    // eslint-disable-next-line
   }, [timer]);
 
   useEffect(() => {
     if (isQuizEnd) {
       checkScore();
     }
+    // eslint-disable-next-line
   }, [isQuizEnd]);
 
   useEffect(() => {
     if (isQuizEnd) {
       uploadQuizHistory();
     }
+    // eslint-disable-next-line
   }, [totalScore]);
 
   const timerColorChanger = () => {

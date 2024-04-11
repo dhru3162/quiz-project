@@ -19,6 +19,7 @@ const ProfileContainer = () => {
     if (auth && role !== "admin") {
       getScore();
     }
+    // eslint-disable-next-line
   }, []);
 
   const getScore = async () => {

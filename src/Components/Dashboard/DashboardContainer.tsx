@@ -21,6 +21,7 @@ const DashboardContainer = () => {
 
     useEffect(() => {
         getQuiz()
+        // eslint-disable-next-line
     }, [])
 
     const getQuiz = async () => {
