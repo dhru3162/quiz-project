@@ -8,7 +8,6 @@ import React, { ReactNode, createContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import "firebase/auth";
 import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
 
 interface LayoutType {
