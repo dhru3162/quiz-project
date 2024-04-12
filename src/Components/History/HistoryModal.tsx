@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import ResultComponent from "../ResultComponent/ResultComponent";
+import Style from "./History.module.scss"
 
 const HistoryModal = (props: any) => {
   const { history } = props;
@@ -21,13 +22,13 @@ const HistoryModal = (props: any) => {
         return (
           <div
             key={index}
-            className="bg-white border-b flex justify-stretch hover:bg-blue-50 cursor-pointer"
+            className={`bg-white border-b flex justify-stretch hover:bg-[#EEEEEE] cursor-pointer`}
             onClick={() => {
               setData(item);
               onOpen();
             }}
           >
-            <div className="px-4 py-4 font-extrabold text-sm text-gray-900 w-[10%]">
+            <div className={`${Style.themeBlue} px-4 py-4 font-extrabold text-sm w-[10%]`}>
               {index + 1}
             </div>
             <div className="px-4 py-4 w-[50%] truncate">

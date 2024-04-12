@@ -34,8 +34,8 @@ const HistoryPage = (props: any) => {
                         </div>
 
                         <div className="relative overflow-x-auto shadow-lg rounded-lg ">
-                            <div className="text-sm text-left text-gray-500">
-                                <div className="text-xs text-gray-700 uppercase bg-blue-100">
+                            <div className="text-sm text-left">
+                                <div className={`text-xs ${Style.themeBlue} uppercase bg-blue-100`}>
                                     <div className='flex justify-stretch font-extrabold text-sm cursor-default'>
                                         <div className="px-4 py-3 w-[10%]">
                                             #
@@ -51,7 +51,7 @@ const HistoryPage = (props: any) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='h-96 overflow-auto bg-white'>
+                                <div className={`bg-white h-96 overflow-auto `}>
                                     {loader &&
                                         <HistorySkeleton />
                                     }

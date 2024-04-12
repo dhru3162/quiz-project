@@ -1,5 +1,21 @@
 @import '../../../styles/themeColors.scss';
 
-.btnColor{
-    color: $white; 
+.btnColor {
+    color: $white;
+}
+
+.textWhite {
+    color: $white
+}
+
+.whiteBg {
+    background-color: $white;
+}
+
+.themeBlue {
+    color: $text;
+}
+
+.themeBtn {
+    color: $button;
 }

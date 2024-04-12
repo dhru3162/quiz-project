@@ -19,8 +19,9 @@ export const GetScoreApi = async (payload: any) => {
   })
 };
 
-export const GetUserData = async (payload: any) => {
+export const GetUserData = async (payload: any, paramsData: any) => {
   return await axios.get(`${API}/user`, {
-    headers: payload
+    headers: payload,
+    params: paramsData
   })
 }
