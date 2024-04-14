@@ -12,6 +12,7 @@ import DropdownTheme from '../Theme/Dropdown/DropdownTheme';
 import Style from './Navbar.module.scss'
 import { FaUsers } from 'react-icons/fa';
 import { Context } from '../Context/ContextProvider';
+import { PiChats } from 'react-icons/pi';
 
 const Navbar = () => {
   const router = useRouter()
@@ -29,6 +30,12 @@ const Navbar = () => {
       label: 'History',
       value: 'history',
       startContent: <MdOutlineHistory />,
+      className: `${Style.textColor} hover:!text-[#0C356A]`,
+    },
+    {
+      label: 'Contact Admin',
+      value: 'contact_us',
+      startContent: <PiChats />,
       className: `${Style.textColor} hover:!text-[#0C356A]`,
     },
     {

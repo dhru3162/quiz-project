@@ -8,6 +8,7 @@ export const middleware = (request: NextRequest) => {
     const commanPrivatePath = path === '/dashboard' || path === '/profile';
     const isPrivateUsersPath = path === '/history' || path === "/playquiz";
     const isPrivateAdminPath = path === '/users' || path === "/editquiz";
+    const contactUsPath = path === '/contact_us'
 
     const getCookies: any = request.cookies.get('auth')?.value || '';
     let auth: any = ''
@@ -29,6 +30,10 @@ export const middleware = (request: NextRequest) => {
     }
 
     if (isPrivateAdminPath && role !== "admin") {
+        return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
+    }
+
+    if (contactUsPath && role === 'admin') {
         return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
     }
 

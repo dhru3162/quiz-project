@@ -8,7 +8,8 @@ export const APP_TITLE_DATA = {
   history: "History",
   forgotPassword: "Forgot Password",
   editQuiz: "Edit Quiz",
-  users: "Users"
+  users: "Users",
+  contactus: "Contact Admin"
 };
 
 export const API = `https://quizwiz-backend.vercel.app`;
