@@ -29,8 +29,15 @@ const HomePage = () => {
                     <div className="flex justify-center">
                         <Logo className={`${Style.textColor}`} white />
                     </div>
-                    <div className="text-center text-lg">
-                        Email: info@QuizWiz.com
+                    <div className="flex justify-center">
+                        <Link href={`mailto:quizwiz.app.contact@gmail.com`} className="text-lg">
+                            Email: quizwiz.app.contact@gmail.com
+                        </Link>
+                    </div>
+                    <div className="flex justify-center">
+                        <Link href={`/contact_us`} >
+                            Contact Us
+                        </Link>
                     </div>
                     <div className="text-center text-xs">
                         © 2024 QuizWiz. All rights reserved.
