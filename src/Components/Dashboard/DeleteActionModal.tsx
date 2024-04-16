@@ -32,7 +32,7 @@ const DeleteActionModal = (props: PropData) => {
             }
 
             await DeleteQuizApi(item?._id, head)
-            toast.success(`Question Added Successfully.`)
+            toast.success(`Question Deleted Successfully.`)
             getQuiz()
             onClose()
         } catch (error: any) {
