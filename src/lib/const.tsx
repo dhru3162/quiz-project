@@ -12,6 +12,7 @@ export const APP_TITLE_DATA = {
   contactus: "Contact Admin"
 };
 
-export const API = `https://quizwiz-backend.vercel.app`;
+// export const API = `https://quizwiz-backend.vercel.app`;
+export const API = `https://quizwiz-api.up.railway.app`;
 // export const API = `http://localhost:8000`;
 // export const API = `http://192.168.163.182:8000`;
