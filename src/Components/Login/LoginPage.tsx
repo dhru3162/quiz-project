@@ -15,7 +15,6 @@ const LoginPage = (props: any) => {
         setIsLogin,
         reset,
         getValues,
-        loginWithGoogle,
     } = props
 
     return (

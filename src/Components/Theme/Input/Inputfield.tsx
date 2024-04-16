@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { UseControllerProps, FieldValues, FieldError, useController, Control } from 'react-hook-form';
 import { BiSolidErrorCircle } from 'react-icons/bi';
 
@@ -36,7 +36,7 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
         field,
         fieldState: { error }
     } = useController({ name, control, rules, defaultValue: '' });
-
+    const inputRef = useRef<HTMLInputElement>(null);
     const [showPass, setShowPass] = useState<Boolean>(false)
     const typeCondition = eye ? (showPass ? `text` : `password`) : (type || 'text')
 
@@ -47,12 +47,14 @@ const Inputfield: React.FC<FormInputProps> = (props) => {
                     className={`${error ? `border-red-500` : `border-black focus:border-[#0C356A]`} ${(error && eye) ? `pr-16` : `pr-12`} block pt-2.5 pl-2 pb-1 text-gray-900 w-full bg-transparent placeholder-transparent border-b-[2.5px] appearance-none outline-none focus:ring-0 peer`}
                     id={name}
                     {...field}
+                    ref={inputRef}
                     disabled={disabled}
                     placeholder={``}
                     type={typeCondition}
                 />
                 <label
-                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} text-lg pl-2 font-medium absolute duration-300 peer-focus:font-medium transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`}
+                    onClick={() => inputRef.current?.focus()}
+                    className={`${error ? `text-red-500` : `text-black peer-focus:text-[#0C356A]`} text-lg pl-2 font-medium absolute duration-300 peer-focus:font-medium transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 cursor-text`}
                 >
                     {label}
                 </label>
