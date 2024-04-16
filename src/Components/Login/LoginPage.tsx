@@ -15,6 +15,7 @@ const LoginPage = (props: any) => {
         setIsLogin,
         reset,
         getValues,
+        loginWithGoogle,
     } = props
 
     return (
@@ -80,6 +81,7 @@ const LoginPage = (props: any) => {
                             >
                                 Login
                             </LoginButton>
+
                             <div className='flex justify-center mt-7 font-bold text-sm'>
                                 Not a member?
                                 <span
