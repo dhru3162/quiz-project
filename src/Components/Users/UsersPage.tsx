@@ -1,5 +1,4 @@
 import { TiArrowBack } from 'react-icons/ti';
-import HistorySkeleton from '../Loaders/Skeletons/HistorySkeleton';
 import Navbar from '../Navbar/Navbar';
 import Styles from "./User.module.scss"
 import { Pane } from 'evergreen-ui';
@@ -7,8 +6,7 @@ import { FiSearch } from 'react-icons/fi';
 import debounce from 'lodash.debounce';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { Select, SelectItem } from '@nextui-org/react';
-import toast from 'react-hot-toast';
-// import { animals } from "./data";
+import UserListSkeleton from '../Loaders/Skeletons/UserListSkeleton';
 
 const UsersPage = (props: any) => {
     const {
@@ -22,25 +20,6 @@ const UsersPage = (props: any) => {
         availableFilter,
         handlerFilterList
     } = props;
-
-    // const animals = [
-    //     {
-    //         value: 'test',
-    //         label: 'Test'
-    //     },
-    //     {
-    //         value: 'test1',
-    //         label: 'Test1'
-    //     },
-    //     {
-    //         value: 'test2',
-    //         label: 'Test2'
-    //     },
-    //     {
-    //         value: 'test3',
-    //         label: 'Test3'
-    //     },
-    // ]
 
     const userList = userData?.map((user: any, index: number) => {
         return (
@@ -63,7 +42,7 @@ const UsersPage = (props: any) => {
 
     return (
         <>
-            <div className="bgColor min-h-[100dvh] w-screen ">
+            <div className="bgColor min-h-[100dvh]">
                 <Navbar />
                 <div className='max-w-screen-2xl bgColor mt-5 '>
                     <div className='md:px-10 max-w-[90%] z-0 lg:max-w-[80%] xl:max-w-[60%] 2xl:max-w-[40%] mx-auto right-0 left-0 absolute'>
@@ -152,9 +131,9 @@ const UsersPage = (props: any) => {
                                     </div>
                                 </div>
 
-                                <div className={`bg-white h-96 overflow-auto `}>
+                                <div className={`bg-white h-72 overflow-auto `}>
                                     {isLoading &&
-                                        <HistorySkeleton />
+                                        <UserListSkeleton />
                                     }
                                     {!isLoading &&
                                         <>
