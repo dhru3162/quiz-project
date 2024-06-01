@@ -45,7 +45,7 @@ const LoginContainer = () => {
 
       } catch (error: any) {
         if (error?.request?.status === 504) {
-          toast(`somthing went Wrong Try Again`)
+          toast(`Somthing Went Wrong Try Again`)
         } else {
           if (!error?.response?.data?.massage) {
             toast.error(`Somthing went wrong try again`)

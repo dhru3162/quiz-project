@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/navigation';
 import Logo from '../Logo/Logo';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
@@ -12,12 +12,12 @@ import DropdownTheme from '../Theme/Dropdown/DropdownTheme';
 import Style from './Navbar.module.scss'
 import { FaUsers } from 'react-icons/fa';
 import { Context } from '../Context/ContextProvider';
-import { PiChats } from 'react-icons/pi';
+import { IoMdLock } from 'react-icons/io';
 
 const Navbar = () => {
   const router = useRouter()
   const { loggedInData, role }: any = useSelector((state: any) => state.auth)
-  const { LogOut } = useContext(Context)
+  const { LogOut, AdminRights } = useContext(Context)
 
   const userDropdown = [
     {
@@ -33,9 +33,9 @@ const Navbar = () => {
       className: `${Style.textColor} hover:!text-[#0C356A]`,
     },
     {
-      label: 'Contact Admin',
-      value: 'contact_us',
-      startContent: <PiChats />,
+      label: 'Change Password',
+      value: 'change-password',
+      startContent: <IoMdLock />,
       className: `${Style.textColor} hover:!text-[#0C356A]`,
     },
     {
@@ -60,6 +60,12 @@ const Navbar = () => {
       className: `${Style.textColor} hover:!text-[#0C356A]`,
     },
     {
+      label: 'Change Password',
+      value: 'change-password',
+      startContent: <IoMdLock />,
+      className: `${Style.textColor} hover:!text-[#0C356A]`,
+    },
+    {
       label: 'Logout',
       value: 'logout',
       startContent: <AiOutlineLogout />,
@@ -71,9 +77,17 @@ const Navbar = () => {
     if (key === 'logout') {
       LogOut()
     } else {
-      router.push(`/${key}`)
-    }
-  }
+      if (key === "change-password" && role === "admin" && AdminRights()) {
+        router.push(`/${key}`);
+      };
+      if (key === "change-password" && role !== "admin") {
+        router.push(`/${key}`);
+      };
+      if (key !== "change-password") {
+        router.push(`/${key}`);
+      };
+    };
+  };
 
   return (
     <>

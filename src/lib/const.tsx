@@ -9,8 +9,11 @@ export const APP_TITLE_DATA = {
   forgotPassword: "Forgot Password",
   editQuiz: "Edit Quiz",
   users: "Users",
-  contactus: "Contact Admin"
+  contactus: "Contact Admin",
+  changePassword: "Change Password"
 };
+
+export const ADMIN_PASSWORD = "Admin@admin123"
 
 // export const API = `https://quizwiz-backend.vercel.app`;
 export const API = `https://quizwiz-api.up.railway.app`;

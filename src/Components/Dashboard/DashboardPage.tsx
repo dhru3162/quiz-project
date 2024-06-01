@@ -6,6 +6,7 @@ import DashboardCardsSkeleton from "../Loaders/Skeletons/DashboardCardsSkeleton"
 import Loader from "../Loaders/Loader";
 import AddQuizModal from "./AddQuizModel";
 import DeleteActionModal from "./DeleteActionModal";
+import Footer from "../Footer/Footer";
 
 const DashboardPage = (props: any) => {
     const {
@@ -16,6 +17,7 @@ const DashboardPage = (props: any) => {
         setPageChangeLoader,
         router,
         getQuiz,
+        AdminRights,
     } = props
 
     const cardsForUser = quizData?.map((item: any, index: number) => {
@@ -50,14 +52,17 @@ const DashboardPage = (props: any) => {
                             <BiEdit
                                 className={`${Style.editAction} `}
                                 onClick={() => {
-                                    router.push(`/editquiz?q=${item?._id}`)
-                                    setPageChangeLoader(true)
+                                    if (AdminRights()) {
+                                        router.push(`/editquiz?q=${item?._id}`)
+                                        setPageChangeLoader(true)
+                                    }
                                 }}
                             />
                             <DeleteActionModal
                                 {...{
                                     item,
                                     getQuiz,
+                                    AdminRights,
                                 }}
                             />
                         </div>
@@ -73,18 +78,17 @@ const DashboardPage = (props: any) => {
                     </div>
                 </div>
             </div>
-        )
-    })
-
+        );
+    });
 
     return (
         <>
-            {role === 'user' &&
-                <>
-                    {pageChangeLoader && <Loader bgBlur />}
-                    <div className='bgColor min-h-[100dvh]'>
-                        <Navbar />
-                        <div className='flex justify-center'>
+            {pageChangeLoader && <Loader bgBlur />}
+            <div className='bgColor min-h-[100dvh]'>
+                <Navbar />
+                {role === 'user' &&
+                    <>
+                        <div className='flex justify-center mb-10'>
                             <div className="max-w-screen-2xl w-full p-10">
 
                                 <div className="flex justify-center max-md:mt-7">
@@ -102,44 +106,39 @@ const DashboardPage = (props: any) => {
                                     {isLoading && <DashboardCardsSkeleton />}
                                     {!isLoading && cardsForUser}
                                 </div>
+                            </div>
+                        </div>
+                        <Footer />
+                    </>
+                }
 
+                {role === "admin" &&
+                    <div className='flex justify-center'>
+
+                        <div className="max-w-screen-2xl w-full p-10">
+
+                            <div className="flex justify-center">
+                                <h1 className={`${Style.headText} text-5xl md:text-4xl font-bold max-md:text-3xl`}>
+                                    Available Quiz
+                                </h1>
+                            </div>
+                            <div className='flex justify-end mr-20 max-md:mr-1 max-md:mt-5'>
+                                <AddQuizModal
+                                    {...{
+                                        getQuiz,
+                                        AdminRights,
+                                    }}
+                                />
+                            </div>
+
+                            <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+                                {isLoading && <DashboardCardsSkeleton />}
+                                {!isLoading && cardsForAdmin}
                             </div>
                         </div>
                     </div>
-                </>
-            }
-
-            {role === 'admin' &&
-                <>
-                    {pageChangeLoader && <Loader bgBlur />}
-                    <div className='bgColor min-h-[100dvh] '>
-                        <Navbar />
-                        <div className='flex justify-center'>
-                            <div className="max-w-screen-2xl w-full max-h-fit p-10">
-
-                                <div className="flex justify-center">
-                                    <h1 className={`${Style.headText} text-5xl md:text-4xl font-bold max-md:text-3xl`}>
-                                        Available Quiz
-                                    </h1>
-                                </div>
-                                <div className='flex justify-end mr-20 max-md:mr-1 max-md:mt-5'>
-                                    <AddQuizModal
-                                        {...{
-                                            getQuiz
-                                        }}
-                                    />
-                                </div>
-
-                                <div className='mt-10 gap-8 h-fit grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-                                    {isLoading && <DashboardCardsSkeleton />}
-                                    {!isLoading && cardsForAdmin}
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </>
-            }
+                }
+            </div>
         </>
     )
 }

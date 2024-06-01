@@ -11,12 +11,14 @@ import toast from "react-hot-toast";
 import { AddQuizApi } from "@/src/ReduxToolkit/Apis/quiz.api";
 
 interface PropInterface {
-    getQuiz: any
+    getQuiz: any,
+    AdminRights: any,
 }
 
 const AddQuizModal = (props: PropInterface) => {
     const {
-        getQuiz
+        getQuiz,
+        AdminRights,
     } = props
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
@@ -84,7 +86,7 @@ const AddQuizModal = (props: PropInterface) => {
             <ButtonTheme
                 type='button'
                 white
-                onClick={() => onOpen()}
+                onClick={() => AdminRights() && onOpen()}
             >
                 <Pane display="flex" alignItems="center" justifyContent="center">
                     <FaPlus className="mr-2" />

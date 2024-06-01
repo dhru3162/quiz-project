@@ -5,7 +5,7 @@ export const middleware = (request: NextRequest) => {
     const path = request.nextUrl.pathname;
 
     const isPublicPath = path === '/login' || path === '/' || path === '/forgot-password';
-    const commanPrivatePath = path === '/dashboard' || path === '/profile';
+    const commanPrivatePath = path === '/dashboard' || path === '/profile' || path === "/change-password";
     const isPrivateUsersPath = path === '/history' || path === "/playquiz";
     const isPrivateAdminPath = path === '/users' || path === "/editquiz";
     const contactUsPath = path === '/contact_us'

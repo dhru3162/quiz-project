@@ -20,3 +20,9 @@ export const LogoutApi = async (payload: any, sessionId: any) => {
         headers: payload
     })
 }
+
+export const ChangePasswordApi = async (payload: any, body: any) => {
+    return await axios.post(`${API}/auth/changepassword`, body, {
+        headers: payload
+    })
+}

@@ -1,8 +1,6 @@
-import Link from "next/link"
-import Logo from "../Logo/Logo"
 import Style from './ContactUs.module.scss'
 import ButtonTheme from "../Theme/Button/ButtonTheme"
-import { Input } from "@nextui-org/react"
+import Navbar from "../Navbar/Navbar"
 
 const ContactUsPage = (props: any) => {
   const {
@@ -17,16 +15,10 @@ const ContactUsPage = (props: any) => {
   return (
     <div className='bgColor min-h-[100dvh]'>
 
-      <nav className="bg-[#EEEEEE] rounded-b-lg backdrop-blur-md md:pl-8 md:pr-8 sticky select-none z-20 top-0 ">
-        <div className="max-w-screen-2xl flex flex-wrap items-center mx-auto p-4">
-          <Link href="/" className="flex items-center space-x-3 outline-none rtl:space-x-reverse">
-            <Logo className='h-10' />
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className='flex justify-center'>
-        <div className="max-w-screen-2xl w-full p-10">
+        <div className="max-w-screen-2xl w-full">
 
           <div className="flex justify-center max-md:mt-7">
 

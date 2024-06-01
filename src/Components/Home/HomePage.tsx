@@ -2,6 +2,7 @@ import Link from "next/link"
 import Navbar from "../Navbar/Navbar"
 import Style from './Home.module.scss'
 import Logo from "../Logo/Logo"
+import Footer from "../Footer/Footer"
 
 const HomePage = () => {
     return (
@@ -24,25 +25,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-
-                <footer className={`bg-black ${Style.textColor} space-y-7 py-12`}>
-                    <div className="flex justify-center">
-                        <Logo className={`${Style.textColor}`} white />
-                    </div>
-                    <div className="flex justify-center">
-                        <Link href={`mailto:quizwiz.app.contact@gmail.com`} className="text-lg">
-                            Email: quizwiz.app.contact@gmail.com
-                        </Link>
-                    </div>
-                    <div className="flex justify-center">
-                        <Link href={`/contact_us`} >
-                            Contact Us
-                        </Link>
-                    </div>
-                    <div className="text-center text-xs">
-                        © 2024 QuizWiz. All rights reserved.
-                    </div>
-                </footer>
+                <Footer />
             </div>
         </>
     )

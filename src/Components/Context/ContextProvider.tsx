@@ -4,11 +4,12 @@ import {
   setInitialData,
 } from "@/src/ReduxToolkit/Slices/Auth";
 import { useRouter } from "next/router";
-import React, { ReactNode, createContext, useEffect } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
+import { ADMIN_PASSWORD } from "@/src/lib/const";
 
 interface LayoutType {
   children: ReactNode;
@@ -18,9 +19,10 @@ export const Context = createContext<any>(null);
 
 export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const [{ auth }, setCookie] = useCookies(["auth"]);
-  const { isAuth, loggedInData } = useSelector((state: any) => state.auth)
+  const { isAuth, loggedInData } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [adminVerifyed, setAdminVerifyed] = useState(false);
 
   const LogOut = async () => {
     try {
@@ -76,6 +78,18 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
     }
   };
 
+  const AdminRights = () => {
+    if (adminVerifyed) return true;
+    const Password = prompt("Please Enter Admin Verification Password", "");
+    if (Password === ADMIN_PASSWORD) {
+      setAdminVerifyed(true);
+      return true;
+    } else {
+      if (Password && Password !== "") toast.error("Wrong password");
+      return false;
+    };
+  };
+
   useEffect(() => {
     if (auth?.token && !isAuth) {
       getUserData()
@@ -90,6 +104,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       value={{
         LogOut,
         getUserData,
+        AdminRights,
       }}
     >
       {children}

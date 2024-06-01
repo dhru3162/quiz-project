@@ -12,12 +12,14 @@ import { DeleteQuizApi } from "@/src/ReduxToolkit/Apis/quiz.api";
 interface PropData {
     item: any
     getQuiz: any
+    AdminRights: any
 }
 
 const DeleteActionModal = (props: PropData) => {
     const {
         item,
-        getQuiz
+        getQuiz,
+        AdminRights
     } = props
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,7 +49,7 @@ const DeleteActionModal = (props: PropData) => {
         <>
             <MdDelete
                 className={`${Style.deleteAction}`}
-                onClick={onOpen}
+                onClick={() => AdminRights() && onOpen}
             />
             <Modal
                 isOpen={isOpen}
