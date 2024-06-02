@@ -5,25 +5,26 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react'
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { ForgotPasswordApi } from "@/src/ReduxToolkit/Apis/auth.api";
 
 const ForgotPasswordContainer = () => {
-  const router = useRouter()
-  const { control, handleSubmit } = useForm()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [forgotPasswordDone, setForgotPasswordDone] = useState(true)
+  const router = useRouter();
+  const { control, handleSubmit } = useForm();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [forgotPasswordDone, setForgotPasswordDone] = useState(false);
 
   const handlerForgotPassword = async (inputData: any) => {
     setIsLoading(true)
     try {
-      toast(`this feature is under development stage coming soon for all users`)
+      await ForgotPasswordApi(inputData);
+      setForgotPasswordDone(true);
     } catch (error: any) {
-      console.log(error)
-      toast.error(`Somthing Went Wrong`)
+      console.log(error);
+      toast.error(error?.response?.data?.massage ?? "Somthin went wrong");
     } finally {
       setIsLoading(false)
-    }
-  }
-
+    };
+  };
 
   return (
     <>

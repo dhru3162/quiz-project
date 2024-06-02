@@ -1,3 +1,8 @@
 import ForgotPasswordContainer from "@/src/Components/ForgotPassword/ForgotPasswordContainer";
 
-export default ForgotPasswordContainer
+const index = () => {
+    return <ForgotPasswordContainer />
+}
+
+export default index
+

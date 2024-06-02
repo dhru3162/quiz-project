@@ -19,10 +19,22 @@ export const LogoutApi = async (payload: any, sessionId: any) => {
     return await axios.post(`${API}/auth/logout`, sessionId, {
         headers: payload
     })
-}
+};
 
 export const ChangePasswordApi = async (payload: any, body: any) => {
     return await axios.post(`${API}/auth/changepassword`, body, {
         headers: payload
     })
-}
+};
+
+export const ForgotPasswordApi = async (body: any) => {
+    return await axios.post(`${API}/auth/forgot-password`, body);
+};
+
+export const CheckLinkApi = async (body: any) => {
+    return await axios.post(`${API}/auth/check-link`, body);
+};
+
+export const ResetPasswordApi = async (body: any) => {
+    return await axios.post(`${API}/auth/reset-password`, body);
+};

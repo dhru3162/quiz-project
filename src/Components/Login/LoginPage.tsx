@@ -69,9 +69,9 @@ const LoginPage = (props: any) => {
                                 }}
                             />
                             <div className='flex justify-end mb-5'>
-                                <div className={`${Styles.textColor} font-bold`} onClick={() => toast('Coming soon')}>
+                                <Link href={`/forgot-password`} className={`${Styles.textColor} font-bold`}>
                                     Forgot password?
-                                </div>
+                                </Link>
                             </div>
                             <LoginButton
                                 type='submit'
