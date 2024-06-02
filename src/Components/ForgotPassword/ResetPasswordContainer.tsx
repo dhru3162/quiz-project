@@ -10,7 +10,6 @@ import toast from 'react-hot-toast'
 const ResetPasswordContainer = () => {
     const router = useRouter();
     const { token } = router.query;
-    console.log('token: ', token);
     const { control, getValues, handleSubmit } = useForm();
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -27,7 +26,7 @@ const ResetPasswordContainer = () => {
 
     const checkLink = async () => {
         try {
-            await CheckLinkApi({ token })
+            await CheckLinkApi({ token: token })
         } catch (err) {
             console.log(err);
             router.push('/');
@@ -38,7 +37,7 @@ const ResetPasswordContainer = () => {
     };
 
     useEffect(() => {
-        if (token !== "") {
+        if (token && token !== "") {
             checkLink();
         };
         // eslint-disable-next-line
