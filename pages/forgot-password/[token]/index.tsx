@@ -8,22 +8,23 @@ const index = () => {
 
 export default index;
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const { token } = context.params as { token: string };
+// export const getServerSideProps: GetServerSideProps = async (context: any) => {
+//   const { token } = context.params as { token: string };
+//   console.log('token: ', token);
 
-  try {
-    await CheckLinkApi({ token });
-    return {
-      props: {},
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-};
+//   try {
+//     await CheckLinkApi({ token });
+//     return {
+//       props: {},
+//     };
+//   } catch (err) {
+//     console.log(err);
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     };
+//   }
+// };
 

@@ -24,6 +24,24 @@ const ResetPasswordContainer = () => {
         }
     };
 
+    const checkLink = async () => {
+        try {
+            await CheckLinkApi({ token: token })
+        } catch (err) {
+            console.log(err);
+            router.push('/');
+            toast.error("Link Expired")
+        } finally {
+            setIsLoading(false);
+        };
+    };
+
+    useEffect(() => {
+        if (token && token !== "") {
+            checkLink();
+        };
+        // eslint-disable-next-line
+    }, [token])
 
     return (
         <>
