@@ -20,7 +20,7 @@ const DashboardPage = (props: any) => {
         AdminRights,
     } = props
 
-    const cardsForUser = quizData?.map((item: any, index: number) => {
+    const cardsForUser = quizData && quizData?.length > 0 ? quizData?.map((item: any, index: number) => {
         return (
             <div key={index} className='flex justify-center w-full'>
                 <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl p-5 space-y-2`}>
@@ -40,9 +40,9 @@ const DashboardPage = (props: any) => {
                 </div>
             </div>
         )
-    })
+    }) : null;
 
-    const cardsForAdmin = quizData?.map((item: any, index: number) => {
+    const cardsForAdmin = quizData && quizData?.length > 0 ? quizData?.map((item: any, index: number) => {
         return (
             <div key={index} className='flex justify-center w-full h-full'>
                 <div className={`max-md:w-[80%] xl:w-[90%] text-center ${Style.cardBg} w-full rounded-xl relative group`}>
@@ -79,7 +79,7 @@ const DashboardPage = (props: any) => {
                 </div>
             </div>
         );
-    });
+    }) : null;
 
     return (
         <>

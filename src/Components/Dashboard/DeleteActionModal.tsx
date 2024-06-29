@@ -49,7 +49,7 @@ const DeleteActionModal = (props: PropData) => {
         <>
             <MdDelete
                 className={`${Style.deleteAction}`}
-                onClick={() => AdminRights() && onOpen}
+                onClick={() => AdminRights() && onOpen()}
             />
             <Modal
                 isOpen={isOpen}
