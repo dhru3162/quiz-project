@@ -16,7 +16,7 @@ const ResetPasswordContainer = () => {
     const handlerResetPassword = async (data: any) => {
         try {
             await ResetPasswordApi({ ...data, token });
-            toast.success("Password reset successfully")
+            toast.success("Password reset successfully");
             router.push('/login');
         } catch (err: any) {
             console.log('err: ', err);
@@ -26,11 +26,11 @@ const ResetPasswordContainer = () => {
 
     const checkLink = async () => {
         try {
-            await CheckLinkApi({ token: token })
+            await CheckLinkApi({ token: token });
         } catch (err) {
             console.log(err);
             router.push('/');
-            toast.error("Link Expired")
+            toast.error("Link Expired");
         } finally {
             setIsLoading(false);
         };
