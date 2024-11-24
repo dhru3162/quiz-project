@@ -19,8 +19,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
 
     if (query.q) {
         try {
-            const cookie: any = req.headers.cookie
-            const decodedCookie = decodeURIComponent(cookie.replace('auth=', ''));
+            const cookie: any = req.headers.cookie ?? "";
+            const authCookie: any = cookie?.split('; ')?.find((c: any) => c?.startsWith('auth='));
+
+            const decodedCookie = decodeURIComponent(authCookie?.replace('auth=', ''));
             const auth = JSON.parse(decodedCookie);
 
             const payload = {

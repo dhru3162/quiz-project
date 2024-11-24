@@ -8,7 +8,6 @@ import Style from './Dashboard.module.scss'
 const DashboardModal = (props: any) => {
     const {
         item,
-        setPageChangeLoader,
         router,
     } = props
 
@@ -61,7 +60,6 @@ const DashboardModal = (props: any) => {
                                         onClick={() => {
                                             onClose()
                                             router.push(`/playquiz?q=${item._id}`)
-                                            setPageChangeLoader(true)
                                         }}
                                     >
                                         <FaPlay className="mr-2" />

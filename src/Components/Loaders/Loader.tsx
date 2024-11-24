@@ -4,7 +4,7 @@ interface Prop {
     bgBlur?: boolean
 }
 
-const Loader = ({ bgBlur }: Prop) => {
+const Loader = ({ bgBlur = false }: Prop) => {
 
     if (bgBlur) {
         return (

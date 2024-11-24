@@ -13,8 +13,6 @@ const DashboardPage = (props: any) => {
         quizData,
         role,
         isLoading,
-        pageChangeLoader,
-        setPageChangeLoader,
         router,
         getQuiz,
         AdminRights,
@@ -33,7 +31,6 @@ const DashboardPage = (props: any) => {
                     <DashboardModal
                         {...{
                             item,
-                            setPageChangeLoader,
                             router,
                         }}
                     />
@@ -54,7 +51,6 @@ const DashboardPage = (props: any) => {
                                 onClick={() => {
                                     if (AdminRights()) {
                                         router.push(`/editquiz?q=${item?._id}`)
-                                        setPageChangeLoader(true)
                                     }
                                 }}
                             />
@@ -83,7 +79,6 @@ const DashboardPage = (props: any) => {
 
     return (
         <>
-            {pageChangeLoader && <Loader bgBlur />}
             <div className='bgColor min-h-[100dvh]'>
                 <Navbar />
                 {role === 'user' &&

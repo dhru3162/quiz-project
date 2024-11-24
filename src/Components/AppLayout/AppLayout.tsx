@@ -37,13 +37,10 @@ const AppLayout = ({ children }: LayoutType) => {
         <>
             {isOnline ?
                 <>
-                    {isFirstLoading ?
-                        <Loader />
-                        :
-                        <main>
-                            {children}
-                        </main>
-                    }
+                    <main>
+                        {isFirstLoading && <Loader bgBlur />}
+                        {children}
+                    </main>
                 </>
                 :
                 <NoInternet />

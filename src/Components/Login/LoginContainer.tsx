@@ -45,18 +45,13 @@ const LoginContainer = () => {
 
       } catch (error: any) {
         if (error?.request?.status === 504) {
-          toast(`Somthing Went Wrong Try Again`)
+          toast(`Something Went Wrong Try Again`)
         } else {
-          if (!error?.response?.data?.massage) {
-            toast.error(`Somthing went wrong try again`)
-          } else {
-            toast.error(error?.response?.data?.massage)
-          }
-          console.error(error);
+          toast.error(error?.response?.data?.message ?? "Something went wrong")
         }
+        console.error(error);
       } finally {
         dispatch(setIsLoading(false));
-
       }
     } else if (isRegister) {
       try {

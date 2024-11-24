@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
 import { ADMIN_PASSWORD } from "@/src/lib/const";
+import { AxiosInstance } from "axios";
 
 interface LayoutType {
   children: ReactNode;
@@ -23,6 +24,38 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [adminVerifyed, setAdminVerifyed] = useState(false);
+
+  // const axiosInstance: AxiosInstance = API();
+
+  // axiosInstance.interceptors.request.use(
+  //   (config) => {
+  //     if (auth) {
+  //       if (!(config.headers && config.headers["authorization"])) {
+  //         config.headers[
+  //           "Authorization"
+  //         ] = `Bearer ${auth?.token}`;
+  //       }
+  //     }
+  //     config.headers["cache"] = "no-store";
+
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
+
+  // axiosInstance.interceptors.response.use(
+  //   (response) => {
+  //     if (response.status === 401) {
+  //       router.replace("/login");
+  //     }
+  //     return response;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   const LogOut = async () => {
     try {
