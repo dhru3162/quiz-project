@@ -68,10 +68,9 @@ const LoginContainer = () => {
         if (error?.request?.status === 504) {
           toast(`somthing went Wrong Try Again`)
         } else {
-          toast.error(error?.response?.data?.massage)
-          console.error(error);
+          toast.error(error?.response?.data?.message ?? "Something went wrong")
         }
-
+        console.error(error);
       } finally {
         dispatch(setIsLoading(false));
       }
