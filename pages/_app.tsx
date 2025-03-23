@@ -9,8 +9,36 @@ import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import TagManager from "react-gtm-module";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  const GTM_ID = ""
+
+  useEffect(() => {
+    // Initialize GTM
+    TagManager.initialize({ gtmId: GTM_ID });
+
+    // Function to trigger a page view event
+    const handleRouteChange = (url: string) => {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "pageview",
+        page: url,
+      });
+    };
+
+    // Listen for route changes
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router]);
+
   return (
     <>
       <Provider store={store}>
