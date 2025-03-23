@@ -23,10 +23,10 @@ export default function App({ Component, pageProps }: AppProps) {
     TagManager.initialize({ gtmId: GTM_ID });
 
     // Function to trigger a page view event
-    const handleRouteChange = (url: string) => {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        event: "pageview",
+    const handleRouteChange = (url: any) => {
+      window.dataLayer = window?.dataLayer || [];
+      window?.dataLayer.push({
+        event: "pageView",
         page: url,
       });
     };
