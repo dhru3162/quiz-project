@@ -17,6 +17,20 @@ export default function Document() {
             `,
           }}
         />
+        {/* <!-- Google tag (gtag.js) --> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LYTPWW68E"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+               window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-1LYTPWW68E');
+            `,
+          }}
+        />
+
         {/* <!-- End Google Tag Manager --> */}
         <meta name="Dhru Viramgama" content="This is amazing web app for playing quiz" />
       </Head>
