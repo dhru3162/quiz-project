@@ -3,7 +3,6 @@ import Logo from '../Logo/Logo';
 import Styles from './LoginStyle.module.scss';
 import Inputfield from '../Theme/Input/Inputfield';
 import LoginButton from '../Theme/Button/LoginButton';
-import toast from 'react-hot-toast';
 
 const LoginPage = (props: any) => {
     const {

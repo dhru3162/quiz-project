@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import UsersPage from './UsersPage'
-import TitleComponent from '../TitleComponent/TitleComponent'
-import { APP_TITLE_DATA } from '@/src/lib/const'
 import { useCookies } from 'react-cookie'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { GetUserData } from '@/src/ReduxToolkit/Apis/users.api'
 import toast from 'react-hot-toast'
+import { SEO_DATA } from '../SeoComponent/SeoData'
+import SeoComponent from '../SeoComponent/SeoComponent'
 
 const UsersContainer = () => {
     const [{ auth }, setCookie] = useCookies(["auth"]);
@@ -87,9 +87,7 @@ const UsersContainer = () => {
 
     return (
         <>
-            <TitleComponent
-                title={APP_TITLE_DATA.users}
-            />
+            <SeoComponent {...SEO_DATA.users} />
             <UsersPage
                 {...{
                     userData,

@@ -1,5 +1,3 @@
-import { APP_TITLE_DATA } from "@/src/lib/const"
-import TitleComponent from "../TitleComponent/TitleComponent"
 import ContactUsPage from "./ContactUsPage"
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -7,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ContactUsApi } from "@/src/ReduxToolkit/Apis/contact.api";
+import SeoComponent from "../SeoComponent/SeoComponent";
+import { SEO_DATA } from "../SeoComponent/SeoData";
 
 const ContactUsContainer = () => {
     const router = useRouter()
@@ -38,7 +38,7 @@ const ContactUsContainer = () => {
 
     return (
         <>
-            <TitleComponent title={APP_TITLE_DATA.contactus} />
+            <SeoComponent {...SEO_DATA.contactUs} />
             <ContactUsPage
                 {...{
                     handleSubmit,

@@ -15,7 +15,7 @@ const Footer = () => {
                 </Link>
             </div>
             <div className="flex justify-center">
-                <Link href={`/contact_us`} >
+                <Link href={`/contact-us`} >
                     Contact Us
                 </Link>
             </div>

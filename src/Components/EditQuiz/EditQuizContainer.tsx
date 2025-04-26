@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import EditQuizPage from './EditQuizPage'
 import { useRouter } from 'next/navigation';
-import { APP_TITLE_DATA } from '@/src/lib/const';
-import TitleComponent from '@/src/Components/TitleComponent/TitleComponent';
 import toast from 'react-hot-toast';
 import { useCookies } from 'react-cookie';
 import { GetOneQuiz } from '@/src/ReduxToolkit/Apis/quiz.api';
+import { SEO_DATA } from '../SeoComponent/SeoData';
+import SeoComponent from '../SeoComponent/SeoComponent';
 
 const EditQuizContainer = ({ data, id }: any) => {
     const router = useRouter()
@@ -27,9 +27,7 @@ const EditQuizContainer = ({ data, id }: any) => {
 
     return (
         <>
-            <TitleComponent
-                title={APP_TITLE_DATA.editQuiz}
-            />
+            <SeoComponent {...SEO_DATA.editQuiz} />
             <EditQuizPage
                 {...{
                     quizData,

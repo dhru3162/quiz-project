@@ -1,19 +1,18 @@
 export const APP_NAME = `QuizWiz`;
 
-export const APP_TITLE_DATA = {
-  login: "Login",
-  register: "Register",
-  dashboard: "Dashboard",
-  profile: "Profile",
-  history: "History",
-  forgotPassword: "Forgot Password",
-  editQuiz: "Edit Quiz",
-  users: "Users",
-  contactus: "Contact Admin",
-  changePassword: "Change Password"
-};
-
-export const ADMIN_PASSWORD = "Admin@admin123"
+export const PAGE_SLUG = {
+  home: "/",
+  login: "/login",
+  dashboard: "/dashboard",
+  contactUs: "/contact-us",
+  changePassword: "/change-password",
+  profile: "/profile",
+  history: "/history",
+  forgotPassword: "/forgot-password",
+  editQuiz: "/edit-quiz",
+  users: "/users",
+  playQuiz: "/play-quiz",
+}
 
 export const API = `https://quizwiz-backend.vercel.app`;
 // export const API = `https://quizwiz-api.up.railway.app`;

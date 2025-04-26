@@ -1,11 +1,11 @@
-import TitleComponent from "../TitleComponent/TitleComponent"
-import { APP_TITLE_DATA } from '@/src/lib/const';
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import { useForm } from "react-hook-form";
 import { useState } from 'react'
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ForgotPasswordApi } from "@/src/ReduxToolkit/Apis/auth.api";
+import { SEO_DATA } from "../SeoComponent/SeoData";
+import SeoComponent from '../SeoComponent/SeoComponent';
 
 const ForgotPasswordContainer = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const ForgotPasswordContainer = () => {
       setForgotPasswordDone(true);
     } catch (error: any) {
       console.log(error);
-      toast.error(error?.response?.data?.massage ?? "Somthin went wrong");
+      toast.error(error?.response?.data?.massage || "Something went wrong");
     } finally {
       setIsLoading(false)
     };
@@ -28,7 +28,7 @@ const ForgotPasswordContainer = () => {
 
   return (
     <>
-      <TitleComponent title={APP_TITLE_DATA.forgotPassword} />
+      <SeoComponent {...SEO_DATA.forgotPassword} />
       <ForgotPasswordPage
         {...{
           handleSubmit,

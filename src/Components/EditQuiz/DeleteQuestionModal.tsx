@@ -40,7 +40,7 @@ const DeleteQuestionModal = (props: PropData) => {
             onClose()
         } catch (error: any) {
             console.error(error)
-            toast.error(`Somthig Went Wrong`)
+            toast.error(`Something Went Wrong`)
         } finally {
             setLoader(false)
         }

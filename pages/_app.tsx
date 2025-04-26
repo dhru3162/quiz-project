@@ -1,6 +1,5 @@
 import AppLayout from "@/src/Components/AppLayout/AppLayout";
 import { ContextProvider } from "@/src/Components/Context/ContextProvider";
-import TitleComponent from "@/src/Components/TitleComponent/TitleComponent";
 import { store } from "@/src/ReduxToolkit/store";
 import "@/styles/globals.scss";
 import 'react-circular-progressbar/dist/styles.css';
@@ -16,9 +15,11 @@ import TagManager from "react-gtm-module";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const GTM_ID = "GTM-WPG4GB3X"
+  const GTM_ID = process.env.GTM_ID;
 
   useEffect(() => {
+    if (!GTM_ID) return;
+
     // Initialize GTM
     TagManager.initialize({ gtmId: GTM_ID });
 
@@ -37,14 +38,13 @@ export default function App({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, [router]);
+  }, [router, GTM_ID]);
 
   return (
     <>
       <Provider store={store}>
         <ContextProvider>
           <NextUIProvider>
-            <TitleComponent />
             <AppLayout>
               <Component {...pageProps} />
             </AppLayout>

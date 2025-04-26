@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import TitleComponent from "../TitleComponent/TitleComponent";
 import PlayQuizPage from "./PlayQuizPage";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { AddHistoryApi } from "@/src/ReduxToolkit/Apis/users.api";
+import SeoComponent from "../SeoComponent/SeoComponent";
+import { PAGE_SLUG } from "@/src/lib/const";
 
 const PlayQuizContainer = ({ quizData }: any) => {
   const router = useRouter();
@@ -129,7 +129,11 @@ const PlayQuizContainer = ({ quizData }: any) => {
 
   return (
     <>
-      <TitleComponent title={quizData?.title || ""} />
+      <SeoComponent
+        title={`Take the ${quizData?.title} Quiz - Challenge Yourself on QuizWiz`}
+        description={`Ready to take the ${quizData?.title} quiz? Dive in and answer questions on [mention a key topic if space allows]. Track your progress and get your results instantly on QuizWiz.`}
+        canonical={PAGE_SLUG.playQuiz}
+      />
       <PlayQuizPage
         {...{
           quizData,

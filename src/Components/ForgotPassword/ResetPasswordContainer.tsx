@@ -1,11 +1,12 @@
-import { APP_TITLE_DATA } from '@/src/lib/const'
+import { PAGE_SLUG } from '@/src/lib/const'
 import ResetPasswordPage from './ResetPasswordPage'
-import TitleComponent from '../TitleComponent/TitleComponent'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { CheckLinkApi, ResetPasswordApi } from '@/src/ReduxToolkit/Apis/auth.api'
 import toast from 'react-hot-toast'
+import { SEO_DATA } from '../SeoComponent/SeoData'
+import SeoComponent from '../SeoComponent/SeoComponent'
 
 const ResetPasswordContainer = () => {
     const router = useRouter();
@@ -20,7 +21,7 @@ const ResetPasswordContainer = () => {
             router.push('/login');
         } catch (err: any) {
             console.log('err: ', err);
-            toast.error(err?.response?.data?.massage ?? "Somthin went wrong");
+            toast.error(err?.response?.data?.massage || "Something went wrong");
         }
     };
 
@@ -45,7 +46,10 @@ const ResetPasswordContainer = () => {
 
     return (
         <>
-            <TitleComponent title={APP_TITLE_DATA.forgotPassword} />
+            <SeoComponent
+                {...SEO_DATA.resetPassword}
+                canonical={`${PAGE_SLUG.forgotPassword}/${token}`}
+            />
             <ResetPasswordPage
                 {...{
                     control,

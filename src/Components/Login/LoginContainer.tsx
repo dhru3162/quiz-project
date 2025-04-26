@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import LoginPage from "./LoginPage";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import TitleComponent from "../TitleComponent/TitleComponent";
-import { APP_TITLE_DATA, } from "@/src/lib/const";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, setIsLoading } from "@/src/ReduxToolkit/Slices/Auth";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { LoginApi, RegisterApi } from "@/src/ReduxToolkit/Apis/auth.api";
+import SeoComponent from "../SeoComponent/SeoComponent";
+import { SEO_DATA } from "../SeoComponent/SeoData";
 
 const LoginContainer = () => {
   const { control, handleSubmit, reset, getValues } = useForm();
@@ -47,7 +47,7 @@ const LoginContainer = () => {
         if (error?.request?.status === 504) {
           toast(`Something Went Wrong Try Again`)
         } else {
-          toast.error(error?.response?.data?.message ?? "Something went wrong")
+          toast.error(error?.response?.data?.message || "Something went wrong")
         }
         console.error(error);
       } finally {
@@ -68,7 +68,7 @@ const LoginContainer = () => {
         if (error?.request?.status === 504) {
           toast(`somthing went Wrong Try Again`)
         } else {
-          toast.error(error?.response?.data?.message ?? "Something went wrong")
+          toast.error(error?.response?.data?.message || "Something went wrong")
         }
         console.error(error);
       } finally {
@@ -79,9 +79,7 @@ const LoginContainer = () => {
 
   return (
     <>
-      <TitleComponent
-        title={isLogin ? APP_TITLE_DATA.login : APP_TITLE_DATA.register}
-      />
+      <SeoComponent {...SEO_DATA.login} />
       <LoginPage
         {...{
           control,

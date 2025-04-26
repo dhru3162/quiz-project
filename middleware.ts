@@ -4,10 +4,10 @@ export const middleware = (request: NextRequest) => {
     const path = request.nextUrl.pathname;
 
     const isPublicPath = path === '/login' || path === '/' || path === '/forgot-password' || path.startsWith('/forgot-password');
-    const commanPrivatePath = path === '/dashboard' || path === '/profile' || path === "/change-password";
-    const isPrivateUsersPath = path === '/history' || path === "/playquiz";
-    const isPrivateAdminPath = path === '/users' || path === "/editquiz";
-    const contactUsPath = path === '/contact_us'
+    const commonPrivatePath = path === '/dashboard' || path === '/profile' || path === "/change-password";
+    const isPrivateUsersPath = path === '/history' || path === "/play-quiz";
+    const isPrivateAdminPath = path === '/users' || path === "/edit-quiz";
+    const contactUsPath = path === '/contact-us'
 
     const getCookies: any = request.cookies.get('auth')?.value || '';
     let auth: any = ''
@@ -20,7 +20,7 @@ export const middleware = (request: NextRequest) => {
         return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
     }
 
-    if ((commanPrivatePath && !auth) || (isPrivateUsersPath && !auth) || (isPrivateAdminPath && !auth)) {
+    if ((commonPrivatePath && !auth) || (isPrivateUsersPath && !auth) || (isPrivateAdminPath && !auth)) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 

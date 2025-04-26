@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import Navbar from '../Navbar/Navbar'
 import ChangePasswordPage from './ChangePasswordPage'
 import { useRouter } from 'next/navigation';
-import { APP_TITLE_DATA } from '@/src/lib/const';
-import TitleComponent from '../TitleComponent/TitleComponent';
 import { useForm } from 'react-hook-form';
 import { ChangePasswordApi } from '@/src/ReduxToolkit/Apis/auth.api';
 import { useCookies } from 'react-cookie';
 import toast from 'react-hot-toast';
+import SeoComponent from '../SeoComponent/SeoComponent';
+import { SEO_DATA } from '../SeoComponent/SeoData';
 
 const ChangePasswordContainer = () => {
     const router = useRouter();
@@ -27,7 +26,7 @@ const ChangePasswordContainer = () => {
 
         } catch (error: any) {
             console.log(error);
-            toast.error(error?.response?.data?.massage ?? "Somthin went wrong")
+            toast.error(error?.response?.data?.massage || "Something went wrong")
         } finally {
             setIsLoading(false);
         }
@@ -35,7 +34,7 @@ const ChangePasswordContainer = () => {
 
     return (
         <>
-            <TitleComponent title={APP_TITLE_DATA.changePassword} />
+            <SeoComponent {...SEO_DATA.changePassword} />
             <ChangePasswordPage
                 {...{
                     router,

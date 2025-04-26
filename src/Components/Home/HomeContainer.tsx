@@ -1,10 +1,11 @@
-import TitleComponent from "../TitleComponent/TitleComponent"
+import SeoComponent from "../SeoComponent/SeoComponent"
+import { SEO_DATA } from "../SeoComponent/SeoData"
 import HomePage from "./HomePage"
 
 const HomeContainer = () => {
     return (
         <>
-            <TitleComponent />
+            <SeoComponent {...SEO_DATA.home} />
             <HomePage />
         </>
     )

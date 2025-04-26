@@ -1,5 +1,3 @@
-import TitleComponent from "../TitleComponent/TitleComponent";
-import { APP_TITLE_DATA } from "@/src/lib/const";
 import ProfilePage from "./ProfilePage";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -7,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { GetScoreApi } from "@/src/ReduxToolkit/Apis/users.api";
 import toast from "react-hot-toast";
+import { SEO_DATA } from "../SeoComponent/SeoData";
+import SeoComponent from "../SeoComponent/SeoComponent";
 
 const ProfileContainer = () => {
   const { loggedInData, role } = useSelector((state: any) => state.auth);
@@ -40,7 +40,7 @@ const ProfileContainer = () => {
 
   return (
     <>
-      <TitleComponent title={APP_TITLE_DATA.profile} />
+      <SeoComponent {...SEO_DATA.profile} />
       <ProfilePage
         {...{
           loggedInData,

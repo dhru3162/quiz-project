@@ -50,7 +50,7 @@ const DashboardPage = (props: any) => {
                                 className={`${Style.editAction} `}
                                 onClick={() => {
                                     if (AdminRights()) {
-                                        router.push(`/editquiz?q=${item?._id}`)
+                                        router.push(`/edit-quiz?q=${item?._id}`)
                                     }
                                 }}
                             />

@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import DashboardPage from './DashboardPage'
-import TitleComponent from '../TitleComponent/TitleComponent'
-import { APP_TITLE_DATA } from '@/src/lib/const'
+import SeoComponent from '../SeoComponent/SeoComponent'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation'
@@ -9,6 +8,7 @@ import toast from 'react-hot-toast'
 import { useCookies } from 'react-cookie'
 import { GetQuizData } from '@/src/ReduxToolkit/Apis/quiz.api'
 import { Context } from '../Context/ContextProvider'
+import { SEO_DATA } from '../SeoComponent/SeoData'
 
 const DashboardContainer = () => {
     const { role } = useSelector((state: any) => state.auth);
@@ -25,14 +25,11 @@ const DashboardContainer = () => {
 
     const getQuiz = async () => {
         try {
-            const payload = {
-                Authorization: `Bearer ${auth?.token}`
-            }
-            const res: any = await GetQuizData(payload)
+            const res: any = await GetQuizData()
             setQuizData(res?.data?.data)
         } catch (error: any) {
             console.error(error.massage)
-            toast.error(`Somthig Went Wrong`)
+            toast.error(`Something Went Wrong`)
         } finally {
             setIsLoading(false)
         }
@@ -40,9 +37,7 @@ const DashboardContainer = () => {
 
     return (
         <>
-            <TitleComponent
-                title={APP_TITLE_DATA.dashboard}
-            />
+            <SeoComponent {...SEO_DATA.dashboard} />
             <DashboardPage
                 {...{
                     quizData,

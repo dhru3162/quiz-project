@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import TitleComponent from "../TitleComponent/TitleComponent";
-import { APP_TITLE_DATA } from "@/src/lib/const";
 import HistoryPage from "./HistoryPage";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { GetHistoryApi } from "@/src/ReduxToolkit/Apis/users.api";
+import SeoComponent from "../SeoComponent/SeoComponent";
+import { SEO_DATA } from "../SeoComponent/SeoData";
 
 const HistoryContainer = () => {
   const router = useRouter();
@@ -44,7 +44,7 @@ const HistoryContainer = () => {
 
   return (
     <>
-      <TitleComponent title={APP_TITLE_DATA.history} />
+      <SeoComponent {...SEO_DATA.history} />
       <HistoryPage
         {...{
           history,

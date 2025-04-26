@@ -9,8 +9,6 @@ import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutApi, WhoAmIApi } from "@/src/ReduxToolkit/Apis/auth.api";
-import { ADMIN_PASSWORD } from "@/src/lib/const";
-import { AxiosInstance } from "axios";
 
 interface LayoutType {
   children: ReactNode;
@@ -23,7 +21,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const { isAuth, loggedInData } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
-  const [adminVerifyed, setAdminVerifyed] = useState(false);
+  const [adminVerified, setAdminVerified] = useState(false);
 
   // const axiosInstance: AxiosInstance = API();
 
@@ -112,10 +110,11 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   };
 
   const AdminRights = () => {
-    if (adminVerifyed) return true;
+    if (adminVerified) return true;
     const Password = prompt("Please Enter Admin Verification Password", "");
-    if (Password === ADMIN_PASSWORD) {
-      setAdminVerifyed(true);
+    const adminPassword = process.env.ADMIN_PASSWORD
+    if (adminPassword && Password === adminPassword) {
+      setAdminVerified(true);
       return true;
     } else {
       if (Password && Password !== "") toast.error("Wrong password");

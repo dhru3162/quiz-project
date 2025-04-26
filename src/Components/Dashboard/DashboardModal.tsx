@@ -59,7 +59,7 @@ const DashboardModal = (props: any) => {
                                         type="button"
                                         onClick={() => {
                                             onClose()
-                                            router.push(`/playquiz?q=${item._id}`)
+                                            router.push(`/play-quiz?q=${item._id}`)
                                         }}
                                     >
                                         <FaPlay className="mr-2" />
