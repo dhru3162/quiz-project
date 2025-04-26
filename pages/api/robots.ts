@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+    const host = req.headers.host;
+    const protocol = req?.headers?.["x-forwarded-proto"] || 'https';
+    const sitemapUrl = `${protocol}://${host}/sitemap.xml`;
+
     const content = `
 User-agent: *
 Allow: /
@@ -14,7 +18,7 @@ Disallow: /forgot-password
 Disallow: /edit-quiz
 Disallow: /users
 
-Sitemap: https://your-domain.com/api/sitemap
+Sitemap: ${sitemapUrl}
 `;
 
     res.setHeader('Content-Type', 'text/plain');

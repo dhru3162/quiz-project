@@ -54,7 +54,7 @@ const PlayQuizPage = (props: any) => {
                     {questionNumber + 1}/
                   </span>
                   <span className='text-lg'>
-                    {quizData?.totalQuestions}
+                    {quizData?.questions?.length}
                   </span>
                 </div>
 

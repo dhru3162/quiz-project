@@ -5,7 +5,6 @@ const nextConfig = {
   env: {
     GTM_ID: process.env.GTM_ID,
     GA_ID: process.env.GA_ID,
-    DOMAIN: process.env.DOMAIN,
   },
   async rewrites() {
     return [

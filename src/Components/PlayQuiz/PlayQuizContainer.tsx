@@ -31,7 +31,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       const count = setInterval(() => setTimer(timer - 1), 1000);
       return () => clearInterval(count);
     } else if (timer === 0) {
-      if (questionNumber > 0) {
+      if (questionNumber > -1) {
         handlerNextQuestion();
       }
     }
@@ -74,20 +74,21 @@ const PlayQuizContainer = ({ quizData }: any) => {
 
   const checkScore = () => {
     const checkAnswer = quizData?.questions?.map((items: any) => {
-      const currectAnswer = `${items.question}_${items.correctAnswers}`;
-      const check = answers.includes(currectAnswer);
+      const correctAnswer = `${items.question}_${items.correctAnswers}`;
+      const check = answers.includes(correctAnswer);
       return check;
     });
     const quizScore = checkAnswer.filter(Boolean).length;
     setTotalScore(quizScore);
     const quizPercentage = (
-      (quizScore / quizData?.totalQuestions) *
+      (quizScore / quizData?.questions?.length) *
       100
     ).toFixed();
     setPercentage(parseInt(quizPercentage));
   };
 
   const handlerNextQuestion = async () => {
+    console.log('handlerNextQuestion: ');
     if (selectedOption !== "") {
       setAnswers([
         ...answers,
@@ -97,7 +98,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       setAnswers([...answers, "emptyData"]);
     }
 
-    if (quizData?.totalQuestions !== questionNumber + 1) {
+    if (quizData?.questions?.length !== questionNumber + 1) {
       setQuestionNumber(questionNumber + 1);
     } else {
       setQuestionNumber(0);
