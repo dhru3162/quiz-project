@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/next-script-for-ga */
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -6,7 +6,8 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* <!-- Google Tag Manager --> */}
-        <script
+        <GoogleAnalytics gaId="GTM-WPG4GB3X" />
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':
@@ -16,9 +17,9 @@ export default function Document() {
               })(window,document,'script','dataLayer','GTM-WPG4GB3X');
             `,
           }}
-        />
+        /> */}
         {/* <!-- Google tag (gtag.js) --> */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LYTPWW68E"></script>
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LYTPWW68E"></script> */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
