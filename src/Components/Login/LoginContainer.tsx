@@ -66,7 +66,7 @@ const LoginContainer = () => {
 
       } catch (error: any) {
         if (error?.request?.status === 504) {
-          toast(`somthing went Wrong Try Again`)
+          toast(`Something went Wrong Try Again`)
         } else {
           toast.error(error?.response?.data?.message || "Something went wrong")
         }

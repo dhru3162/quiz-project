@@ -66,7 +66,7 @@ const UsersContainer = () => {
 
         } catch (error: any) {
             console.error(error);
-            toast.error(`Somthing Went Wrong`)
+            toast.error(`Something Went Wrong`)
         } finally {
             setIsLoading(false)
         }

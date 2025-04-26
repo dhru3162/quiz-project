@@ -20,7 +20,7 @@ const EditQuizContainer = ({ data, id }: any) => {
             const res = await GetOneQuiz(id, payload)
             setQuizData(res.data.data)
         } catch (error: any) {
-            toast.error(`Somthing Went Wrong`)
+            toast.error(`Something Went Wrong`)
             console.error(error)
         }
     }

@@ -124,7 +124,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
 
     } catch (error: any) {
       console.error(error);
-      toast.error(`Somthing Went Wrong History Not Saved`);
+      toast.error(`Something Went Wrong History Not Saved`);
     }
   };
 
@@ -133,7 +133,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
       <SeoComponent
         title={`Take the ${quizData?.title} Quiz - Challenge Yourself on QuizWiz`}
         description={`Ready to take the ${quizData?.title} quiz? Dive in and answer questions on [mention a key topic if space allows]. Track your progress and get your results instantly on QuizWiz.`}
-        canonical={PAGE_SLUG.playQuiz}
+        canonical={`${PAGE_SLUG.playQuiz}?q=${quizData?._id}`}
       />
       <PlayQuizPage
         {...{

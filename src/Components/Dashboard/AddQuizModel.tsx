@@ -55,7 +55,7 @@ const AddQuizModal = (props: PropInterface) => {
                 getQuiz()
                 handleModalClose()
             } catch (error: any) {
-                toast.error(`Somthing Went Wrong`)
+                toast.error(`Something Went Wrong`)
                 console.error(error)
             } finally {
                 setLoader(false)

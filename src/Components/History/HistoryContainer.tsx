@@ -36,7 +36,7 @@ const HistoryContainer = () => {
       setHistory(res.data.data);
     } catch (error: any) {
       setHistory([]);
-      toast.error(`Somthing Went Wrong`);
+      toast.error(`Something Went Wrong`);
     } finally {
       setLoader(false);
     }

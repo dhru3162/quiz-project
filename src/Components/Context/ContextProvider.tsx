@@ -70,7 +70,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
         router.push(`/`)
       } else {
         console.log(error);
-        toast(`Somthing Went Wrong`)
+        toast(`Something Went Wrong`)
       }
     }
   };
@@ -99,7 +99,7 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
       } else if (error?.request?.status === 0) {
         toast.error('Check Your Internet Connection');
       } else {
-        toast('Somthing Went Wrong')
+        toast('Something Went Wrong')
         console.error(error);
       }
 

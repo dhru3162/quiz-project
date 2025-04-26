@@ -77,7 +77,7 @@ const AddEditQuestionModal = (props: PropData) => {
                 }
                 handleModalClose()
             } catch (error) {
-                toast.error(`Somthing Went Wrong`)
+                toast.error(`Something Went Wrong`)
                 console.log(error)
             } finally {
                 setLoader(false)

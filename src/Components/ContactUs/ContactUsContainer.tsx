@@ -29,7 +29,7 @@ const ContactUsContainer = () => {
             toast.success('Your message sent successfully')
             toast('Admin contact you shortly')
         } catch (error) {
-            toast.error(`Somthing Went Wrong Try Again`)
+            toast.error(`Something Went Wrong Try Again`)
             console.error(error);
         } finally {
             setIsLoading(false)
