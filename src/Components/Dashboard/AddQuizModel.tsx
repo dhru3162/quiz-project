@@ -5,7 +5,6 @@ import Style from "./Dashboard.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import { Pane } from "evergreen-ui";
 import { FaPlus } from "react-icons/fa";
-import { useCookies } from "react-cookie";
 import { TiDelete } from "react-icons/ti";
 import toast from "react-hot-toast";
 import { AddQuizApi } from "@/src/ReduxToolkit/Apis/quiz.api";
@@ -25,7 +24,6 @@ const AddQuizModal = (props: PropInterface) => {
     const [correctAnswersIndex, setCorrectAnswersIndex]: any = useState<Number>()
     const [selectError, setSelectError] = useState<Boolean>(false)
     const [numberOfOptions, setNumberOfOption]: any = useState(2)
-    const [{ auth }, setCookie] = useCookies(["auth"]);
     const [loader, setLoader] = useState(false)
 
     const submit = async (data: any) => {
@@ -46,11 +44,8 @@ const AddQuizModal = (props: PropInterface) => {
                         }
                     ]
                 }
-                const head = {
-                    Authorization: `Bearer ${auth?.token}`
-                }
 
-                await AddQuizApi(addQuizPayload, head)
+                await AddQuizApi(addQuizPayload)
                 toast.success(`Quiz Added Successfully.`)
                 getQuiz()
                 handleModalClose()

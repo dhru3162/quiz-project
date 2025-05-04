@@ -6,7 +6,6 @@ import RoundLoader from "../Loaders/RoundLoader";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useCookies } from "react-cookie";
 import { DeleteQuizApi } from "@/src/ReduxToolkit/Apis/quiz.api";
 
 interface PropData {
@@ -24,16 +23,11 @@ const DeleteActionModal = (props: PropData) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [loader, setLoader] = useState(false)
-    const [{ auth }, setCookie] = useCookies(["auth"]);
 
     const handleDelete = async () => {
         setLoader(true)
         try {
-            const head = {
-                Authorization: `Bearer ${auth?.token}`
-            }
-
-            await DeleteQuizApi(item?._id, head)
+            await DeleteQuizApi(item?._id)
             toast.success(`Question Deleted Successfully.`)
             getQuiz()
             onClose()
