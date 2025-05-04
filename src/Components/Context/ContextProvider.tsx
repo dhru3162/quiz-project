@@ -23,44 +23,9 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   const router = useRouter();
   const [adminVerified, setAdminVerified] = useState(false);
 
-  // const axiosInstance: AxiosInstance = API();
-
-  // axiosInstance.interceptors.request.use(
-  //   (config) => {
-  //     if (auth) {
-  //       if (!(config.headers && config.headers["authorization"])) {
-  //         config.headers[
-  //           "Authorization"
-  //         ] = `Bearer ${auth?.token}`;
-  //       }
-  //     }
-  //     config.headers["cache"] = "no-store";
-
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
-  // axiosInstance.interceptors.response.use(
-  //   (response) => {
-  //     if (response.status === 401) {
-  //       router.replace("/login");
-  //     }
-  //     return response;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
-
   const LogOut = async () => {
     try {
-      const payload = {
-        Authorization: `Bearer ${auth?.token}`
-      }
-      await LogoutApi(payload, { sessionId: loggedInData?.session?._id })
+      await LogoutApi({ sessionId: loggedInData?.session?._id })
       dispatch(logOut())
       router.push(`/`)
     }
@@ -78,10 +43,8 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
   // get logged in user data
   const getUserData = async () => {
     try {
-      const payload = {
-        Authorization: `Bearer ${auth?.token}`
-      }
-      const res: any = await WhoAmIApi(payload)
+      const res: any = await WhoAmIApi()
+      console.log('res: ', res);
 
       dispatch(setInitialData(res.data));
 
@@ -105,7 +68,6 @@ export const ContextProvider: React.FC<LayoutType> = ({ children }) => {
 
     } finally {
       dispatch(setFirstLoading(false));
-
     }
   };
 

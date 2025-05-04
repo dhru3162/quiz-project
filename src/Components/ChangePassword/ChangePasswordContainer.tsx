@@ -17,10 +17,7 @@ const ChangePasswordContainer = () => {
     const handleChangePassword = async (data: any) => {
         setIsLoading(true);
         try {
-            const payload = {
-                Authorization: `Bearer ${auth?.token}`
-            };
-            const res = await ChangePasswordApi(payload, data)
+            const res = await ChangePasswordApi(data)
             toast.success(res?.data?.massage);
             reset();
 

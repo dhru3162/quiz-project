@@ -26,7 +26,7 @@ const LoginContainer = () => {
   }, [role])
 
   useEffect(() => {
-    if (loggedInData.token) {
+    if (loggedInData?.token) {
       setCookie("auth", loggedInData);
       router.push(`/dashboard`);
     }

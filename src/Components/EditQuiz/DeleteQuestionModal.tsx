@@ -4,7 +4,6 @@ import Style from './EditQuiz.module.scss'
 import { Pane } from 'evergreen-ui';
 import RoundLoader from '../Loaders/RoundLoader';
 import ButtonTheme from '../Theme/Button/ButtonTheme';
-import { useCookies } from 'react-cookie';
 import { DeleteQuestionApi } from '@/src/ReduxToolkit/Apis/quiz.api';
 import toast from 'react-hot-toast';
 
@@ -25,16 +24,11 @@ const DeleteQuestionModal = (props: PropData) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [loader, setLoader] = useState(false)
-    const [{ auth }, setCookie] = useCookies(["auth"]);
 
     const handleDelete = async () => {
         setLoader(true)
         try {
-            const head = {
-                Authorization: `Bearer ${auth?.token}`
-            }
-
-            await DeleteQuestionApi(quizId, item?._id, head)
+            await DeleteQuestionApi(quizId, item?._id)
             toast.success(`Question Added Successfully.`)
             updateQuiz()
             onClose()

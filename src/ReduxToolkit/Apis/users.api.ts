@@ -1,27 +1,19 @@
-import { API } from "@/src/lib/const";
-import axios from "axios";
+import fetch from "@/src/lib/axiosConfig"
 
-export const AddHistoryApi = async (payload: any, head: any) => {
-  return await axios.post(`${API}/user/addhistory`, payload, {
-    headers: head,
-  });
+export const AddHistoryApi = async (payload: any) => {
+  return await fetch.post(`/user/add-history`, payload);
 };
 
-export const GetHistoryApi = async (payload: any) => {
-  return await axios.get(`${API}/user/history`, {
-    headers: payload
-  })
+export const GetHistoryApi = async () => {
+  return await fetch.get(`/user/history`)
 };
 
-export const GetScoreApi = async (payload: any) => {
-  return await axios.get(`${API}/user/getscore`, {
-    headers: payload
-  })
+export const GetScoreApi = async () => {
+  return await fetch.get(`/user/get-score`)
 };
 
-export const GetUserData = async (payload: any, paramsData: any) => {
-  return await axios.get(`${API}/user`, {
-    headers: payload,
+export const GetUserData = async (paramsData: any) => {
+  return await fetch.get(`/user`, {
     params: paramsData
   })
 }

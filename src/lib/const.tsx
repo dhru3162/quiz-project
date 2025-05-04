@@ -14,7 +14,7 @@ export const PAGE_SLUG = {
   playQuiz: "/play-quiz",
 }
 
-export const API = `https://quizwiz-backend.vercel.app`;
-// export const API = `https://quizwiz-api.up.railway.app`;
-// export const API = `http://localhost:8000`;
-// export const API = `http://192.168.163.182:8000`;
+export const API_BASEURL = `https://quizwiz-backend.vercel.app`;
+// export const API_BASEURL = `https://quizwiz-api.up.railway.app`;
+// export const API_BASEURL = `http://localhost:8000`;
+// export const API_BASEURL = `http://192.168.163.182:8000`;

@@ -1,48 +1,36 @@
-import { API } from "@/src/lib/const"
-import axios from "axios"
+import fetch from "@/src/lib/axiosConfig"
 
 export const GetQuizData = async () => {
-    return await axios.get(`${API}/quiz`)
+    // return await axios.get(`${API}/quiz`)
+    return await fetch.get(`/quiz`)
 }
 
-export const GetOneQuiz = async (id: any, payload: any,) => {
-    return await axios.get(`${API}/quiz/${id}`, {
+export const GetOneQuiz = async (id: any, payload?: any,) => {
+    return await fetch.get(`/quiz/${id}`, {
         headers: payload
     })
 }
 
-export const AddQuizApi = async (payload: any, head: any) => {
-    return await axios.post(`${API}/quiz/add`, payload, {
-        headers: head
-    })
+export const AddQuizApi = async (payload: any) => {
+    return await fetch.post(`/quiz/add`, payload)
 }
 
-export const EditQuizDetailsApi = async (id: any, payload: any, head: any) => {
-    return await axios.put(`${API}/quiz/${id}`, payload, {
-        headers: head
-    })
+export const EditQuizDetailsApi = async (id: any, payload: any) => {
+    return await fetch.put(`/quiz/${id}`, payload)
 }
 
-export const DeleteQuizApi = async (id: any, head: any) => {
-    return await axios.delete(`${API}/quiz/${id}`, {
-        headers: head
-    })
+export const DeleteQuizApi = async (id: any) => {
+    return await fetch.delete(`/quiz/${id}`)
 }
 
-export const AddQuestionApi = async (id: any, payload: any, head: any) => {
-    return await axios.post(`${API}/quiz/addquestion/${id}`, payload, {
-        headers: head
-    })
+export const AddQuestionApi = async (id: any, payload: any) => {
+    return await fetch.post(`/quiz/add-question/${id}`, payload)
 }
 
-export const EditQuestionApi = async (id: any, payload: any, head: any) => {
-    return await axios.put(`${API}/quiz/editquestion/${id}`, payload, {
-        headers: head
-    })
+export const EditQuestionApi = async (id: any, payload: any) => {
+    return await fetch.put(`/quiz/edit-question/${id}`, payload)
 }
 
-export const DeleteQuestionApi = async (quizId: any, questionId: any, head: any) => {
-    return await axios.delete(`${API}/quiz/${quizId}/deletequestion/${questionId}`, {
-        headers: head,
-    })
+export const DeleteQuestionApi = async (quizId: any, questionId: any) => {
+    return await fetch.delete(`/quiz/${quizId}/delete-question/${questionId}`)
 }

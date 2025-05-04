@@ -50,9 +50,6 @@ const AddEditQuestionModal = (props: PropData) => {
         if (correctAnswersIndex !== undefined) {
             const options = Array.from(Array(numberOfOptions)).map((s: any, index: number) => (data?.[`option${index}`]))
 
-            const head = {
-                Authorization: `Bearer ${auth?.token}`
-            }
             try {
                 setLoader(true)
                 if (type === 'Add') {
@@ -61,7 +58,7 @@ const AddEditQuestionModal = (props: PropData) => {
                         options: options,
                         correctAnswers: data?.[`option${correctAnswersIndex}`],
                     }
-                    await AddQuestionApi(quizId, addPayload, head)
+                    await AddQuestionApi(quizId, addPayload)
                     toast.success(`Question Added Successfully.`)
                     updateQuiz()
                 } else {
@@ -71,7 +68,7 @@ const AddEditQuestionModal = (props: PropData) => {
                         options: options,
                         correctAnswers: data?.[`option${correctAnswersIndex}`],
                     }
-                    await EditQuestionApi(quizId, editPayload, head)
+                    await EditQuestionApi(quizId, editPayload)
                     toast.success(`Question Edited Successfully.`)
                     updateQuiz()
                 }

@@ -25,10 +25,7 @@ const ProfileContainer = () => {
   const getScore = async () => {
     setIsLoading(true);
     try {
-      const payload = {
-        Authorization: `Bearer ${auth?.token}`,
-      };
-      const res = await GetScoreApi(payload);
+      const res = await GetScoreApi();
       setTotalScore(res?.data?.totalScore);
     } catch (err) {
       setTotalScore(0);

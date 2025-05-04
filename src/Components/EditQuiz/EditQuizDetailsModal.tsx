@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import Style from "./EditQuiz.module.scss";
 import ButtonTheme from "../Theme/Button/ButtonTheme";
 import toast from "react-hot-toast";
-import { TiDelete } from "react-icons/ti";
-import { AddQuestionApi, EditQuestionApi, EditQuizDetailsApi } from "@/src/ReduxToolkit/Apis/quiz.api";
-import { useCookies } from "react-cookie";
+import { EditQuizDetailsApi } from "@/src/ReduxToolkit/Apis/quiz.api";
 
 interface PropData {
     quizData: any,
@@ -22,7 +20,6 @@ const EditQuizDetailsModal = (props: PropData) => {
     } = props
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { register, handleSubmit, reset, formState: { errors }, setValue, }: any = useForm();
-    const [{ auth }, setCookie] = useCookies(["auth"]);
     const [loader, setLoader] = useState(false)
 
     const handleOpenModal = () => {
@@ -36,10 +33,7 @@ const EditQuizDetailsModal = (props: PropData) => {
     const submitData = async (data: any) => {
         try {
             setLoader(true)
-            const head = {
-                Authorization: `Bearer ${auth?.token}`
-            }
-            await EditQuizDetailsApi(quizData?._id, data, head)
+            await EditQuizDetailsApi(quizData?._id, data)
             toast.success(`Quiz Details Updated Successful.`)
             updateQuiz()
             handleModalClose()
@@ -77,7 +71,7 @@ const EditQuizDetailsModal = (props: PropData) => {
                         <ModalHeader className="flex flex-col gap-1"></ModalHeader>
                         <ModalBody className="m-2">
                             <form onSubmit={handleSubmit(submitData)} className="space-y-2">
-         
+
                                 <div className="pb-1.5">
                                     <div
                                         className={`${Style.titleColor} flex flex-col gap-1 text-xl font-semibold mb-1`}
@@ -138,7 +132,7 @@ const EditQuizDetailsModal = (props: PropData) => {
                                         Edit Details
                                     </ButtonTheme>
                                 </div>
-                                
+
                             </form>
                         </ModalBody>
                     </>

@@ -58,10 +58,7 @@ const UsersContainer = () => {
     const getUserData = async () => {
         setIsLoading(true)
         try {
-            const payload = {
-                Authorization: `Bearer ${auth?.token}`,
-            }
-            const res = await GetUserData(payload, paramsData)
+            const res = await GetUserData(paramsData)
             setUserData(res?.data?.data)
 
         } catch (error: any) {

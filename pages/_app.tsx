@@ -8,7 +8,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import TagManager from "react-gtm-module";
 
@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router, GTM_ID]);
 
   return (
-    <>
+    <React.StrictMode>
       <Provider store={store}>
         <ContextProvider>
           <NextUIProvider>
@@ -54,6 +54,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </NextUIProvider>
         </ContextProvider>
       </Provider>
-    </>
+    </React.StrictMode>
   )
 }

@@ -117,10 +117,7 @@ const PlayQuizContainer = ({ quizData }: any) => {
         result: answers,
         percentage: percentage,
       };
-      const head = {
-        Authorization: `Bearer ${auth?.token}`,
-      };
-      await AddHistoryApi(payload, head);
+      await AddHistoryApi(payload);
 
     } catch (error: any) {
       console.error(error);
